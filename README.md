@@ -6,3 +6,6 @@ Rapport de stage du Semestre 6 - **Université Lille1 (Laboratoire: L.I.F.L. - �
 
 Tuteur de stage: *Meftali Samy*  
 Responsable d'équipe: *Giraud Mathieu*
+
+
+Rédaction du rapport en LaTeX
