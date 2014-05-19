@@ -1,0 +1,210 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{hyperref}
+\usepackage{color}
+\AddThinSpaceBeforeFootnotes
+\FrenchFootnotes
+
+\title{Rapport de stage}
+\author{Antonin Carette}
+\date{28 Juin 2014}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+
+\chapter{Introduction}
+
+\section{Remerciements}
+Je remercie tout d'abord l'équipe Bonsai, pour toute l'accueil généreuse recueillie durant ces 3 mois de stage.
+\newline 
+Je remercie ensuite les membres du projet \textit{Vidjil}: \textbf{Giraud Mathieu}, \textbf{Salson Mikaël} ainsi que \textbf{Duez Marc} pour l'intégration mais aussi l'aide avec laquelle chaque membre m'a aidé pour mon sujet de stage.
+\newline
+Aussi, je remercie M. \textbf{Meftali Samy} ainsi que M. \textbf{Giraud Mathieu} pour toute l'attention donnée quant au travail sur le projet, ainsi que sur ce rapport.
+\newline
+Pour finir, je tiens à remercier ma famille pour tout le soutien apporté durant ces trois mois de stage, ainsi qu'à mes collèges de bureau: \textbf{Dufresne Yoann} et \textbf{Vrolland Christophe}.
+
+\section{Présentation de l'équipe Bonsai}
+Bonsai a été créé en 2011 par Mme \textbf{Touzet Hélène}, responsable de l'équipe; elle était, auparavant, nommée Sequoia.
+\newline
+Cette jeune équipe dépend du \textit{L.I.F.L.}, de l'\textit{I.N.R.I.A.} ainsi que du \textit{C.N.R.S.}.
+\newline
+Mes encadrants ont été, dans l'équipe, M. \textbf{Giraud Mathieu}, M. \textbf{Salson Mikaël} ainsi que M. \textbf{Duez Marc}.
+\newline
+Les travaux des membres de l'équipe (on en compte actuellement 22) sont assez larges, tous réunis dans un seul domaine: la biologie.
+\newline
+En effet, l'équipe Bonsai est très réputée dans la bio-informatique; on dénombre plus de 30 applications/logiciels utilisables gratuitement, créés par les membres de l'équipe.
+\newline
+Cette équipe m'a donc accueillie pour mon stage de fin de licence, se déroulant du 1er Avril au 30 Juin inclus.
+
+
+\chapter{Contexte du stage et objectifs}
+
+\section{La Leucémie Aigüe Limphoblastique}
+La Leucémie Aigüe Limphoblastique (\textit{LAL}) est un cancer liquide\footnote{Le cancer liquide, encore appelé cancer sanguin, est un ensemble composé des leucémies (cancers du sang et de la moëlle épinière) et des lymphomes (cancers du système lymphatique).} affectant majoritairement les enfants.
+\newline
+Cette leucémie peut-être induite par un défaut dans la recombinaison V(D)J, mécanisme de recombinaison de l'ADN présents chez les Humains et autres vertébrés permettant de créer une grande diversité de récepteurs d'anti-corps, nécessaires à la reconnaissance d'antigènes étrangers, pouvant apporter diverses pathologies plus ou moins graves.
+\newline
+\textcolor{red}{-> Tous les outils permettant d'évaluer les recombinaisons V(D)J; explication des clônes}
+
+\section{Le projet Vidjil}
+
+\textit{Vidjil} est un projet intra (pour le développement des programmes) et extra (pour toute la partie échantillonage) Universitaire créé par un petit groupe de chercheurs et d'ingénieurs de l'équipe Bonsai, mais aussi du Laboratoire d'Hématologie de Lille2.
+\subsection{Contexte}
+Le projet \textit{Vidjil} a pris naissance lors d'une problèmatique assez simple: peu d'outils fiables et complets étaient disponible pour le séquençage à haut-débit, demandé par l'équipe d'Hématologie de Lille2 pour ses analyses concernant principalement la \textit{LAL}, menée par M. \textbf{Preudhomme Claude} - requièrant beaucoup de travail, au niveau algorithmique et d'adaptation à un modèle biologique\footnote{Voir le premier article écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}, sur l'\textit{algorithme}.}.
+\newline
+Après en avoir parlé avec M. \textbf{Figeac Martin}, il a de suite émis l'idée d'en discuter avec des informaticiens intéressés par la biologie, issus de l'équipe Bonsai du L.I.F.L. - ce qu'il a fait en discutant de tout celà avec M. \textbf{Giraud} et M. \textbf{Salson}.
+\newline
+Les deux équipes se sont donc rencontrés début de l'année 2011 pour en discuter calmement, et essayer de mieux décortiquer la problèmatique principale. Ce n'est qu'en 2012 que le premier programme a été écrit, et que le projet \textit{Vidjil} a réellement débuté.
+
+\subsection{Principe}
+Ce projet consiste à la mise en place d'un programme en langage C++, appelé \textit{algorithme}, ainsi que d'une interface Web, appelé \textit{afficheur}, permettant de calculer et afficher plusieurs informations quand aux recombinaisons V(D)J de patients souffrants de la maladie précédemment évoquée, à travers un jeu de données précis.
+\newline
+\textcolor{red}{-> Expliquer en bas de page comment ont été réalisés ces jeux de données + comment les exploiter}
+\newline
+Toutes ces informations pourront être, par la suite, utilisées par les services hôpitaux/biologiques afin de traiter les données recueillies directement sur les patients, les étudier, et pouvoir prédire les rechutes quant à cette maladie.
+
+\subsection{L'équipe}
+\textit{Vidjil} est un projet créé en partenariat avec le \textit{Laboratoire d'Hématologie de Lille2}, par M. \textbf{Giraud Mathieu}, M. \textbf{Salson Mikaël} et M. \textbf{Preudhomme Claude}, responsable de l'équipe d'Hématologie de Lille2.
+\newline
+L'équipe de ce projet travaille désormais avec \textit{EuroClonality NGS} (un Consentium Européen contenant plusieurs laboratoires, ayant un grand intérêt pour le projet quant à l'échantillonage), ainsi que différents laboratoires à l'intérieur mais aussi à l'extérieur de la France comme celui de Paris, de Rennes, mais aussi de République Tchèque et d'Angleterre.
+
+\section{Objectifs de stage}
+Mes objectifs ont été clairs, et m'ont été donné par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël} lors d'un entretien téléphonique et oral en Décembre 2013/Janvier 2014.
+
+\subsection{L'\textit{afficheur}}
+Pour un premier, je devais intégrer dans l'\textit{afficheur} un graphe permettant de visualiser les distances d'édition des clônes, les uns par rapport aux autres.
+\newline
+Ce premier travail devait s'effectuer sur une durée de deux mois, avec une programmation en HTML5, CSS3 et Less, le langage orienté objet Javascript, Ajax, et en utilisation les frameworks Javascript D3JS et JQuery, langages déjà intégrés au projet depuis sa conception par \textbf{Marc Duez}.
+\subsection{L'algorithmique (DBSCAN)}
+Par la suite, le travail devait déborder sur une partie beaucoup plus algorithmique avec l'utilisation de DBSCAN\footnote{DBSCAN est un algorithme de partitionnement de données proposé en 1996 par \textbf{Martin Ester}, \textbf{Hans-Peter Kriegel}, \textbf{Jörg Sander} et \textbf{Xiaowei Xu}}, sur la partie du programme créée en langage C++, jusqu'à la fin de mon stage.
+\newline
+\textcolor{red}{-> A VOIR ET DÉVELOPPER!!!}
+
+
+\chapter{L'\textit{afficheur}}
+
+\section{Un travail d'un an...}
+Toute la conception et l'écriture de l'\textit{afficheur} a été faite par l'ingénieur de recherche du projet \textit{Vidjil} \textbf{Marc Duez}.
+\newline
+M. \textbf{Duez} a commencé à participer au projet dès Mars/Avril 2013, projet de fin d'année pour son Master 2.
+\newline
+Son ambition était de créer un logiciel répondant aux besoins des utilisateurs (principalement des biologistes), avec le plus de facilité possible, tout en respectant les principes de "Programmation Orientée Objet" et de "Modèle-Vue-Contrôleur".
+
+\section{Langages et frameworks}
+À mon arrivée dans l'équipe, le programme utilisait les langages les plus simples et les plus utilisés du Web: HTML5, CSS3, Javascript et Ajax.
+\newline
+Tout le côté "Administration serveur" a été réalisé avec le langage Python (version 2.7) grâce au framework open source web2py.
+\newline
+Côté conception avancée, il y avait plus de 20 classes Javascript déjà écrites (à environ 1000 lignes de code par classe), utilisant 2 frameworks Javascript reconnus (D3JS et JQuery), ainsi que le langage Less\footnote{Less est un langage dynamique de génération de feuilles de style, conçu par \textbf{Alexis Sellier}.} - langage très utile quant au changement dynamique de feuille de style afin de mieux visualiser les données calculées pour un échantillonage préparé, et permettant beaucoup plus de souplesse que le langage CSS.
+
+\section{Préparation}
+Tout ceci s'est faite durant la 1ère semaine de stage, et la moitié du temps durant les deux suivantes.
+
+\subsection{La documentation}
+Ne connaissant pas D3JS, JQuery, Ajax ou encore Less, il a donc fallu que je me documente à leur sujet, exploiter toutes les fonctionnalités mais aussi comment les intégrer, et quel est le but recherché quant à l'utilisation de tel framework ou tel langage.
+
+\subsection{L'intégration au projet}
+Je ne pouvais me permettre d'ajouter directement ma nouvelle fonctionnalité dans la classe correspondant à l'endroit où elle devait apparaître dans l'\textit{afficheur}, il m'a donc fallu tout d'abord étudier le code ainsi que recourir à la création de la documentation pour le développeur non-écrite ou obsolète, ainsi que corriger quelques bugs mineurs dans l'\textit{afficheur} afin de mieux pouvoir discerner quelle partie du projet était intégrée dans quelle classe objet.
+\newline
+De plus, il était très important pour moi de respecter les règles de l'équipe en matière d'ingénièrie logicielle, ne serait-ce par l'écriture du code, de la documentation, mais aussi par rapport au respect des commits/push sur le serveur, via l'utilitaire \textit{Git}.
+
+\subsection{Le domaine biologique}
+Dernière chose, je me suis remis - lors des deux premières semaines - à la biologie et l'étude de la recombinaison V(D)J chez le vertébré, mais aussi les techniques de séquençage et de clusterisation afin de mieux comprendre et poursuivre les discussions autour du sujet, lors des réunions dans l'équipe, ou avec le Laboratoire d'Hématologie de Lille2.
+
+\section{Le graphe}
+La distribution quant à l'édition de distance entre les différents clônes est très intéressante afin de visualiser les rapprochements entre ceux-ci, et permettre une visualisation par échelle de couleur, afin de mieux distancer quels sont les clônes les plus similaires par rapport aux autres.
+\newline
+Le projet contenait à lui seul d'ores-et-déjà 5 distributions:
+\begin{itemize}
+\item V/J génique
+\item V/J allèlique
+\item V/J selon la distance des clônes
+\item la visualisation l'abondance des clônes V et J
+\item la visualisation des V selon un histogramme
+\end{itemize}
+Toutes ces distributions sont utiles et nécessaires à la visualisation des clônes dans un environnement précis, en fonction d'un jeu de données.
+
+\subsection{Ajout d'une nouvelle distribution}
+L'ajout d'une nouvelle distribution n'était pas aisée - en effet, il m'a fallu me mettre dans le code afin de prévoir où implanter ma distribution, et quelles modifications effectuer sur la partie de l'\textit{afficheur} utilisé: le \textit{scatterPlot}.
+\newline
+De plus, par rapport aux autres distributions effectuées par l'ingénieur de recherche de la petite équipe, il fallait forcer un peu plus le moteur physique et 3D de D3JS afin que lui seul puisse positionner les clônes le plus précisémment possible par rapport à une distance, déjà calculée et implantée sous la forme d'un tableau JSON - les points prendront donc une position naturelle, on ne la calculera pas et ne la donnera pas au moteur afin qu'il puisse les placer.
+\newline
+Autre soucis à prévoir, la non-possibilité pour D3JS de calculer absolument tous les déplacement d'arêtes possibles dans le graphe - en effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par frame la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié.
+
+\subsection{Création du graphe}
+D3JS contient, pour son moteur, absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus l'exactitude des informations données.
+\newline
+\textcolor{red}{-> Théorie des graphes et exactitude de la représentation}
+\newline
+\textcolor{red}{-> Screenshots de l'établissement du graphe, pas-à-pas}
+
+\subsection{Problème et résolution des arêtes}
+La technologie D3JS est utilisée à fort escient dans le projet, d'ores-et-déjà; il était donc tout à fait naturel de le continuer en utilisant celle-ci pour la création et l'exploitation du graphe à mettre en oeuvre.
+\newline
+Cependant, une question restait encore à éclaircir: sur un graphe à 100 clônes, chacun était lié aux 99 autres par une arête, il faudra donc créer un graphe à 10000 arêtes; la question est: "Le moteur du framework est-il capable de supporter absolument tout le calcul nécessaire pour la mouvance du graphe?"
+\newline
+La réponse est \textbf{non}, le framework n'en est pas capable, car il n'a pas été créé/optimisé pour cette tâche - nous allons voir par la suite comment il a fallu optimiser un maximum la composition du graphe afin de le représenter plus rapidement, avec un maximum de concordance.
+
+\subsubsection{Il était une fois, un premier algorithme...}
+Le premier algorithme qui m'est venu à l'esprit est de supprimer toutes les arêtes ayant une longueur supérieure à une distance donnée, directement dans le programme - cela permettra donc d'alléger le tableau d'arêtes prit en compte par le moteur, et de moins le faire souffrir lors des calculs.
+\newline
+Ce procédé a été un semi-échec: nous avons supprimé un peu plus de 50\% des arêtes disponibles (nous étions passé de 10000 à 4970 sur un jeu de données) - malheureusement, le moteur peinait à calculer toutes les positions des noeuds et arêtes par frame une nouvelle fois (sur une machine à processus corei5 à 8Go de RAM, GPU Intel HD 4000).
+\newline
+Il était donc nécessaire de chercher un nouvel algorithme qui pourrai, au moins, diviser de moitié le nombre d'arêtes enregistrées/calculées par le moteur.
+
+\subsubsection{Il était une fois, un deuxième algorithme...}
+Le deuxième algorithme a été trouvé par \textbf{Marc Duez}; il s'agit de:
+\begin{enumerate}
+\item Trouver les 3 plus grandes arêtes du graphe ayant les caractèristiques suivantes:
+	\begin{itemize}
+	\item chaque arête ne doit pas avoir de point commun avec les autres
+	\item chaque point à une distance minimale d'une extrêmité d'une arête trouvée ne doit plus exister, lors du calcul
+	\item chaque arête doit être le moins parallèle possible des autres
+	\end{itemize}
+\item Calculer toutes les arêtes possibles entre une extrémité d'arête trouvée
+\item Calculer 4/5 arêtes possibles, dans une distance minimale, des points trouvés lors de l'étape 2
+\end{enumerate}
+Pour le résultat, il a été concluant - en effet, en suivant à la main l'algorithme, nous pouvons voir que:
+\begin{itemize}
+\item L'étape 1 se fera avec un maximum de 3 arêtes
+\item L'étape 2 se fera avec un maximum de 600 arêtes (au total: 600 + 3 arêtes)
+\item L'étape 3 se fera avec un maximum de 100 * 5 arêtes (au total: 1103 arêtes)
+\end{itemize}
+Ainsi, nous avons pu enlever un peu moins de 90\% des arêtes totales, en moyenne; ce qui est très largement au-delà de ce qu'il nous faut pour le temps de calcul, mais aussi pour l'allégement du moteur de D3JS.
+\newline
+Malheureusement, nous étions confronté à un problème, non pas par rapport au temps, mais par rapport à la fidélité de la représentation du graphe.
+\textcolor{red}{-> Conclusion pertinante (plus de 90\% d'arêtes enlevées en moyenne) MAIS toujours autant d'approximation dans la visualisation}
+\newline
+\textcolor{red}{-> Résolution de cette approximation en modifiant les propriétés du moteur D3JS + élimination des clônes autour d'un des 3 grandes arêtes au dessus d'une longueur de 'n'}
+\newline
+
+\chapter{DBSCAN}
+
+
+\chapter{Le travail en recherche}
+
+\section{Qualité de vie}
+
+\section{Qualité de travail}
+
+\section{Un monde différent}
+
+
+\chapter{Conclusion}
+
+
+\chapter{Bibliographie}
+\begin{itemize}
+\item{Le premier article sur le projet \textit{Vidjil}, écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}: \url{} \textit{(Consultation le 04 Avril 2014)}}
+\item{\url{http://www.worldcat.org/title/recombinaison-vdj-illegitime-et-developpement-de-leucemies-aigues-lymphoblastiques-t/oclc/495056914} \textit{(Consultation le 10 Mai 2014)}}
+\item{\url{http://fr.wikipedia.org/wiki/Recombinaison_V%28D%29J} \textit{(Consultation le 10 Mai 2014)}}
+\end{itemize}
+
+\end{document}
