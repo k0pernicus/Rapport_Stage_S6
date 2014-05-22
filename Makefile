@@ -12,6 +12,6 @@ compile:
 	$(LATEX) $(SRC) && $(LATEX) $(SRC)
 
 clean:
-	rm -f *.out *.toc *.aux *.log
+	rm -f *.synctex.gz *.out *.toc *.aux *.log
 
 
