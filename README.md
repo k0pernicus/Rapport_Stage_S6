@@ -8,4 +8,9 @@ Tuteur de stage: *Meftali Samy*
 Responsable d'équipe: *Giraud Mathieu*
 
 
-Rédaction du rapport en LaTeX
+Rédaction du rapport en LaTeX - nécessité d'avoir les programmes pdflatex et evince
+
+
+Utilisation:
+1.	make
+2.	make clean
