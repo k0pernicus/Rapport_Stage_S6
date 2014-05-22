@@ -12,5 +12,6 @@ Rédaction du rapport en LaTeX - nécessité d'avoir les programmes pdflatex et 
 
 
 Utilisation:
-1.	make
-2.	make clean
+
+1. make
+2. make clean
