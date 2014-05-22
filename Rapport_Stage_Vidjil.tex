@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{color}
 \usepackage{calc}
+\usepackage{pseudocode}
 \AddThinSpaceBeforeFootnotes
 \FrenchFootnotes
 
@@ -209,68 +210,60 @@ Tout d'abord, il faut choisir deux paramètres essentiels:
 \item une distance ($\epsilon$), représentant un rayon de cercle, qui nous aidera à considérer que les points situés à une distance inférieure ou égale à celle-ci d'un autre est représentatif d'un seul cluster
 \item un nombre minimum de points (\textit{Mp}), que l'on utilisera par la suite pour considérer si le point prit en compte est considéré comme un \textbf{point central} (\textit{\textbf{core point}} - le point détient un nombre de voisins plus élevé que \textit{Mp}, dans le rayon $\epsilon$), un \textbf{point de bordure} (\textit{\textbf{border point}} - le point détient un nombre de voisins moindre que \textit{Mp}, mais est voisin d'un \textbf{point central}), ou encore un \textbf{point de bruit} (\textit{\textbf{noise point}} - tout point n'étant pas l'un des deux précédemment évoqués).
 \end{itemize}
-Cet algorithme est ici intéressant car il nous permet donc bien de parcourir chacun des points d'un graphe, son voisinage, et de clusteriser chaque point en fonction de son voisinage, et des deux paramètres énoncés précédemment - la densité revient donc au nombre de points (\textit{Mp}) compris dans un rayon bien spécifié ($\epsilon$).
+Cet algorithme est ici intéressant car il nous permet donc bien de parcourir chacun des points d'un graphe, son voisinage, et de clusteriser chaque point en fonction de son voisinage, et des deux paramètres énoncés précédemment - la densité revient donc au nombre de points (\textit{Mp}) compris dans un rayon bien spécifié ($\epsilon$). Tout ceci va nous permettre de pouvoir modifier l'\textit{afficheur} afin de pouvoir maximiser le nombre d'outils utiles aux chercheurs - notamment via la colorisation des clusters, ou encore l'apport des regroupements de clones dans le graphe.
 \newline
 Il est intéressant ici de constater ici que DBSCAN clusterise les données selon une certaine densité, donnée en paramètre via epsilon et \textit{Mp}; cet algorithme ne pourra donc pas gérer les clusters de densités différentes (ce qui ne nous intéresse pas ici, fort-heureusement).
 
 \subsection{L'algorithme}
 
 L'algorithme est représenté ci-dessous (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}):
-\newline
 
-\fbox{
-	\parbox{\linewidth-2\fboxrule-2\fboxsep}
-	{
+\begin{pseudocode}{DBSCAN}{D, eps, MinPts}
+\COMMENT{Base de l'algorithme}\\
+C $=$ 0\\
+$Pour chaque point $P$ non visité des données $D\\
+$marquer $P$ comme visité$\\
+PtsVoisins$ = $\CALL{epsilonVoisinage}{P, eps}\\
+\IF tailleDe(PtsVoisins) < MinPts
+\THEN $marquer $P$ comme "bruit"$
+\ELSE 
+	\BEGIN
+		C$++$\\
+		\CALL{extensionCluster}{D, P, PtsVoisins, C, eps, MinPts}\\
+	\END\\
+\\
 
-\textbf{DBSCAN} (D, eps, MinPts)
-\newline
-\indent C = 0
-\newline
-\indent pour chaque point P non visité des données D
-\newline
-\indent \indent marquer P comme visité
-\newline
-\indent \indent PtsVoisins = epsilonVoisinage(P, eps)
-\newline
-\indent \indent si tailleDe(PtsVoisins) < MinPts
-\newline
-\indent \indent \indent mark P as NOISE
-\newline
-\indent \indent sinon
-\newline
-\indent \indent \indent C++
-\newline
-\indent \indent \indent expandCluster(D, P, PtsVoisins, C, eps, MinPts)
-\newline
-\newline          
-\textbf{expandCluster} (D, P, PtsVoisins, C, eps, MinPts)
-\newline
-\indent ajouter P au cluster C
-\newline
-\indent pour chaque point P' de PtsVoisins
-\newline
-\indent \indent si P' n'a pas été visité
-\newline
-\indent \indent marquer P' comme visité
-\newline
-\indent \indent PtsVoisins' = epsilonVoisinage(D, P', eps)
-\newline
-\indent \indent si tailleDe(PtsVoisins') >= MinPts
-\newline
-\indent \indent \indent PtsVoisins = PtsVoisins U PtsVoisins'
-\newline
-\indent \indent si P' n'est membre d'aucun cluster
-\newline
-\indent \indent \indent ajouter P' au cluster C
-\newline
-\newline
-\textbf{epsilonVoisinage} (D, P, eps)
-\newline
-\indent retourner tous les points de D qui sont à une distance inférieur à epsilon de P
-	}
-}
+\COMMENT{Procédure permettant d'inclure un point dans un cluster - extension d'un cluster}\\
+\PROCEDURE {extensionCluster}{D, P, PtsVoisins, C, eps, MinPts}
+	$Ajouter $P$ au cluster C$\\
+	\FOREACH P' \in PtsVoisins \DO
+			\IF P'$ n'a pas été visité$
+			\THEN 
+				\BEGIN
+					$Marquer $P'$ comme visité$\\
+					PtsVoisins'$ = $ \CALL{epsilonVoisinage}{D, P', eps}\\
+					\IF tailleDe(PtsVoisins') >= MinPts
+					\THEN PtsVoisins$ = $PtsVoisins \cup PtsVoisins'\\
+				\END\\
+			\IF P'$ n'est membre d'aucun cluster$
+			\THEN $Ajouter $P'$ au cluster $C
+\ENDPROCEDURE
+
+\COMMENT{Procedure retournant tous les points de $D$ qui sont à une distance inférieure à $eps$ de $P$}\\
+\PROCEDURE{epsilonVoisinage}{D, P, eps}
+	$Retourner tous les points de $D$ qui sont à une distance inférieure à $eps$ de $P
+\ENDPROCEDURE
+\end{pseudocode}
 
 \section{Implantation de l'algorithme}
+
+\subsection{Déterminaison les paramètres}
+
+\subsection{Les résultats apportés}
+
+\subsubsection{Ajout d'une nouvelle colorisation}
+
+\subsubsection{Apport au graphe}
 
 \chapter{Le travail en recherche}
 
@@ -318,11 +311,7 @@ La vigilance est aussi de mise quant à la publication d'autres scientifiques su
 
 \section{"Think different"}
 
-\textcolor{red}{Ce qui me plaît, c'est de réfléchir et travailler autrement que les autres ("Think Different")!
-\newline
-Conditions de vie + relationnel OK (ne pas oublier de dire que les labos sont cools + matos cool
-\newline
-Conditions de travail Bof-Bof pour les chercheurs - OK pour moi...}
+\textcolor{red}{Réfléchir / travailler autrement - beaucoup moins scolaire et "industriel": ("Think Different")!
 
 \chapter{Conclusion}
 
