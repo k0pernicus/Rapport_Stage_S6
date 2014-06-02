@@ -28,7 +28,7 @@ Je remercie tout d'abord l'équipe Bonsai, pour toute l'accueil généreuse recu
 \newline 
 Je remercie ensuite les membres du projet \textit{Vidjil}: \textbf{Giraud Mathieu}, \textbf{Salson Mikaël} ainsi que \textbf{Duez Marc} pour l'intégration mais aussi l'aide avec laquelle chaque membre m'a aidé pour mon sujet de stage.
 \newline
-Aussi, je remercie M. \textbf{Meftali Samy} ainsi que M. \textbf{Giraud Mathieu}, \textbf{Salson Mikaël} et \textbf{Duez Marc} pour toute l'attention donnée quant au travail sur le projet, ainsi que sur ce rapport.
+Aussi, je remercie M. \textbf{Meftali Samy} ainsi que M. \textbf{Giraud Mathieu} pour toute l'attention donnée quant au travail sur le projet, ainsi que sur ce rapport.
 \newline
 Pour finir, je tiens à remercier ma famille pour tout le soutien apporté durant ces trois mois de stage, ainsi qu'à mes collèges de bureau: \textbf{Dufresne Yoann} et \textbf{Vrolland Christophe}.
 
@@ -257,13 +257,81 @@ PtsVoisins$ = $\CALL{epsilonVoisinage}{P, eps}\\
 
 \section{Implantation de l'algorithme}
 
-\subsection{Déterminaison les paramètres}
+\subsection{Choix quant aux paramètres}
 
-\subsection{Les résultats apportés}
+Les paramètres pris par défaut sont de 0 pour $\epsilon$, ainsi que pour \textit{Mp}. Ainsi, au départ, chaque clone a son propre cluster.
+\newline
+Le meilleur moyen pour faire varier les paramètres et réaliser, pour soi, la meilleure clusterisation, est de faire varier les paramètres par nos propres moyens.
+\newline
+J'ai donc ajouté, pour cela, deux sliders dans l'\textit{interface}:
+	\begin{itemize}
+	\item{Un slider pour faire varier la distance prise en compte entre chaque clone: $\epsilon$},
+	\item{Un slider pour faire varier le nombre de voisins minimum pris en compte dans l'algorithme: \textit{Mp}.}
+	\end{itemize}
+Ces sliders calculent, à chaque modification apportée par clic, un nouvel objet DBSCAN selon les nouveaux paramètres demandés - ce qui permet de visualiser en temps réel les modifications apportées manuellement.
+\newline
+La visualisation des clusters se fait par couleur - en effet, chaque clone appartient à un cluster bien précis, calculé et attribué lors du calcul de l'algorithme, chaque cluster ayant une couleur bien spécifique, attribuée du début à la fin de la visualisation.
+
+\subsection{Visualisation}
+
+La visualisation des groupes de clones est primordiale - elle en est même la base du sujet de stage.
+\newline
+Il a donc fallu travailler sur la visualisation de chaque clone d'un cluster, indépendamment des autres, mais aussi de l'intéraction d'un clone avec un autre, présent ou non dans le même cluster.
+\newline
+D'où l'idée d'implémenter trois choses, accomplissant parfaitement la visualisation et l'intéraction avec les clusters:
+	\begin{itemize}
+	\item{Une nouvelle colorisation, afin de visualiser rapidement quel clone est présent dans le même cluster qu'un autre,}
+	\item{Une nouvelle clusterisation, afin de visualiser rapidement, via le menu gauche, quels sont les différents groupes de clones existant,}
+	\item{Une nouvelle distribution, afin de pouvoir interagir physiquement, via un nouveau paramètrage du moteur physique D3JS, avec un ou plusieurs clones ou cluster - selon la clusterisation choisie pour l'étude.}
+	\end{itemize}
 
 \subsubsection{Ajout d'une nouvelle colorisation}
 
-\subsubsection{Apport au graphe}
+La colorisation s'est imposée d'elle-même, étant beaucoup plus bénéfique visuellement et résiduelle dans le temps (il est en effet possible de colorier les clones selon les résultats de DBSCAN, tout en étudiant une distribution précise, autre que celle de DBSCAN).
+\newline
+Aussi, il a fallu faire attention à plusieurs choses:
+	\begin{itemize}
+		\item{La couleur choisie pour chaque cluster est comprise entre 0 et 270 - afin d'aller d'une teinte rouge (0) vers le violet (270), des couleurs déjà utilisées dans le projet, et permettant aussi de respecter scrupuleusement la légende des couleurs déjà établie par l'ingénieur de recherche du projet}
+		\item{Le dégradé est de mise - il a fallu faire attention à ce que les noeuds se ressemblant n'aient pas une teinte beaucoup trop proche l'une de l'autre.
+			\newline
+			Pour palier à ce problème, j'ai donc créé un objet tableau à N entrées (100 ici, pour utiliser au maximum 100 clusters, soit 1 clone par cluster) que j'ai expressément mélangé afin d'obtenir un tableau de clusters avec une suite de couleurs non-dégradée, via l'algorithme de Fisher-Yates (encore appelé mélange de Knuth), utilisé dans ce genre de situation.}
+	\end{itemize}
+
+\subsubsection{Ajout d'une nouvelle clusterisation}
+
+L'algorithme DBSCAN est un algorithme de clusterisation - il était donc normal qu'il faille ajouter, dans l'\textit{interface}, la clusterisation DBSCAN afin de pouvoir visualiser directement les clusters, indépendamment de la colorisation et de la distribution étudiée.
+\newline
+La classe "Model" du projet a donc été légèrement modifiée pour ceci, afin de permettre non seulement la visualisation générale de cette clusterisation, mais aussi la visualisation de toutes les mises-à-jour futures de celle-ci, lors des changements des paramètres $\epsilon$ et \textit{Mp} de l'algorithme par l'utilisateur.
+
+\subsubsection{Ajout d'une nouvelle distribution}
+
+Pourquoi a-t-il fallu créer/ajouter une nouvelle distribution, au lieu d'utiliser celle déjà établie avec le graphe représentant les distances d'édition ?
+\newline
+Tout d'abord, il ne s'agira pas d'un seul graphe, mais de tout un ensemble de petits graphes représentant chacun un cluster, présents dans la même fenêtre SVG - ainsi, il faut prendre en compte que les distances entre chaque point du graphe ne sera pas représenté, mais que l'on veut obtenir un graphe complet par cluster.
+\newline
+Ensuite, les distances calculées et délivrées par le programme en C++ ne seront pas prises en compte! Nous voulons que chaque cluster soit condensé/renfermé - ainsi, il faudra donner une valeur prise par défaut mais minimaliste, à chaque lien entre une source et une cible \textbf{appartenant au même cluster}.
+\newline
+Vient après une suite de légères modifications:
+	\begin{itemize}
+	\item{Une augmentation de la gravité,}
+	\item{Une élasticité non-utilisée,}
+	\item{L'ajout d'une modification de la distribution en temps réel, en fonction des paramètres utilisés par l'utilisateur, et pouvant être modifié à n'importe quel moment.}
+	\end{itemize}
+Tout ceci a nécessité la création d'un nouveau paramètre du moteur physique D3JS, spécialement conçu pour la plus précise visualisation intéractive des clusters.
+\newline
+Heureusement, certaines choses ont été gardés du moteur physique implémenté pour le graphe de distance d'édition, notamment la disposition du cadre SVG, son remplissage et l'intéraction établie avec l'ensemble de l'\textit{interface}, comme l'effacement des légendes, la modification de celles-ci manuellement, etc...
+
+\subsection{Résultats}
+
+Les résultats de cette implémentation de l'algorithme DBSCAN en JavaScript vont être discutés sous deux formes:
+	\begin{itemize}
+	\item{un apport scientifique, axé sur les résultats physiques de l'algorithme en lui-même dans le projet,}
+	\item{ainsi qu'un apport plus axé sur la similitude entre cette nouvelle distribution, et celle créée lors du travail sur la première partie du stage}
+	\end{itemize}
+
+\subsubsection{Apport scientifique et biologique}
+
+\subsubsection{Apport à la première partie du stage}
 
 \chapter{Le travail en recherche}
 
@@ -311,14 +379,18 @@ La vigilance est aussi de mise quant à la publication d'autres scientifiques su
 
 \section{"Think different"}
 
-\textcolor{red}{Réfléchir / travailler autrement - beaucoup moins scolaire et "industriel": ("Think Different")!
+\textcolor{red}{Ce qui me plaît, c'est de réfléchir et travailler autrement que les autres ("Think Different")!
+\newline
+Conditions de vie + relationnel OK (ne pas oublier de dire que les labos sont cools + matos cool
+\newline
+Conditions de travail Bof-Bof pour les chercheurs - OK pour moi...}
 
 \chapter{Conclusion}
 
 
 \chapter{Bibliographie}
 \begin{itemize}
-\item{Le premier article sur le projet \textit{Vidjil}, écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}: \url{} \textit{(Consultation le 04 Avril 2014)}}
+\item{Le premier article sur le projet \textit{Vidjil}, écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}: \url{http://www.biomedcentral.com/1471-2164/15/409/abstract} \textit{(Consultation le 04 Avril 2014)}}
 \item{\url{http://www.worldcat.org/title/recombinaison-vdj-illegitime-et-developpement-de-leucemies-aigues-lymphoblastiques-t/oclc/495056914} \textit{(Consultation le 10 Mai 2014)}}
 \item{\url{http://fr.wikipedia.org/wiki/Recombinaison_V%28D%29J} \textit{(Consultation le 10 Mai 2014)}}
 \item{\url{http://fr.wikipedia.org/wiki/DBSCAN} \textit{(Consultation le 19 Mai 2014)}}
