@@ -104,6 +104,8 @@ DBSCAN sera donc à développer en JavaScript, et sera à intégrer au projet so
 
 \chapter{Préparation}
 
+Avant de me lancer dans le travail tout de suite, il m'a fallu étudier l'\textit{afficheur}, ses différentes parties (afin de savoir "quelle partie faisait quoi?"), mais aussi les langages qui composaient le site internet afin de pouvoir au mieux les exploiter.
+
 \section{L'\textit{afficheur}}
 
 \subsection{Un travail d'un an...}
@@ -120,58 +122,56 @@ Le programme utilise les langages les plus simples et les plus utilisés du Web:
 \newline
 Tout le côté "Administration serveur" a été réalisé grâce au langage Python (version 2.7), ainsi qu'au framework \textit{open source} web2py.
 \newline
-Côté conception, il y avait déjà plus de 20 classes Javascript écrites (à environ 1000 lignes de code par classe), utilisant 2 frameworks JavaScript reconnus (D3JS et JQuery), ainsi que le langage Less\footnote{Less est un langage dynamique de génération de feuilles de style, conçu par \textbf{Alexis Sellier}.} - très utile quant au changement dynamique de feuille de style afin de mieux visualiser les données calculées pour un échantillonage préparé, et permettant beaucoup plus de souplesse que le langage CSS, permettant de définir la présentation du document HTML.
+Côté conception, il y avait déjà plus de 20 classes Javascript écrites (à environ 1000 lignes de code par classe), utilisant 2 \textit{frameworks}\footnote{Un \textit{framework} est un ensemble d'outils et de composants logiciels organisés conformément à un plan d'architecture et des patterns, l'ensemble formant ou promouvant un "squelette" de programme - il est conçu en vue d'aider les programmeurs dans leur travail} JavaScript reconnus (D3JS et JQuery), ainsi que le langage Less\footnote{Less est un langage dynamique de génération de feuilles de style, conçu par \textbf{Alexis Sellier}.} - très utile quant au changement dynamique de feuille de style afin de mieux visualiser les données calculées pour un échantillonage préparé, et permettant beaucoup plus de souplesse que le langage CSS, permettant de définir la présentation du document HTML.
 
 \subsection{Composition de l'\textit{afficheur}}
 
-L'\textit{afficheur} se présente sur différentes parties, toutes dépendantes les unes des autres\footnote{Se rapporter à l'annexe}:
+L'\textit{afficheur} se présente sur différentes parties, toutes dépendantes les unes des autres\footnote{Se rapporter à l'annexe, pour une visualisation de l'\textit{afficheur} et ses différentes parties}.
+\newline Je ne me suis intéressé, pour mon stage, qu'à trois grandes parties:
 \begin{itemize}
-\item{le menu Haut}
-\item{le menu Gauche}
-\item{le sur-scatterplot ?}
-\item{le \textit{scatterplot}}
-\item{le menu Bas}
-\item{le segmenteur}
+\item{le \textbf{menu Haut} - pour l'implémentation des distributions et de la clusterisation DBSCAN,}
+\item{le \textbf{menu Gauche} - pour l'implémentation de la clusterisation par DBSCAN,}
+\item{et enfin le \textbf{\textit{scatterplot}}, permettant la visualisation des clones selon la distribution/clusterisation demandée.}
 \end{itemize}
 
 \section{Étude et intégration}
-Tout ceci s'est fait durant la 1ère semaine de stage, et la moitié du temps durant les deux suivantes.
+
+Cette phase a duré 2 semaines.
 
 \subsection{La documentation}
-Ne connaissant pas D3JS, JQuery, Ajax ou encore Less, il a donc fallu que je me documente à leur sujet, exploiter toutes les fonctionnalités mais aussi comment les intégrer, et quel est le but recherché quant à l'utilisation de tel framework ou tel langage.
+Ne connaissant pas les \textit{frameworks} D3JS et JQuery, Ajax ou encore Less, il a donc fallu que je me documente à leur sujet, exploiter toutes les fonctionnalités mais aussi comment les intégrer, et quel est le but recherché quant à l'utilisation de tel \textit{framework} ou tel langage.
 
 \subsection{L'intégration au projet}
-Je ne pouvais me permettre d'ajouter directement ma nouvelle fonctionnalité dans la classe correspondant à l'endroit où elle devait apparaître dans l'\textit{afficheur}, il m'a donc fallu tout d'abord étudier le code ainsi que recourir à la création de la documentation pour le développeur non-écrite ou obsolète, ainsi que corriger quelques bugs mineurs dans l'\textit{afficheur} afin de mieux pouvoir discerner quelle partie du projet était intégrée dans quelle classe objet.
+Je ne pouvais me permettre d'ajouter directement ma nouvelle fonctionnalité dans la classe correspondant à l'endroit où elle devait apparaître dans l'\textit{afficheur}, il m'a donc fallu tout d'abord étudier le code, ainsi que recourir à la création de la documentation pour le développeur (qui était non-écrite, ou obsolète), ainsi que corriger quelques bugs mineurs dans l'\textit{afficheur}, demandée par l'équipe \textit{Vidjil} afin de me permettre de mieux discerner les grandes parties de l'\textit{afficheur}.
 \newline
-De plus, il était très important pour moi de respecter les règles de l'équipe en matière d'ingénièrie logicielle, ne serait-ce par l'écriture du code, de la documentation, mais aussi par rapport au respect des commits/push sur le serveur, via l'utilitaire \textit{Git}.
+De plus, il était très important pour moi de respecter les règles de l'équipe en matière d'ingénièrie logicielle, ne serait-ce par l'écriture du code, de la documentation, mais aussi par rapport au respect des \textit{commits}\footnote{Un \textit{commit} est une action permettant d'envoyer ses modifications locales vers le référentiel central}/\textit{push}\footnote{Un \textit{push} est une action permettant de transférer des commits d'un dépôt local à un dépôt distant} sur le serveur, via le logiciel de gestion de versions décentralisé \textit{Git}\footnote{\textit{Git} est un logiciel libre créé par \textbf{Linus Torvalds}, permettant de gérer très facilement les codes sources de projets.}.
 
 \subsection{Le domaine biologique}
-Dernière chose, je me suis remis - lors des deux premières semaines - à la biologie et l'étude de la recombinaison V(D)J chez le vertébré, mais aussi les techniques de séquençage et de clusterisation afin de mieux comprendre et poursuivre les discussions autour du sujet, lors des réunions dans l'équipe, ou avec le Laboratoire d'Hématologie de Lille2.
+Enfin, je me suis remis à étudier la microbiologie, la recombinaison V(D)J chez les Vertébrés, ainsi que les techniques de séquençage et de clusterisation afin de mieux me permettre de comprendre, et de poursuivre, les discussions autour du sujet, lors des réunions dans l'équipe, ou avec le Laboratoire d'Hématologie de Lille2.
 
 \chapter{Le graphe de distances d'édition}
 
 
-La distribution quant à l'édition de distance entre les différents clônes est très intéressante afin de visualiser les rapprochements entre ceux-ci, et permettre une visualisation par échelle de couleur, afin de mieux distancer quels sont les clônes les plus similaires par rapport aux autres.
+La distribution quant à l'édition de distance entre les différents clônes est très intéressante, car elle permet de visualiser les rapprochements biologiques entre ceux-ci ainsi que de permettre une visualisation par échelle de couleur, afin de mieux distancer quels sont les clônes les plus similaires par rapport aux autres.
 \newline
-Le projet contenait à lui seul d'ores-et-déjà 5 distributions:
+Le projet contenait à lui seul d'ores-et-déjà 4 distributions:
 \begin{itemize}
 \item V/J génique
 \item V/J allèlique
-\item V/J selon la distance des clônes
-\item la visualisation l'abondance des clônes V et J
-\item la visualisation des V selon un histogramme
+\item l'abondance des régions V et J
+\item histogramme d'abondance des régions V
 \end{itemize}
-Toutes ces distributions sont utiles et nécessaires à la visualisation des clônes dans un environnement précis, en fonction d'un jeu de données.
+Toutes ces distributions peuvent être utiles, voire nécessaires, à un médecin ou un biologiste, afin de visualiser directement les clônes, en fonction d'un jeu de données.
 
 \section{Ajout d'une nouvelle distribution}
-L'ajout d'une nouvelle distribution n'était pas aisée - en effet, il m'a fallu me mettre dans le code afin de prévoir où implanter ma distribution, et quelles modifications effectuer sur la partie de l'\textit{afficheur} utilisé: le \textit{scatterPlot}.
+L'ajout d'une nouvelle distribution n'était, au départ, pas aisée - en effet, il m'a fallu me mettre dans le code afin de prévoir où implanter ma distribution, et quelles modifications sont à effectuer sur la partie de l'\textit{afficheur} utilisée: le \textit{scatterPlot}.
 \newline
-De plus, par rapport aux autres distributions effectuées par l'ingénieur de recherche de la petite équipe, il fallait forcer un peu plus le moteur physique et 3D de D3JS afin que lui seul puisse positionner les clônes le plus précisémment possible par rapport à une distance, déjà calculée et implantée sous la forme d'un tableau JSON - les points prendront donc une position naturelle, on ne la calculera pas et ne la donnera pas au moteur afin qu'il puisse les placer.
+De plus, par rapport aux autres distributions effectuées par l'ingénieur de recherche de la petite équipe, il fallait forcer un peu plus le moteur physique de D3JS, afin que lui seul puisse positionner les clônes le plus précisémment possible, tout en respectant une distance donnée pour deux clônes, calculée par le programme C++.
 \newline
-Autre soucis à prévoir, la non-possibilité pour D3JS de calculer absolument tous les déplacement d'arêtes possibles dans le graphe - en effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par frame la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié.
+Autre soucis à prévoir, la non-possibilité pour D3JS de calculer absolument tous les déplacements d'arêtes possibles dans le graphe, lorsque l'on bouge en temps réel un clône (ayant pour effet de modifier la structure du graphe) - en effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par \textit{frame}\footnote{Une \textit{frame} = nombre d'images par seconde} la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié pour ce genre de cas particulier.
 
 \section{Création du graphe}
-D3JS contient, pour son moteur, absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus l'exactitude des informations données.
+D3JS contient, pour son moteur, absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus le respect exact des informations données, et de la transformation effectuée par D3JS.
 \newline
 \textcolor{red}{-> Théorie des graphes et exactitude de la représentation}
 \newline
@@ -180,18 +180,20 @@ D3JS contient, pour son moteur, absolument toutes les fonctions nécessaires afi
 \section{Problème et résolution des arêtes}
 La technologie D3JS est utilisée à fort escient dans le projet, d'ores-et-déjà; il était donc tout à fait naturel de le continuer en utilisant celle-ci pour la création et l'exploitation du graphe à mettre en oeuvre.
 \newline
-Cependant, une question restait encore à éclaircir: sur un graphe à 100 clônes, chacun était lié aux 99 autres par une arête, il faudra donc créer un graphe à 10000 arêtes; la question est: "Le moteur du framework est-il capable de supporter absolument tout le calcul nécessaire pour la mouvance du graphe?"
+Cependant, une question restait encore à éclaircir: sur un graphe à 100 clônes, chacun était lié aux 99 autres par une arête, il faudra donc créer un graphe à 10000 arêtes; la question est: "Le moteur du \textit{framework} est-il capable de supporter absolument tout le calcul nécessaire pour la mouvance du graphe, en temps réel?"
 \newline
-La réponse est \textbf{non}, le framework n'en est pas capable, car il n'a pas été créé/optimisé pour cette tâche - nous allons voir par la suite comment il a fallu optimiser un maximum la composition du graphe afin de le représenter plus rapidement, avec un maximum de concordance.
+La réponse est \textbf{non}, le framework n'en est pas capable, car il n'a pas été créé/optimisé pour cette tâche.
+\newline
+Il a donc fallu trouver un moyen d'optimiser au maximum la composition du graphe (c'est à dire garder un nombre minimal d'arêtes), afin de le représenter le plus rapidement possible (avec mouvance), et avec un maximum de concordance par rapport aux données fournies.
 
-\subsection{Il était une fois, un premier algorithme...}
+\subsection{\textit{"Il était une fois, un premier algorithme..."}}
 Le premier algorithme qui m'est venu à l'esprit est de supprimer toutes les arêtes ayant une longueur supérieure à une distance donnée, directement dans le programme - cela permettra donc d'alléger le tableau d'arêtes prit en compte par le moteur, et de moins le faire souffrir lors des calculs.
 \newline
 Ce procédé a été un semi-échec: nous avons supprimé un peu plus de 50\% des arêtes disponibles (nous étions passé de 10000 à 4970 sur un jeu de données) - malheureusement, le moteur peinait à calculer toutes les positions des noeuds et arêtes par frame une nouvelle fois (sur une machine à processus corei5 à 8Go de RAM, GPU Intel HD 4000).
 \newline
 Il était donc nécessaire de chercher un nouvel algorithme qui pourrai, au moins, diviser de moitié le nombre d'arêtes enregistrées/calculées par le moteur.
 
-\subsection{L'algorithme contre-attaque}
+\subsection{\textit{"L'algorithme contre-attaque"}}
 Le deuxième algorithme a été trouvé par \textbf{Marc Duez}; il s'agit de:
 \begin{enumerate}
 \item Trouver les 3 plus grandes arêtes du graphe ayant les caractèristiques suivantes:
@@ -210,17 +212,29 @@ Pour le résultat, il a été concluant - en effet, en suivant à la main l'algo
 \item l'étape 3 se fera avec un maximum de 100 * 5 arêtes (au total: 1103 arêtes)
 \end{itemize}
 Ainsi, nous avons pu enlever un peu moins de 90\% des arêtes totales, en moyenne; ce qui est très largement au-delà de ce qu'il nous faut pour le temps de calcul, mais aussi pour l'allégement du moteur de D3JS.
+
+\subsection{\textit{"Le triangle à 3 arêtes"}}
+Le troisième algorithme - et celui retenu par mon équipe et moi-même, a été proposé par mon responsable d'équipe, M. \textbf{Giraud Mathieu}.
 \newline
-Malheureusement, nous étions confronté à un problème, non pas par rapport au temps, mais par rapport à la fidélité de la représentation du graphe.
+Selon lui, il fallait juste modifier la 1ère partie du graphe, de sorte à prendre les 3 plus grandes arêtes formant un triangle, dont la somme des côtés sera la longueur maximale de toutes les autres représentations triangulaires.
 \newline
-En effet, notre représentation préserve bien, grâce au paramètrage de l'élasticité donnée à chaque arête dans le moteur D3JS, les distances les plus faibles (inférieures à un certain pourcentage de comparaison) - le soucis étant maintenant que les plus grandes distances ne sont pas respectées. Ainsi, deux points très éloignés, à cause du paramètrage de l'élasticité, peuvent maintenant être très proches dans le graphe.
+Ainsi, nous pourrons nous assurer d'avoir une structure en triangle, à 3 arêtes, dont la chance d'obtenir en son sein un maximum de clônes est proche.
 \newline
-Afin de palier à celui-ci, il a fallu garder la vision des arêtes pour un/plusieurs point(s) sélectionné(s), afin de bien visualiser qui est proche, et qui est loin d'un autre point. Chaque arête sera visualisé en fonction des points présents, mais aussi en fonction de leur longueur - si l'arête détient une longueur supérieure à un pourcentage bien défini par avance, il ne pourra être affiché, ce qui permettra de ne pas afficher un graphe complet pour chaque point, ce qui rendrai la vision du graphe très complexe, mais aussi d'afficher surtout les points distancés d'une longueur voulue/intéressante.
+Nous pourrons donc obtenir premièrement un "squelettre" du graphe, afin de pouvoir aider le moteur à mieux modéliser la "chair".
 
 \section{Résultats}
 
-\textcolor{red}{-> Résolution de cette approximation en modifiant les propriétés du moteur D3JS + élimination des clônes autour d'un des 3 grandes arêtes au dessus d'une longueur de 'n'}
+Le résultat final montre bien les rapports entre les différents clônes, très rapidement.
 \newline
+Malheureusement, nous étions encore confronté à un problème, non pas par rapport au temps, mais par rapport à la fidélité de la représentation du graphe.
+\newline
+En effet, notre représentation préserve bien, grâce au paramètrage de l'élasticité donnée à chaque arête dans le moteur D3JS, les distances les plus faibles (inférieures à un certain pourcentage de comparaison) - le soucis étant maintenant que les plus grandes distances ne sont pas respectées (autre que les 3 plus grandes distances, modélisant le triangle). Ainsi, deux points très éloignés, à cause du paramètrage de l'élasticité, peuvent maintenant être très proches dans le graphe, vu que le moteur ne détient pas d'information lui permettant de savoir où le placer correctement.
+\newline
+Afin de palier à celui-ci, il a fallu garder la vision des arêtes pour un/plusieurs point(s) sélectionné(s), afin de bien visualiser qui est proche, et qui est loin d'un autre point - ainsi, chaque arête présente sera représentative d'une certaine proximité entre les deux points visés. 
+\newline
+Chaque arête sera visualisée en fonction des points présents, mais aussi en fonction de leur longueur - si l'arête détient une longueur supérieure à un pourcentage bien défini par avance, elle ne pourra être affichée, ce qui permettra de ne pas afficher un graphe complet pour chaque point cliquable (ce qui rendrai la vision du graphe beaucoup trop complexe et inutile), et d'afficher les points distancés d'une longueur voulue, selon la valeur demandée sur un \textit{slider} du \textbf{sous-menu Haut} "\textit{display}".
+\newline
+Enfin, il était intéressant de visualiser, non pas seulement les pourcentages d'identité/de ressemblance entre les clônes (ce qui a été calculé premièrement par le programme C++), mais d'obtenir de réelles distances en fonction des différences entre les séquences ADN. C'est le travail qui a été réalisé par moi-même lors des 3 dernières semaines de stage, visible en \textbf{partie 6} du rapport.
 
 \chapter{L'algorithme de clusterisation DBSCAN}
 
@@ -375,9 +389,7 @@ La recherche m'intéressait au plus au point dès ma sortie du lycée.
 \newline
 Il était donc naturel que je puisses effectuer mon premier stage Universitaire dans une structure de recherche. Ayant effectué un DEUST de Biologie avant de postuler pour une licence d'Informatique, à l'Université Lille1, et étant toujours intéressé par ce domaine si particulier de la Science, j'étais vraiment très curieux de pouvoir effectuer mes premiers pas dans le monde de la recherche dans une équipe de bio-informaticiens, d'où mon postulat pour l'équipe Bonsai.
 
-\subsection{Qualité de vie (relationnel et Scientifique)}
-
-\subsubsection{La vie est un long fleuve tranquille...}
+\section{La vie est un long fleuve tranquille...}
 
 La vie en laboratoire de recherche a été un véritable plaisir.
 \newline
@@ -401,7 +413,7 @@ Celà s'est ressenti de différentes manières:
 \end{itemize}
 Tout ceci m'a permis de me créer une belle idée de ce qu'est le monde de la recherche sur le plan relationnel et scientifique, et de me sentir beaucoup plus à l'aise dès la première semaine de stage.
 
-\subsubsection{...ou pas}
+\section{...ou pas}
 
 Ce stage m'a permis aussi de me rendre compte de tous les problèmes tournant autour de la recherche, que ce soit pour l'accréditation des sujets de recherche, les problèmes liés aux actions en dehors de sa thèse, ou encore plus directement aux problèmes touchant à son sujet de thèse (la publication du sujet en est un exemple valable).
 \newline
@@ -413,16 +425,7 @@ Tout ceci est lié à un rythme de publication assez rapide et drastique, qui ne
 \newline
 La vigilance est aussi de mise quant à la publication d'autres scientifiques sur un sujet très proche de celui sur lequel un/plusieurs chercheur(s) travaille(nt). En effet, un article paraissant à une période très proche d'un autre traitant du même sujet, mais déjà publié, pourrai être refusé en publication pour ce motif - ce qui pourrai faire perdre au(x) chercheur(s) plusieurs mois (voire années) de travail à cause de celà.
 
-\section{"Think different"}
-
-\textcolor{red}{Ce qui me plaît, c'est de réfléchir et travailler autrement que les autres ("Think Different")!
-\newline
-Conditions de vie + relationnel OK (ne pas oublier de dire que les labos sont cools + matos cool
-\newline
-Conditions de travail Bof-Bof pour les chercheurs - OK pour moi...}
-
 \chapter{Conclusion}
-
 
 \chapter{Bibliographie}
 \begin{itemize}
