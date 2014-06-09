@@ -1,15 +1,21 @@
 LATEX = pdflatex
 VISU = evince
-SRC = Rapport_Stage_Vidjil.tex
+SRCR = Rapport_Stage_Vidjil.tex
+SRCA = Rapport_Stage_Vidjil_Annexes.tex
 PDF = $(SRC:.tex=.pdf)
 
 all: visu
 
-visu: compile
+visu: compileAll
 	$(VISU) $(PDF)
 
-compile:
-	$(LATEX) $(SRC) && $(LATEX) $(SRC)
+compileAll: compileR compileA
+
+compileR:
+	$(LATEX) $(SRCR) && $(LATEX) $(SRCR)
+
+compileA:
+	$(LATEX) $(SRCA) && $(LATEX) $(SRCA)
 
 clean:
 	rm -f *.synctex.gz *.out *.toc *.aux *.log
