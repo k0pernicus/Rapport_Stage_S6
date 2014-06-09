@@ -151,26 +151,30 @@ Enfin, je me suis remis à étudier la microbiologie, la recombinaison V(D)J che
 \chapter{Le graphe de distances d'édition}
 
 
-La distribution quant à l'édition de distance entre les différents clônes est très intéressante, car elle permet de visualiser les rapprochements biologiques entre ceux-ci ainsi que de permettre une visualisation par échelle de couleur, afin de mieux distancer quels sont les clônes les plus similaires par rapport aux autres.
+La distribution\footnote{Une distribution est une visualisation possible des données, pour une utilisation spécifique.} quant aux distances d'édition entre les différents clônes est très intéressante, car elle permet de visualiser les similarités biologiques entre ceux-ci, par leur rapprochement physique, mais aussi par la couleur de l'arête, représentant cette distance (du rouge pour la proximité, au violet pour le plus éloigné).
 \newline
-Le projet contenait à lui seul d'ores-et-déjà 4 distributions:
+Le projet contenait, à mon arrivé, 4 distributions:
 \begin{itemize}
 \item V/J génique
 \item V/J allèlique
-\item l'abondance des régions V et J
+\item abondance des régions V et J
 \item histogramme d'abondance des régions V
 \end{itemize}
-Toutes ces distributions peuvent être utiles, voire nécessaires, à un médecin ou un biologiste, afin de visualiser directement les clônes, en fonction d'un jeu de données.
+Toutes ces distributions peuvent être utiles, voire nécessaires, à un médecin ou un biologiste, afin de visualiser directement la disparité et le réarrangement des clônes, en fonction d'un jeu de données, pour une étude ou un suivi.
 
 \section{Ajout d'une nouvelle distribution}
-L'ajout d'une nouvelle distribution n'était, au départ, pas aisée - en effet, il m'a fallu me mettre dans le code afin de prévoir où implanter ma distribution, et quelles modifications sont à effectuer sur la partie de l'\textit{afficheur} utilisée: le \textit{scatterPlot}.
+L'ajout d'une nouvelle distribution n'était, au départ, pas aisée pour différentes raisons techniques.
 \newline
-De plus, par rapport aux autres distributions effectuées par l'ingénieur de recherche de la petite équipe, il fallait forcer un peu plus le moteur physique de D3JS, afin que lui seul puisse positionner les clônes le plus précisémment possible, tout en respectant une distance donnée pour deux clônes, calculée par le programme C++.
+En effet, il a déjà fallu me plonger dans le code du \textit{scatterplot} afin de prévoir où implanter ma distribution, et quelles modifications seraient à effectuer sur cette partie de l'\textit{afficheur}.
 \newline
-Autre soucis à prévoir, la non-possibilité pour D3JS de calculer absolument tous les déplacements d'arêtes possibles dans le graphe, lorsque l'on bouge en temps réel un clône (ayant pour effet de modifier la structure du graphe) - en effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par \textit{frame}\footnote{Une \textit{frame} = nombre d'images par seconde} la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié pour ce genre de cas particulier.
+De plus, par rapport aux autres distributions réalisées par l'ingénieur de recherche de l'équipe \textit{Vidjil}, il fallait forcer le moteur physique de D3JS afin qu'il puisse positionner les clônes \textbf{lui-même} le plus précisémment possible; c'est à dire en respectant la distance donnée pour plusieurs clônes, calculée par le programme en C++.
+\newline
+Ceci pourra donc amener deux problèmes dans la suite du projet: la non-possibilité, pour le moteur physique, de calculer absolument tous les déplacements d'arêtes possibles dans le graphe, lorsque l'on bouge en temps réel un clône (ayant pour effet de modifier la structure du graphe). En effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par \textit{frame}\footnote{Une \textit{frame} = nombre d'images par seconde} la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié pour ce genre de cas particulier. Le deuxième problème qui pourrai être occasionné étant que le moteur prenne trop de liberté pour placer lui-même les points à un endroit donné, et ne respecte pas la structure exacte d'un graphe possédant les propriétés, données par avance.
 
 \section{Création du graphe}
-D3JS contient, pour son moteur, absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus le respect exact des informations données, et de la transformation effectuée par D3JS.
+
+La technologie D3JS est utilisée à fort escient dans le projet, d'ores-et-déjà; il était donc tout à fait naturel de le continuer en utilisant celle-ci pour la création et l'exploitation du graphe à mettre en oeuvre.
+De plus, D3JS contient absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus le respect exact des informations données et de la transformation effectuée par D3JS (voir les deux problèmes cités ci-dessus).
 \newline
 Voici les transformations effectuées sur le moteur physique:
 \begin{itemize}
@@ -182,29 +186,31 @@ Voici les transformations effectuées sur le moteur physique:
 \item{un point cible,}
 \item{une longueur entre ces deux points}
 \end{itemize}
-), et de distances spécifiques pour chaque,}
+),
+et de distances spécifiques pour chaque,}
+\item{d'une élasticité - ce point sera détaillé dans la partie consacrée aux Résultats}
 \item{ajout d'une liaison entre un point et un début d'arête, afin de pouvoir bouger les arêtes en même temps que le point.}
 \end{itemize}
-\textcolor{red}{-> Théorie des graphes et exactitude de la représentation}
 
 \section{Problème et résolution des arêtes}
-La technologie D3JS est utilisée à fort escient dans le projet, d'ores-et-déjà; il était donc tout à fait naturel de le continuer en utilisant celle-ci pour la création et l'exploitation du graphe à mettre en oeuvre.
-\newline
+
 Cependant, une question restait encore à éclaircir: sur un graphe à 100 clônes, chacun était lié aux 99 autres par une arête, il faudra donc créer un graphe à 10000 arêtes; la question est: "Le moteur du \textit{framework} est-il capable de supporter absolument tout le calcul nécessaire pour la mouvance du graphe, en temps réel?"
 \newline
-La réponse est \textbf{non}, le framework n'en est pas capable, car il n'a pas été créé/optimisé pour cette tâche.
+La réponse est \textbf{non}, le framework n'en est pas capable car il n'a pas été créé/optimisé pour une tâche aussi lourde.
 \newline
-Il a donc fallu trouver un moyen d'optimiser au maximum la composition du graphe (c'est à dire garder un nombre minimal d'arêtes), afin de le représenter le plus rapidement possible (avec mouvance), et avec un maximum de concordance par rapport aux données fournies.
+Il a donc fallu trouver un moyen d'optimiser au maximum la composition du graphe (c'est à dire garder un nombre minimal d'arêtes), afin de le représenter le plus rapidement possible (avec mouvance) mais avec un maximum de concordance/de respect par rapport aux données fournies.
 
 \subsection{\textit{"Il était une fois, un premier algorithme..."}}
-Le premier algorithme qui m'est venu à l'esprit est de supprimer toutes les arêtes ayant une longueur supérieure à une distance donnée, directement dans le programme - cela permettra donc d'alléger le tableau d'arêtes prit en compte par le moteur, et de moins le faire souffrir lors des calculs.
+Le premier algorithme qui m'est venu à l'esprit est de supprimer toutes les arêtes ayant une longueur supérieure à une distance implantée en dur dans le programme - cela permettra donc d'alléger le tableau d'arêtes Javascript pris en compte par le moteur, et de moins le faire souffrir lors des calculs.
 \newline
 Ce procédé a été un semi-échec: nous avons supprimé un peu plus de 50\% des arêtes disponibles (nous étions passé de 10000 à 4970 sur un jeu de données) - malheureusement, le moteur peinait à calculer toutes les positions des noeuds et arêtes par frame une nouvelle fois (sur une machine à processus corei5 à 8Go de RAM, GPU Intel HD 4000).
 \newline
-Il était donc nécessaire de chercher un nouvel algorithme qui pourrai, au moins, diviser de moitié le nombre d'arêtes enregistrées/calculées par le moteur.
+Il était donc nécessaire de chercher un nouvel algorithme qui pourrai, au moins, diviser de moitié le nombre d'arêtes enregistrées/calculées par le moteur. Cependant, l'idée de modifier la distance maximale d'arêtes à afficher a été validé, et gardé dans le projet - il a été implémenté sous la forme d'un slider, présent sous la forme d'un slider du sous-menu "Display" du \textbf{menu Haut}.
 
 \subsection{\textit{"L'algorithme contre-attaque"}}
-Le deuxième algorithme a été trouvé par \textbf{Marc Duez}; il s'agit de:
+Le deuxième algorithme a été trouvé par M. \textbf{Marc Duez}; beaucoup plus brutal, il permet de se dispenser d'une grande partie d'arêtes inutiles - toujours en fonction des distances.
+\newline
+Il s'agit de:
 \begin{enumerate}
 \item Trouver les 3 plus grandes arêtes du graphe ayant les caractèristiques suivantes:
 	\begin{itemize}
@@ -215,47 +221,51 @@ Le deuxième algorithme a été trouvé par \textbf{Marc Duez}; il s'agit de:
 \item calculer toutes les arêtes possibles entre une extrémité d'arête trouvée
 \item calculer 4/5 arêtes possibles, dans une distance minimale, des points trouvés lors de l'étape 2
 \end{enumerate}
-Pour le résultat, il a été concluant - en effet, en suivant à la main l'algorithme, nous pouvons voir que:
+Le résultat a été concluant - en effet, en déroulant l'algorithme, nous pouvons voir que:
 \begin{itemize}
 \item l'étape 1 se fera avec un maximum de 3 arêtes
 \item l'étape 2 se fera avec un maximum de 600 arêtes (au total: 600 + 3 arêtes)
 \item l'étape 3 se fera avec un maximum de 100 * 5 arêtes (au total: 1103 arêtes)
 \end{itemize}
-Ainsi, nous avons pu enlever un peu moins de 90\% des arêtes totales, en moyenne; ce qui est très largement au-delà de ce qu'il nous faut pour le temps de calcul, mais aussi pour l'allégement du moteur de D3JS.
+Ainsi, nous avons pu enlever un peu moins de 90\% des arêtes totales, en moyenne; ce qui nous est très bénéfique par rapport au temps de calcul du moteur pour chaque \textit{frame}.
 
-\subsection{\textit{"Le triangle à 3 arêtes"}}
-Le troisième algorithme - et celui retenu par mon équipe et moi-même, a été proposé par mon responsable d'équipe, M. \textbf{Giraud Mathieu}.
+\subsection{\textit{"Le carré est un triangle qui a réussi, ou une circonférence qui a mal tourné..."}}\footnote{Citation de Pierre Dac}
+Le troisième algorithme - et celui retenu par mon équipe et moi-même, a été proposé par M. \textbf{Giraud Mathieu}.
 \newline
-Selon lui, il fallait juste modifier la 1ère partie du graphe, de sorte à prendre les 3 plus grandes arêtes formant un triangle, dont la somme des côtés sera la longueur maximale de toutes les autres représentations triangulaires.
+Selon mon tuteur d'entreprise, il fallait juste modifier la 1ère partie de l'algorithme précédent, de sorte à prendre les 3 plus grandes arêtes formant un triangle, dont la somme des côtés sera la longueur maximale de toutes les autres représentations triangulaires possibles, selon les données. Ainsi, chaque noeud du triangle est une source d'une arête, mais aussi une cible d'une autre.
 \newline
-Ainsi, nous pourrons nous assurer d'avoir une structure en triangle, à 3 arêtes, dont la chance d'obtenir en son sein un maximum de clônes est proche.
+Ainsi, nous pourrons nous assurer d'avoir une structure triangulaire, dont la chance d'obtenir en son sein un maximum de clônes est proche.
 \newline
-Nous pourrons donc obtenir premièrement un "squelettre" du graphe, afin de pouvoir aider le moteur à mieux modéliser la "chair".
+Nous pourrons donc obtenir premièrement un "squelette" du graphe, afin de pouvoir aider le moteur à mieux modéliser la "chair".
 
 \section{Résultats}
 
-Le résultat final montre bien les rapports entre les différents clônes, très rapidement.
+Le résultat final montre bien les rapports/similarités entre les différents clônes calculés, très rapidement.
 \newline
-Malheureusement, nous étions encore confronté à un problème, non pas par rapport au temps, mais par rapport à la fidélité de la représentation du graphe.
+Malheureusement, nous étions encore confronté à un problème, non pas par rapport au temps de calcul fait par le moteur physique, mais par rapport à la fidélité de la représentation du graphe.
 \newline
-En effet, notre représentation préserve bien, grâce au paramètrage de l'élasticité donnée à chaque arête dans le moteur D3JS, les distances les plus faibles (inférieures à un certain pourcentage de comparaison) - le soucis étant maintenant que les plus grandes distances ne sont pas respectées (autre que les 3 plus grandes distances, modélisant le triangle). Ainsi, deux points très éloignés, à cause du paramètrage de l'élasticité, peuvent maintenant être très proches dans le graphe, vu que le moteur ne détient pas d'information lui permettant de savoir où le placer correctement.
+En effet, notre représentation ne préserve pas très bien les distances données en entrée - étant donné qu'il dispose par lui-même chaque clône dans l'élèment SVG, il le fera au fur-et-à-mesure et prendra en compte de moins en moins bien les dernières distances quand il ne pourra pas les respecter.
 \newline
-Afin de palier à celui-ci, il a fallu garder la vision des arêtes pour un/plusieurs point(s) sélectionné(s), afin de bien visualiser qui est proche, et qui est loin d'un autre point - ainsi, chaque arête présente sera représentative d'une certaine proximité entre les deux points visés. 
+Il a donc fallu intégrer à ce moment là un nouveau paramètre au moteur physique: l'élasticité. Grâce au paramètrage de l'élasticité (attribuée à chaque arête par le moteur D3JS), les distances les plus faibles (inférieures à une certaine distance) auront un poids supérieur aux autres, au fur et à mesure, et seront donc plus respectées que les autres.
 \newline
-Chaque arête sera visualisée en fonction des points présents, mais aussi en fonction de leur longueur - si l'arête détient une longueur supérieure à un pourcentage bien défini par avance, elle ne pourra être affichée, ce qui permettra de ne pas afficher un graphe complet pour chaque point cliquable (ce qui rendrai la vision du graphe beaucoup trop complexe et inutile), et d'afficher les points distancés d'une longueur voulue, selon la valeur demandée sur un \textit{slider} du \textbf{sous-menu Haut} "\textit{display}".
+Le soucis étant maintenant que les plus grandes distances ne sont pas respectées (autre que les 3 plus grandes distances, modélisant le triangle bien entendu). Ainsi, deux points très éloignés peuvent toujours se retrouver à proximité dans le graphe, vu que le moteur soit, ne détient pas d'information lui permettant de savoir où le placer correctement, soit détient cette information mais, l'élasticité de cette arête étant trop faible, place donc le point n'importe où il veut.
 \newline
-Enfin, il était intéressant de visualiser, non pas seulement les pourcentages d'identité/de ressemblance entre les clônes (ce qui a été calculé premièrement par le programme C++), mais d'obtenir de réelles distances en fonction des différences entre les séquences ADN. C'est le travail qui a été réalisé par moi-même lors des 3 dernières semaines de stage, visible en \textbf{partie 6} du rapport.
+Afin de palier à ce problème réccurent, il a fallu permettre à l'utilisateur de savoir si le point est en effet proche d'un autre, ou non - ce qui a déjà été fait grâce à la vision des arêtes pour un/plusieurs point(s) sélectionné(s) par clique. Ainsi, chaque arête présente sera représentative d'une certaine proximité entre les deux points visés, selon la distance maximale donnée par l'utilisateur en faisant bouger le slider.
+\newline
+Enfin, il était intéressant de visualiser, non pas seulement les pourcentages d'identité/de ressemblance entre les clônes (ce qui a été calculé premièrement par le programme C++), mais d'obtenir de réelles distances en fonction des différences entre les séquences ADN. C'est le travail qui j'ai réalisé lors des 3 dernières semaines de stage, consultable en \textbf{partie 5} du rapport.
 
 \chapter{L'algorithme de clusterisation DBSCAN}
 
-Ce chapitre conduira mon travail ainsi que mes réflexions sur la deuxième partie du stage que je devais effectué, sur l'intégration de l'algorithme de clusterisation DBSCAN (\textit{Density-Based Spatial Clustering of Applications with Noise}).
+Ce chapitre conduira mon travail et mes réflexions sur la deuxième partie du stage que je devais effectué, sur l'intégration de l'algorithme de clusterisation DBSCAN (\textit{Density-Based Spatial Clustering of Applications with Noise}).
+\newline
+Ce travail a été réalisé en une semaine, de fin Mai à la première semaine de Juin.
 
 \section{Présentation générale}
 
 \subsection{Présentation}
-DBSCAN est un algorithme permettant la clusterisation de données, proposé en 1996 par Martin Ester, Hans-Peter Kriegel, Jörg Sander et Xiaowei Xu, s'appuyant sur la densité estimée des clusters à partitionner.
+DBSCAN est un algorithme permettant la clusterisation de données, proposé en 1996 par \textbf{Martin Ester}, \textbf{Hans-Peter Kriegel}, \textbf{Jörg Sander} et \textbf{Xiaowei Xu}, s'appuyant sur la densité estimée des clusters à partitionner.
 \newline
-Cet algorithme est très simple à implémenter.
+Cet algorithme a été très simple à implémenter.
 \newline
 Tout d'abord, il faut choisir deux paramètres essentiels:
 \begin{itemize}
