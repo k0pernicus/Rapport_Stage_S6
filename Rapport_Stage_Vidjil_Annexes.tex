@@ -12,6 +12,8 @@
 \usepackage{calc}
 \usepackage{pseudocode}
 
+\usepackage{graphicx}
+
 \AddThinSpaceBeforeFootnotes
 
 \FrenchFootnotes
@@ -29,6 +31,15 @@
 \chapter*{Préparation}
 
 \addcontentsline{toc}{chapter}{Préparation}
+
+\begin{figure}[h]
+\begin{center}
+\rotatebox{90}{
+	\includegraphics[scale=0.35]{img/Montage_Sans_Annotations.jpg}
+}
+\end{center}
+\caption{Aperçu général de l'\textit{afficheur} - montage avec palette ``Dark'' et ``Light''}
+\end{figure}
 
 \chapter*{Le graphe de distances d'édition}
 
@@ -74,6 +85,33 @@ PtsVoisins$ = $\CALL{epsilonVoisinage}{P, eps}\\
 	$Retourner tous les points de $D$ qui sont à une distance inférieure à $eps$ de $P
 \ENDPROCEDURE
 \end{pseudocode}
+
+\begin{figure}[h]
+\begin{center}
+\rotatebox{90}{
+	\includegraphics[scale=0.45]{img/DBSCAN-Cluster-Ex.jpg}
+}
+\end{center}
+\caption{\textit{Afficheur} avec la clusterisation DBSCAN}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\rotatebox{90}{
+	\includegraphics[scale=0.45]{img/DBSCAN-Color-Ex.jpg}
+}
+\end{center}
+\caption{\textit{Afficheur} avec la clusterisation DBSCAN}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\rotatebox{90}{
+	\includegraphics[scale=0.7]{img/DBSCAN-Ex.jpg}
+}
+\end{center}
+\caption{\textit{Afficheur} avec la distribution DBSCAN}
+\end{figure}
 
 \chapter*{Recherche de la meilleure distance possible}
 
