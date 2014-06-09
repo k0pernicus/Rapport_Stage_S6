@@ -4,12 +4,12 @@
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
 \usepackage{setspace}
+\usepackage[top=2.5cm,bottom=2.5cm,right=3cm,left=3cm]{geometry}
 
 \usepackage{hyperref}
 \usepackage{color}
 
 \usepackage{calc}
-\usepackage{pseudocode}
 
 \AddThinSpaceBeforeFootnotes
 
@@ -26,20 +26,21 @@
 
 \tableofcontents
 
+\chapter*{Introduction}
 
-\chapter{Introduction}
+\addcontentsline{toc}{chapter}{Introduction} 
 
 \section{Remerciements}
 Je remercie tout d'abord mon tuteur d'Université: M. \textbf{Meftali Samy}, ainsi que mon tuteur en entreprise: M. \textbf{Giraud Mathieu}, pour toute l'attention donnée quant au travail sur le projet, ainsi que sur ce rapport.
 \newline
 Je remercie ensuite l'équipe Bonsai ainsi que les membres du projet \textit{Vidjil}, pour leur accueil ainsi que leur soutien, recueillis durant les 3 mois de stage.
 \newline
-Enfin, je tiens à remercier ma famille pour tout le soutien apporté durant ces trois mois de stage, ainsi qu'à mes collèges du bureau 235: M. \textbf{Dufresne Yoann} et M. \textbf{Vrolland Christophe}.
+Enfin, je tiens mes collèges du bureau 235: M. \textbf{Dufresne Yoann} et M. \textbf{Vrolland Christophe}.
 
 \section{Présentation de l'entreprise, et de l'équipe}
 
 \subsection{Le \textit{L.I.F.L.}}
-Le \textit{L.I.F.L.} (Laboratoire d'Informatique Fondamentale de Lille) est un laboratoire Français présent sur le campus de l'Université Lille1, rattaché à l'Institut des Sciences de l'Information et de leurs Interactions (\textit{I.N.S.2.I.}) du \textit{C.N.R.S.} (Centre Nationale de la Recherche Scientifique).
+Le \textit{L.I.F.L.} (Laboratoire d'Informatique Fondamentale de Lille) est un laboratoire Français présent sur le campus de l'Université Lille1, rattaché à l'Institut des Sciences de l'Information et de leurs Interactions (\textit{I.N.S.2.I.}) du \textit{C.N.R.S.} (Centre National de la Recherche Scientifique).
 \newline
 Il comprend 10 équipes-projets et équipes du centre de recherche \textit{I.N.R.I.A.} Lille - Nord Europe (Institut national de recherche en informatique et en automatique), de recherche diverses et variées (axe Mathématique, Réalité Virtuelle, BioInformatique, Sécurité et Réseau, Systèmes Multi-agents, etc...); aujourd'hui, plus de 300 personnes y travaillent (enseignants-chercheurs, ingénieurs, techniciens, administratifs et doctorants).
 \newline
@@ -80,8 +81,6 @@ Les deux équipes se sont donc rencontrés début de l'année 2011 pour en parle
 
 \subsection{Principe}
 Le projet \textit{Vidjil} consiste à la mise en place d'un programme en langage C++, permettant de séquencer les régions V(D)J issus de données d'un patient atteint de L.A.L., ainsi que d'une interface Web (composée majoritairement de JavaScript), appelé \textit{afficheur}, dont le but est d'afficher les informations nécessaires pour les biologistes, quant aux résultats de séquençage retourné par le précédent programme, dans un format JSON.
-\newline
-\textcolor{red}{-> Expliquer en bas de page comment ont été réalisés ces jeux de données + comment les exploiter}
 \newline
 La grande idée du projet est que toutes les informations quant aux recombinaisons V(D)J, issus d'un patient spécifique souffrant de L.A.L., pourront être étudiées et analysées plus facilement par les médecins, afin de pouvoir prédire les rechutes.
 
@@ -173,9 +172,20 @@ Autre soucis à prévoir, la non-possibilité pour D3JS de calculer absolument t
 \section{Création du graphe}
 D3JS contient, pour son moteur, absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus le respect exact des informations données, et de la transformation effectuée par D3JS.
 \newline
+Voici les transformations effectuées sur le moteur physique:
+\begin{itemize}
+\item{ajout d'une durée d'animation élevée,}
+\item{ajout d'une gravité,}
+\item{ajout d'arêtes (via un tableau JavaScript ayant comme entrées:	
+\begin{itemize}
+\item{un point source,}
+\item{un point cible,}
+\item{une longueur entre ces deux points}
+\end{itemize}
+), et de distances spécifiques pour chaque,}
+\item{ajout d'une liaison entre un point et un début d'arête, afin de pouvoir bouger les arêtes en même temps que le point.}
+\end{itemize}
 \textcolor{red}{-> Théorie des graphes et exactitude de la représentation}
-\newline
-\textcolor{red}{-> Screenshots de l'établissement du graphe, pas-à-pas}
 
 \section{Problème et résolution des arêtes}
 La technologie D3JS est utilisée à fort escient dans le projet, d'ores-et-déjà; il était donc tout à fait naturel de le continuer en utilisant celle-ci pour la création et l'exploitation du graphe à mettre en oeuvre.
@@ -258,44 +268,7 @@ Il est intéressant ici de constater ici que DBSCAN clusterise les données selo
 
 \subsection{L'algorithme}
 
-L'algorithme est représenté ci-dessous (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}):
-
-\begin{pseudocode}{DBSCAN}{D, eps, MinPts}
-\COMMENT{Base de l'algorithme}\\
-C $=$ 0\\
-$Pour chaque point $P$ non visité des données $D\\
-$marquer $P$ comme visité$\\
-PtsVoisins$ = $\CALL{epsilonVoisinage}{P, eps}\\
-\IF tailleDe(PtsVoisins) < MinPts
-\THEN $marquer $P$ comme "bruit"$
-\ELSE 
-	\BEGIN
-		C$++$\\
-		\CALL{extensionCluster}{D, P, PtsVoisins, C, eps, MinPts}\\
-	\END\\
-\\
-
-\COMMENT{Procédure permettant d'inclure un point dans un cluster - extension d'un cluster}\\
-\PROCEDURE {extensionCluster}{D, P, PtsVoisins, C, eps, MinPts}
-	$Ajouter $P$ au cluster C$\\
-	\FOREACH P' \in PtsVoisins \DO
-			\IF P'$ n'a pas été visité$
-			\THEN 
-				\BEGIN
-					$Marquer $P'$ comme visité$\\
-					PtsVoisins'$ = $ \CALL{epsilonVoisinage}{D, P', eps}\\
-					\IF tailleDe(PtsVoisins') >= MinPts
-					\THEN PtsVoisins$ = $PtsVoisins \cup PtsVoisins'\\
-				\END\\
-			\IF P'$ n'est membre d'aucun cluster$
-			\THEN $Ajouter $P'$ au cluster $C
-\ENDPROCEDURE
-
-\COMMENT{Procedure retournant tous les points de $D$ qui sont à une distance inférieure à $eps$ de $P$}\\
-\PROCEDURE{epsilonVoisinage}{D, P, eps}
-	$Retourner tous les points de $D$ qui sont à une distance inférieure à $eps$ de $P
-\ENDPROCEDURE
-\end{pseudocode}
+L'algorithme est représenté en \textbf{annexe} (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}).
 
 \section{Implantation de DBSCAN}
 
@@ -427,7 +400,10 @@ La vigilance est aussi de mise quant à la publication d'autres scientifiques su
 
 \chapter{Conclusion}
 
-\chapter{Bibliographie}
+\chapter*{Bibliographie - Webographie}
+
+\addcontentsline{toc}{chapter}{Bibliographie - Webographie} 
+
 \begin{itemize}
 \item{Le premier article sur le projet \textit{Vidjil}, écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}: \url{http://www.biomedcentral.com/1471-2164/15/409/abstract} \textit{(Consultation le 04 Avril 2014)}}
 \item{\url{http://www.worldcat.org/title/recombinaison-vdj-illegitime-et-developpement-de-leucemies-aigues-lymphoblastiques-t/oclc/495056914} \textit{(Consultation le 10 Mai 2014)}}
