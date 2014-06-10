@@ -356,6 +356,10 @@ Les résultats de cette implémentation de l'algorithme DBSCAN en JavaScript von
 
 \subsubsection{Apport scientifique et biologique}
 
+L'apport principal de l'implémentation de DBSCAN est de regrouper les clônes similaires par rapport aux distances d'édition précalculées, tout comme la première partie du stage.
+\newline
+Ainsi, cette implémentation permettra au médecin ou au chercheur de pouvoir visualiser directement quels sont les clônes les plus proches les uns des autres, et de pouvoir déceler les clônes ayant subi une mutation au cours du temps (les distances d'édition étant calculées par rapport aux \textit{windows}, marqueur d'évolution temporel) d'un clône déjà étudié.
+
 \subsubsection{Apport à la première partie du stage}
 
 Cette seconde partie fait partie de la visualisation intéractive des clônes, et est aussi une suite au graphe de distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
@@ -422,6 +426,10 @@ Ainsi, pour étudier les objets windows entre eux, il a juste fallu modifier l'a
 
 \section{Le coût utilisé}
 
+Les coûts \textit{Identity} et \textit{Levenshtein} sont les plus probants pour les graphes implémentés - en effet, ce sont eux qui, lors des tests, permettent d'avoir des distances aussi variées que respectueuses des similarités entre les clones.
+\newline
+Dû à sa grande popularité, mon choix s'est porté pour le coût \textit{Levenshtein}, vu que \textit{Identity} se trouve être la même chose que la précédente, avec un poids pour le \textit{match} en plus.
+
 \chapter{Le travail en recherche}
 
 La recherche m'intéressait au plus au point dès ma sortie du lycée.
@@ -438,9 +446,9 @@ Celà s'est ressenti de différentes manières:
 \begin{itemize}
 \item \textbf{les conférences/séminaires du Mardi matin}
 	\newline
-	Chaque mardi matin, généralement entre 11H et 12H, était réservé à une conférence/ un séminaire sur un sujet décidé par un membre de l'équipe Bonsai, ou par un intervenant extérieur.
+	Chaque mardi matin, généralement entre 11H et 12H, était réservé un séminaire sur un sujet décidé par un membre de l'équipe Bonsai, ou par un intervenant extérieur.
 	\newline
-	Nous avons pu donc avoir le plaisir de recevoir des chercheurs de Pennsylvanie ou d'autres États de l'Amérique Centrale, venant nous parler de nouvelles méthodes de recherche, d'attrait à celle-ci, ou des dernières innovations et recherches effectuées/trouvées sur un sujet donné (\textit{the International Mouse Phenotyping Consortium}\footnote{Entreprise Internationale scientifique créant et caractérisant le phénotype de 20 000 \textit{knock-out} (ou "invalidation génétique" en Français) chez la souris}, les graphes de Bruijn\footnote{Graphe orienté qui permet de représenter les chevauchements de longueur (\textit{n}-1) entre tous les mots de longueur \textit{n} sur un alphabet donné - nom donné par le mathématicien les ayant décrit en 1946: Nicolaas Govert de Bruijn} ou encore la détection des variants complexes \footnote{Variants cytogénétiques constituant une majeure partie des cas de Leucémie myéloïde chronique}) -  mais pas seulement!
+	Nous avons pu donc avoir le plaisir de recevoir des chercheurs de Pennsylvanie et d'un autre État de l'Amérique Centrale, venus nous parler de nouvelles méthodes de recherche, d'attrait à celle-ci, ou des dernières innovations et recherches effectuées/trouvées sur un sujet donné (\textit{the International Mouse Phenotyping Consortium}\footnote{Entreprise Internationale scientifique créant et caractérisant le phénotype de 20 000 \textit{knock-out} (ou "invalidation génétique" en Français) chez la souris}, les graphes de Bruijn\footnote{Graphe orienté qui permet de représenter les chevauchements de longueur (\textit{n}-1) entre tous les mots de longueur \textit{n} sur un alphabet donné - nom donné par le mathématicien les ayant décrit en 1946: Nicolaas Govert de Bruijn} ou encore la détection des variants complexes \footnote{Variants cytogénétiques constituant une majeure partie des cas de Leucémie myéloïde chronique}) -  mais pas seulement!
 	\newline
 	Cela a aussi permit à certains membres de l'équipe de pouvoir exposer ses travaux en cours ou finis, afin de pouvoir expliquer son cheminement, sa méthode de travail et ses résultats, comme par exemple le travail d'\textbf{Amandine Perrin} sur l' "Illustration dynamique des effets des vaccins et de la vaccination"\footnote{Travail réalisé entre Mars et Août 2013}.
 \item \textbf{les entraides perpétuelles}
@@ -452,13 +460,13 @@ Celà s'est ressenti de différentes manières:
 \end{itemize}
 Tout ceci m'a permis de me créer une belle idée de ce qu'est le monde de la recherche sur le plan relationnel et scientifique, et de me sentir beaucoup plus à l'aise dès la première semaine de stage.
 
-\section{...ou pas}
+\section{...ou pas!}
 
 Ce stage m'a permis aussi de me rendre compte de tous les problèmes tournant autour de la recherche, que ce soit pour l'accréditation des sujets de recherche, les problèmes liés aux actions en dehors de sa thèse, ou encore plus directement aux problèmes touchant à son sujet de thèse (la publication du sujet en est un exemple valable).
 \newline
 En effet, je me suis rendu compte qu'un travail de recherche représentait des heures incalculables à rechercher, programmer, analyser et rédiger - il faut en général entre 6 mois et 1 an pour arriver à des résultats satisfaisants, valant la peine de les publier.
 \newline
-La thèse mérite un temps considérablement long à être développé, approfondi et traité, afin de pouvoir enfin commencer réellement à travailler dessus - un peu plus longtemps qu'un nouveau sujet de recherche en général, avec l'expérience et les compétences/la culture en plus.
+La thèse, surtout la problèmatique sur laquelle elle repose, mérite un temps considérablement long à être développée, approfondie et traitée, afin de pouvoir enfin réellement commencer à travailler dessus - un peu plus longtemps qu'un nouveau sujet de recherche en général, avec l'expérience et les compétences/la culture en plus.
 \newline
 Tout ceci est lié à un rythme de publication assez rapide et drastique, qui ne permet pas réellement aux chercheurs de pouvoir travailler dans un certain confort psychologique.
 \newline
