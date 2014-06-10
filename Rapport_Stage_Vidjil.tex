@@ -105,7 +105,7 @@ DBSCAN sera donc à développer en JavaScript, et sera à intégrer au projet so
 
 Avant de me lancer dans le travail tout de suite, il m'a fallu étudier l'\textit{afficheur}, ses différentes parties (afin de savoir "quelle partie faisait quoi?"), mais aussi les langages qui composaient le site internet afin de pouvoir au mieux les exploiter.
 
-\section{L'\textit{afficheur}}
+\section{L'\textit{afficheur}  - voir \textit{Figure 1} du document \textit{Annexe}}
 
 \subsection{Un travail d'un an...}
 Toute la conception et l'écriture du code de l'\textit{afficheur} ont été effectués par l'ingénieur de recherche du projet \textit{Vidjil}: \textbf{Marc Duez}.
@@ -238,7 +238,7 @@ Ainsi, nous pourrons nous assurer d'avoir une structure triangulaire, dont la ch
 \newline
 Nous pourrons donc obtenir premièrement un "squelette" du graphe, afin de pouvoir aider le moteur à mieux modéliser la "chair".
 
-\section{Résultats}
+\section{Résultats  - voir \textit{Figure 3} du document \textit{Annexe}}
 
 Le résultat final montre bien les rapports/similarités entre les différents clônes calculés, très rapidement.
 \newline
@@ -278,7 +278,7 @@ Il est intéressant ici de constater ici que DBSCAN clusterise les données selo
 
 \subsection{L'algorithme}
 
-L'algorithme est représenté en \textbf{annexe} (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}).
+L'algorithme est représenté en \textbf{\textit{Algorithm 0.0.1.}} du document \textbf{\textit{Annexe}} (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}).
 
 \section{Implantation de DBSCAN}
 
@@ -310,7 +310,13 @@ D'où l'idée d'implémenter trois choses, accomplissant parfaitement la visuali
 	\item{Une nouvelle distribution, afin de pouvoir interagir physiquement, via un nouveau paramètrage du moteur physique D3JS, avec un ou plusieurs clones ou cluster - selon la clusterisation choisie pour l'étude.}
 	\end{itemize}
 
-\subsubsection{Ajout d'une nouvelle colorisation}
+\subsubsection{Ajout d'une nouvelle clusterisation - voir \textit{Figure 4} du document \textit{Annexe}}
+
+L'algorithme DBSCAN est un algorithme de clusterisation - il était donc normal qu'il faille ajouter, dans l'\textit{interface}, la clusterisation DBSCAN afin de pouvoir visualiser directement les clusters, indépendamment de la colorisation et de la distribution étudiée.
+\newline
+La classe "Model" du projet a donc été légèrement modifiée pour ceci, afin de permettre non seulement la visualisation générale de cette clusterisation, mais aussi la visualisation de toutes les mises-à-jour futures de celle-ci, lors des changements des paramètres $\epsilon$ et \textit{Mp} de l'algorithme par l'utilisateur.
+
+\subsubsection{Ajout d'une nouvelle colorisation - voir \textit{Figure 5} du document \textit{Annexe}}
 
 La colorisation s'est imposée d'elle-même, étant beaucoup plus bénéfique visuellement et résiduelle dans le temps (il est en effet possible de colorier les clones selon les résultats de DBSCAN, tout en étudiant une distribution précise, autre que celle de DBSCAN).
 \newline
@@ -322,13 +328,7 @@ Aussi, il a fallu faire attention à plusieurs choses:
 			Pour palier à ce problème, j'ai donc créé un objet tableau à N entrées (100 ici, pour utiliser au maximum 100 clusters, soit 1 clone par cluster) que j'ai expressément mélangé afin d'obtenir un tableau de clusters avec une suite de couleurs non-dégradée, via l'algorithme de Fisher-Yates (encore appelé mélange de Knuth), utilisé dans ce genre de situation.}
 	\end{itemize}
 
-\subsubsection{Ajout d'une nouvelle clusterisation}
-
-L'algorithme DBSCAN est un algorithme de clusterisation - il était donc normal qu'il faille ajouter, dans l'\textit{interface}, la clusterisation DBSCAN afin de pouvoir visualiser directement les clusters, indépendamment de la colorisation et de la distribution étudiée.
-\newline
-La classe "Model" du projet a donc été légèrement modifiée pour ceci, afin de permettre non seulement la visualisation générale de cette clusterisation, mais aussi la visualisation de toutes les mises-à-jour futures de celle-ci, lors des changements des paramètres $\epsilon$ et \textit{Mp} de l'algorithme par l'utilisateur.
-
-\subsubsection{Ajout d'une nouvelle distribution}
+\subsubsection{Ajout d'une nouvelle distribution - voir \textit{Figure 6} du document \textit{Annexe}}
 
 Pourquoi a-t-il fallu créer/ajouter une nouvelle distribution, au lieu d'utiliser celle déjà établie avec le graphe représentant les distances d'édition ?
 \newline
@@ -382,7 +382,7 @@ L'avantage de prendre les \textit{windows} comme support de calcul est qu'elle s
 
 \section{Les différents coûts utilisés}
 
-Les distances d'édition calculées le sont grâce à la Programmation Dynamique\footnote{La Programmation Dynamique est une technique algorithmique pour optimiser des sommes de fonctions monotones croissantes sous contrainte.}, ce qui nous permettra d'obtenir, pour deux mots \textit{x} et \textit{y}, le nombre minimal d’opérations d’édition\footnote{Il y a 3 opérations possibles: la \textbf{substitution} (le remplacement d'une lettre par une autre), l'\textbf{insertion} (l'ajout d'une nouvelle lettre), et la \textbf{délétion} (la suppression d'une lettre)} pour transformer \textit{x} en \textit{y} - ce nombre minimal étant la distance d'édition recherchée.
+Les distances d'édition calculées le sont grâce à la Programmation Dynamique\footnote{La Programmation Dynamique est une technique algorithmique pour optimiser des sommes de fonctions monotones croissantes sous contrainte.}, ce qui nous permettra d'obtenir, pour deux mots \textit{x} et \textit{y}, le nombre minimal d’opérations d’édition\footnote{Il y a 3 opérations possibles: la \textbf{substitution} (le remplacement d'une lettre par une autre - nous utiliseront aussi le mot \textit{mismatch} pour cette opération), l'\textbf{insertion} (l'ajout d'une nouvelle lettre), et la \textbf{délétion} (la suppression d'une lettre)} pour transformer \textit{x} en \textit{y} - ce nombre minimal étant la distance d'édition recherchée.
 
 \subsection{Les coûts étudiés}
 
@@ -400,10 +400,10 @@ Ainsi, deux coûts ayant des poids sur ces opérations différentes ne devraient
 \newline
 Il est important de calculer de bons coûts, car ils influeront directement sur les distributions précédemment mises en place. Nous en avons donc sélectionner 4:
 \begin{itemize}
-\item{le coût de \textbf{\textit{Levenshtein}}: (0, -1, -1): 0 en \textit{match}, -1 en \textit{mismatch}, et -1 en insertion et délétion - l'homopolymère est considéré comme "gratuit" ici, donc ne pèse rien}
-\item{le coût \textbf{\textit{DNA}}: (+5, -4, -10): 5 en \textit{match}, -4 en \textit{mismatch}, et -10 en insertion et délétion - l'homopolymère est aussi considéré comme "gratuit"}
-\item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -2 pour l'homopolymère}
-\item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour l'homopolymère}
+\item{le coût de \textbf{\textit{Levenshtein}}: (0, -1, -1): 0 en \textit{match}, -1 en \textit{mismatch}, et -1 en insertion et délétion - l'homopolymère est considéré comme "gratuit" ici, donc ne pèse rien,}
+\item{le coût \textbf{\textit{DNA}}: (+5, -4, -10): 5 en \textit{match}, -4 en \textit{mismatch}, et -10 en insertion et délétion - l'homopolymère est aussi considéré comme "gratuit",}
+\item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -1 pour les délétions de fin de séquence\footnote{Imaginons que, pour un alignement de deux séquences de longueurs différentes, si la partie de l'une est beaucoup plus grande que l'autre, nous pouvons compter une délétion sur la partie grande (et non-alignée) avec un poids différent.}, -2 pour l'homopolymère,}
+\item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour l'homopolymère.}
 \end{itemize}
 
 \section{Le coût utilisé}
