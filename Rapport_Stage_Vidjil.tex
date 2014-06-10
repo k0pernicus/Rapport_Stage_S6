@@ -65,9 +65,9 @@ Cette équipe m'a donc accueillie pour mon stage de fin de licence, s'étant dé
 \section{La Leucémie Aigüe Limphoblastique}
 La Leucémie Aigüe Limphoblastique (L.A.L.) est un cancer liquide\footnote{Le cancer liquide, encore appelé cancer sanguin, est un ensemble composé des leucémies (cancers du sang et de la moëlle épinière) et des lymphomes (cancers du système lymphatique).} affectant majoritairement les enfants.
 \newline
-Cette leucémie peut-être induite par un défaut dans la recombinaison de l'ADN (présents chez les Humains et autres Vertébrés) que l'on appelle "recombinaison V(D)J"; mécanisme permettant de créer une grande diversité de récepteurs d'anti-corps, nécessaires à la reconnaissance d'antigènes étrangers.
+Chaque Humain et Vertébré détient un système de recombinaison de l'ADN (que l'on appelle \textbf{recombinaison V(D)J}), qui est un mécanisme permettant de créer une grande diversité de récepteurs d'anti-corps, nécessaires à la reconnaissance d'antigènes étrangers.
 \newline
-\textcolor{red}{-> Tous les outils permettant d'évaluer les recombinaisons V(D)J; explication des clônes}
+Ainsi, nous pouvons créer ou utiliser des lymphocytes\footnote{Un lymphocyte est un globule blanc (ou Leucocyte), ayant un rôle majeur dans le système immunitaire} spécifiques afin de marquer, étudier et suivre l'évolution des régions V, D et J en fonction du temps.
 
 \section{Le projet Vidjil}
 
@@ -80,7 +80,7 @@ Après en avoir parlé avec M. \textbf{Figeac Martin}, il a de suite émis l'id�
 Les deux équipes se sont donc rencontrés début de l'année 2011 pour en parler calmement, et essayer de mieux cerner l'utilisation principale. Ce n'est qu'en 2012 que le premier programme a été écrit, et que le projet \textit{Vidjil} a réellement débuté.
 
 \subsection{Principe}
-Le projet \textit{Vidjil} consiste à la mise en place d'un programme en langage C++, permettant de séquencer les régions V(D)J issus de données d'un patient atteint de L.A.L., ainsi que d'une interface Web (composée majoritairement de JavaScript), appelé \textit{afficheur}, dont le but est d'afficher les informations nécessaires pour les biologistes, quant aux résultats de séquençage retourné par le précédent programme, dans un format JSON.
+Le projet \textit{Vidjil} consiste à la mise en place d'un programme en langage C++, permettant de séquencer les clônes V(D)J\footnote{Un clône V(D)J est un lymphocype reconnaissant une certaine région spécifique V(D)J, et ayant des similitudes avec d'autres} issus de données d'un patient atteint de L.A.L., ainsi que d'une interface Web (composée majoritairement de JavaScript), appelé \textit{afficheur}, dont le but est d'afficher les informations nécessaires pour les biologistes, quant aux résultats de séquençage retourné par le précédent programme, dans un format JSON.
 \newline
 La grande idée du projet est que toutes les informations quant aux recombinaisons V(D)J, issus d'un patient spécifique souffrant de L.A.L., pourront être étudiées et analysées plus facilement par les médecins, afin de pouvoir prédire les rechutes.
 
@@ -232,7 +232,7 @@ Ainsi, nous avons pu enlever un peu moins de 90\% des arêtes totales, en moyenn
 \subsection{\textit{"Le carré est un triangle qui a réussi, ou une circonférence qui a mal tourné..."}}\footnote{Citation de Pierre Dac}
 Le troisième algorithme - et celui retenu par mon équipe et moi-même, a été proposé par M. \textbf{Giraud Mathieu}.
 \newline
-Selon mon tuteur d'entreprise, il fallait juste modifier la 1ère partie de l'algorithme précédent, de sorte à prendre les 3 plus grandes arêtes formant un triangle, dont la somme des côtés sera la longueur maximale de toutes les autres représentations triangulaires possibles, selon les données. Ainsi, chaque noeud du triangle est une source d'une arête, mais aussi une cible d'une autre.
+Cet algorithme soutient la grande majeure partie de l'algorithme précédent, en modifiant seulement sa 1ère partie de sorte à ne prendre que, initialement, les 3 plus grandes arêtes formant un triangle, dont la somme des côtés sera la longueur maximale de toutes les autres représentations triangulaires possibles, selon les données. Ainsi, chaque noeud du triangle est une source d'une arête, mais aussi une cible d'une autre.
 \newline
 Ainsi, nous pourrons nous assurer d'avoir une structure triangulaire, dont la chance d'obtenir en son sein un maximum de clônes est proche.
 \newline
@@ -269,8 +269,8 @@ Cet algorithme a été très simple à implémenter.
 \newline
 Tout d'abord, il faut choisir deux paramètres essentiels:
 \begin{itemize}
-\item une distance ($\epsilon$), représentant un rayon de cercle, qui nous aidera à considérer que les points situés à une distance inférieure ou égale à celle-ci d'un autre est représentatif d'un seul cluster
-\item un nombre minimum de points (\textit{Mp}), que l'on utilisera par la suite pour considérer si le point prit en compte est considéré comme un \textbf{point central} (\textit{\textbf{core point}} - le point détient un nombre de voisins plus élevé que \textit{Mp}, dans le rayon $\epsilon$), un \textbf{point de bordure} (\textit{\textbf{border point}} - le point détient un nombre de voisins moindre que \textit{Mp}, mais est voisin d'un \textbf{point central}), ou encore un \textbf{point de bruit} (\textit{\textbf{noise point}} - tout point n'étant pas l'un des deux précédemment évoqués).
+\item \textbf{une distance} ($\epsilon$), représentant un rayon de cercle, qui nous aidera à considérer que les points situés à une distance inférieure ou égale à celle-ci d'un autre est représentatif d'un seul cluster
+\item \textbf{un nombre minimum de points} (\textit{Mp}), que l'on utilisera par la suite pour considérer si le point prit en compte est considéré comme un \textbf{point central} (\textit{\textbf{core point}} - le point détient un nombre de voisins plus élevé que \textit{Mp}, dans le rayon $\epsilon$), un \textbf{point de bordure} (\textit{\textbf{border point}} - le point détient un nombre de voisins moindre que \textit{Mp}, mais est voisin d'un \textbf{point central}), ou encore un \textbf{point de bruit} (\textit{\textbf{noise point}} - tout point n'étant pas l'un des deux précédemment évoqués).
 \end{itemize}
 Cet algorithme est ici intéressant car il nous permet donc bien de parcourir chacun des points d'un graphe, son voisinage, et de clusteriser chaque point en fonction de son voisinage, et des deux paramètres énoncés précédemment - la densité revient donc au nombre de points (\textit{Mp}) compris dans un rayon bien spécifié ($\epsilon$). Tout ceci va nous permettre de pouvoir modifier l'\textit{afficheur} afin de pouvoir maximiser le nombre d'outils utiles aux chercheurs - notamment via la colorisation des clusters, ou encore l'apport des regroupements de clones dans le graphe.
 \newline
@@ -362,26 +362,51 @@ Cette seconde partie fait partie de la visualisation intéractive des clônes.
 \newline
 En effet, celle-ci fait partie aussi de la première car, utilisant une partie du moteur physique et visualisant cette distribution aussi comme un graphe, construit avec les distances entre deux clônes (mais ne les gardant pas pour dessiner ce graphe), cette partie pourrai servir de base sur la première.
 
-\chapter{Recherche de la meilleure distance possible}
+\chapter{Recherche de la meilleure distance d'édition possible}
 
-Auparavant, nous utilisions comme distances les pourcentages d'identité - qui sont une approximation de différences entre deux clônes, basés sur des séquences de nucléotides de différentes tailles.
+Les distances sont essentielles aux deux parties demandées, pour mon stage. Ce sont elles qui régissent la structure globale du graphe, et ce sont elles les principales données des deux distributions, implantées précédemment.
 \newline
-Afin de pouvoir obtenir une distance beaucoup plus précise, j'ai eu l'idée de comparer des séquences de nucléotides de tailles fixes, présentes dans les jeux de données: les \textit{windows}.
+Auparavant, nous utilisions comme distances les pourcentages d'identité de séquences représentatives - qui sont une approximation de différences entre deux clônes, basés sur des séquences de nucléotides de différentes tailles, et fabriquées à partir des séquences V(D)J et de la \textit{windows}.
+\newline
+Afin de pouvoir obtenir une distance beaucoup plus précise, mais aussi en fonction du temps, j'ai eu l'idée de comparer ces \textit{windows}.
 
 \section{Utilisation des \textit{windows}}
 
-\textcolor{red}{Qu'est-ce que les Windows?}
-\textcolor{red}{Pourquoi les utiliser?}
+\subsection{Qu'est-ce qu'une \textit{windows}}
+
+Les \textit{windows} sont des séquences suivies de 40 nucléotides, trouvées directement entre la fin de la région V, et le début de la région J. Il se peut donc tout à fait que la partie D se retrouve, ou non, dans cette séquence.
+
+\subsection{Pourquoi les utiliser ?}
+
+L'avantage de prendre les \textit{windows} comme support de calcul est qu'elle servira, tout au long du suivi/tout au long du temps à marquer spécifiquement un clône - l'on pourra ainsi faire le suivi de la L.A.L. via l'étude des \textit{windows} spécifiant des zones bien spécifiques, qui pourraient être contraints à évoluer en fonction des mutations infligées.
 
 \section{Les différents coûts utilisés}
 
-\textcolor{red}{La programmation dynamique}
-\textcolor{red}{Quels sont les coûts, pourquoi les avoir choisi?}
+Les distances d'édition calculées le sont grâce à la Programmation Dynamique\footnote{La Programmation Dynamique est une technique algorithmique pour optimiser des sommes de fonctions monotones croissantes sous contrainte.}, ce qui nous permettra d'obtenir, pour deux mots \textit{x} et \textit{y}, le nombre minimal d’opérations d’édition\footnote{Il y a 3 opérations possibles: la \textbf{substitution} (le remplacement d'une lettre par une autre), l'\textbf{insertion} (l'ajout d'une nouvelle lettre), et la \textbf{délétion} (la suppression d'une lettre)} pour transformer \textit{x} en \textit{y} - ce nombre minimal étant la distance d'édition recherchée.
+
+\subsection{Les coûts étudiés}
+
+Chaque calcul effectué se fait sur un coût, constitué sur 5 opérations:
+\begin{itemize}
+\item{le \textit{match}: la lettre de la séquence 1 sur la position actuelle correspond bien à celle de la séquence 2,}
+\item{le \textit{mismatch} (ou substitution): la lettre de la séquence 1 sur la position actuelle ne correspond pas à celle de la séquence 2,}
+\item{l'insertion,}
+\item{la délétion,}
+\item{l'homopolymère: motif de répétition, le plus souvent attribué par une erreur dans le séquenceur}
+\end{itemize}
+Pour ces opérations est attribuée un poids (n'importe quel entier positif, négatif ou nul), permettant de régir et de calculer une distance, spécifique en fonction du poids.
+\newline
+Ainsi, deux coûts ayant des poids sur ces opérations différentes ne devraient pouvoir obtenir le même résultat (ou distance) à la fin du calcul.
+\newline
+Il est important de calculer de bons coûts, car ils influeront directement sur les distributions précédemment mises en place. Nous en avons donc sélectionner 4:
+\begin{itemize}
+\item{le coût de \textbf{\textit{Levenshtein}}: (0, -1, -1): 0 en \textit{match}, -1 en \textit{mismatch}, et -1 en insertion et délétion - l'homopolymère est considéré comme "gratuit" ici, donc ne pèse rien}
+\item{le coût \textbf{\textit{DNA}}: (+5, -4, -10): 5 en \textit{match}, -4 en \textit{mismatch}, et -10 en insertion et délétion - l'homopolymère est aussi considéré comme "gratuit"}
+\item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -2 pour l'homopolymère}
+\item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour l'homopolymère}
+\end{itemize}
 
 \section{Le coût utilisé}
-
-\textcolor{red}{Pour ce coût-ci?}
-\textcolor{red}{Apports aux graphes}
 
 \chapter{Le travail en recherche}
 
