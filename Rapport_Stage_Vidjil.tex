@@ -358,23 +358,25 @@ Les résultats de cette implémentation de l'algorithme DBSCAN en JavaScript von
 
 \subsubsection{Apport à la première partie du stage}
 
-Cette seconde partie fait partie de la visualisation intéractive des clônes.
+Cette seconde partie fait partie de la visualisation intéractive des clônes, et est aussi une suite au graphe de distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
 \newline
 En effet, celle-ci fait partie aussi de la première car, utilisant une partie du moteur physique et visualisant cette distribution aussi comme un graphe, construit avec les distances entre deux clônes (mais ne les gardant pas pour dessiner ce graphe), cette partie pourrai servir de base sur la première.
 
 \chapter{Recherche de la meilleure distance d'édition possible}
 
-Les distances sont essentielles aux deux parties demandées, pour mon stage. Ce sont elles qui régissent la structure globale du graphe, et ce sont elles les principales données des deux distributions, implantées précédemment.
+Les distances sont essentielles aux deux parties de mon stage. Ce sont elles qui régissent la structure globale du graphe, et ce sont aussi les principales données des deux distributions que j'ai pu intégrer au projet.
 \newline
 Auparavant, nous utilisions comme distances les pourcentages d'identité de séquences représentatives - qui sont une approximation de différences entre deux clônes, basés sur des séquences de nucléotides de différentes tailles, et fabriquées à partir des séquences V(D)J et de la \textit{windows}.
 \newline
-Afin de pouvoir obtenir une distance beaucoup plus précise, mais aussi en fonction du temps, j'ai eu l'idée de comparer ces \textit{windows}.
+Afin de pouvoir obtenir une distance beaucoup plus précise, mais aussi en fonction du temps, j'ai eu l'idée de comparer ces \textit{windows}, directement dans le programme C++.
 
 \section{Utilisation des \textit{windows}}
 
 \subsection{Qu'est-ce qu'une \textit{windows}}
 
 Les \textit{windows} sont des séquences suivies de 40 nucléotides, trouvées directement entre la fin de la région V, et le début de la région J. Il se peut donc tout à fait que la partie D se retrouve, ou non, dans cette séquence.
+\newline
+Ces séquences ont été alignés en global\footnote{Alignement global: alignement entre deux séquences sur toute leur longueur.}, et non pas en local\footnote{Alignement local: alignement entre une séquence et une partie de l'autre séquence}.
 
 \subsection{Pourquoi les utiliser ?}
 
@@ -386,25 +388,37 @@ Les distances d'édition calculées le sont grâce à la Programmation Dynamique
 
 \subsection{Les coûts étudiés}
 
-Chaque calcul effectué se fait sur un coût, constitué sur 5 opérations:
+\subsubsection{Sur quoi est basé un coût?}
+
+Chaque calcul effectué se fait sur un coût, constitué de 5 opérations:
 \begin{itemize}
 \item{le \textit{match}: la lettre de la séquence 1 sur la position actuelle correspond bien à celle de la séquence 2,}
 \item{le \textit{mismatch} (ou substitution): la lettre de la séquence 1 sur la position actuelle ne correspond pas à celle de la séquence 2,}
 \item{l'insertion,}
 \item{la délétion,}
-\item{l'homopolymère: motif de répétition, le plus souvent attribué par une erreur dans le séquenceur}
+\item{la détection d'un homopolymère: motif de répétition, le plus souvent attribué par une erreur dans le séquenceur}
 \end{itemize}
+
+\subsubsection{Quels sont ces coûts?}
+
 Pour ces opérations est attribuée un poids (n'importe quel entier positif, négatif ou nul), permettant de régir et de calculer une distance, spécifique en fonction du poids.
 \newline
 Ainsi, deux coûts ayant des poids sur ces opérations différentes ne devraient pouvoir obtenir le même résultat (ou distance) à la fin du calcul.
 \newline
 Il est important de calculer de bons coûts, car ils influeront directement sur les distributions précédemment mises en place. Nous en avons donc sélectionner 4:
 \begin{itemize}
-\item{le coût de \textbf{\textit{Levenshtein}}: (0, -1, -1): 0 en \textit{match}, -1 en \textit{mismatch}, et -1 en insertion et délétion - l'homopolymère est considéré comme "gratuit" ici, donc ne pèse rien,}
-\item{le coût \textbf{\textit{DNA}}: (+5, -4, -10): 5 en \textit{match}, -4 en \textit{mismatch}, et -10 en insertion et délétion - l'homopolymère est aussi considéré comme "gratuit",}
-\item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -1 pour les délétions de fin de séquence\footnote{Imaginons que, pour un alignement de deux séquences de longueurs différentes, si la partie de l'une est beaucoup plus grande que l'autre, nous pouvons compter une délétion sur la partie grande (et non-alignée) avec un poids différent.}, -2 pour l'homopolymère,}
-\item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour l'homopolymère.}
+\item{le coût de \textbf{\textit{Levenshtein}}: (0, -1, -1): 0 en \textit{match}, -1 en \textit{mismatch}, et -1 en insertion et délétion - la détection d'homopolymère(s) est considéré comme "gratuit" ici, donc ne pèse rien,}
+\item{le coût \textbf{\textit{DNA}}: (+5, -4, -10): 5 en \textit{match}, -4 en \textit{mismatch}, et -10 en insertion et délétion - la détection d'homopolymère(s) est aussi considéré comme "gratuit",}
+\item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -1 pour les délétions de fin de séquence\footnote{Imaginons que, pour un alignement de deux séquences de longueurs différentes, si la partie de l'une est beaucoup plus grande que l'autre, nous pouvons compter une délétion sur la partie grande (et non-alignée) avec un poids différent.}, -2 pour la détection d'homopolymère(s),}
+\item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour la détection d'homopolymère(s).}
 \end{itemize}
+Sur ces 4 coûts, il a dû falloir en choisir un ayant les meilleurs rapports de distance afin de perfectionner l'affichage des graphes.
+
+\subsubsection{Comment effectuer les calculs de coût?}
+
+Les coûts étaient déjà implantés à mon arrivée dans l'entreprise, et le programme en C++ contenait déjà un objet (DynProg) prenant en paramètre les deux séquences ADN, l'alignement ainsi que le coût utilisé au calcul, et nous renvoyant, le plus souvent, une matrice de similarité que nous transformions en matrice de distance - ou alors, directement une matrice de distances.
+\newline
+Ainsi, pour étudier les objets windows entre eux, il a juste fallu modifier l'alignement local (prit par défaut) par l'alignement global, et le coût par un de notre choix - étant à tester.
 
 \section{Le coût utilisé}
 
@@ -450,11 +464,13 @@ Tout ceci est lié à un rythme de publication assez rapide et drastique, qui ne
 \newline
 La vigilance est aussi de mise quant à la publication d'autres scientifiques sur un sujet très proche de celui sur lequel un/plusieurs chercheur(s) travaille(nt). En effet, un article paraissant à une période très proche d'un autre traitant du même sujet, mais déjà publié, pourrai être refusé en publication pour ce motif - ce qui pourrai faire perdre au(x) chercheur(s) plusieurs mois (voire années) de travail à cause de celà.
 
-\chapter{Conclusion}
+\chapter*{Conclusion}
 
-\section{Conclusion technique}
+\addcontentsline{toc}{chapter}{Conclusion}
 
-\section{Conclusion par rapport à la Recherche}
+\section*{Conclusion technique}
+
+\section*{Conclusion par rapport à la Recherche}
 
 \chapter*{Bibliographie - Webographie}
 
