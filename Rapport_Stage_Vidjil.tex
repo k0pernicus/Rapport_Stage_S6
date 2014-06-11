@@ -10,6 +10,13 @@
 \usepackage{color}
 
 \usepackage{calc}
+\usepackage{pseudocode}
+
+\usepackage{graphicx}
+
+\usepackage{caption}
+\captionsetup{figurewithin=none}  
+\captionsetup{tablewithin=none}
 
 \AddThinSpaceBeforeFootnotes
 
@@ -492,6 +499,88 @@ La vigilance est aussi de mise quant à la publication d'autres scientifiques su
 \item{\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.4045&rep=rep1&type=pdf} \textit{(Consultation le 19 Mai 2014)}}
 \item{\url{http://www.cise.ufl.edu/class/cis4930sp09dm/notes/dm5part4.pdf} \textit{(Consultation le 19 Mai 2014)}}
 \end{itemize}
+
+\chapter*{Annexe}
+
+\addcontentsline{toc}{chapter}{Annexe}
+
+\begin{figure}[h]
+\begin{center}
+\rotatebox{90}{
+	\includegraphics[scale=0.35]{img/Montage_Sans_Annotations.jpg}
+}
+\end{center}
+\caption{Aperçu général de l'\textit{afficheur} - montage avec palette ``Dark'' et ``Light''}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+	\includegraphics[scale=0.6]{img/Edit-Distance-Ex.jpg}
+\end{center}
+\caption{Aperçu général de l'\textit{afficheur} - montage avec palette ``Dark'' et ``Light''}
+\end{figure}
+
+\begin{pseudocode}{DBSCAN}{D, eps, MinPts}
+\COMMENT{Base de l'algorithme}\\
+C $=$ 0\\
+$Pour chaque point $P$ non visité des données $D\\
+$marquer $P$ comme visité$\\
+PtsVoisins$ = $\CALL{epsilonVoisinage}{P, eps}\\
+\IF tailleDe(PtsVoisins) < MinPts
+\THEN $marquer $P$ comme "bruit"$
+\ELSE 
+	\BEGIN
+		C$++$\\
+		\CALL{extensionCluster}{D, P, PtsVoisins, C, eps, MinPts}\\
+	\END\\
+\\
+
+\COMMENT{Procédure permettant d'inclure un point dans un cluster - extension d'un cluster}\\
+\PROCEDURE {extensionCluster}{D, P, PtsVoisins, C, eps, MinPts}
+	$Ajouter $P$ au cluster C$\\
+	\FOREACH P' \in PtsVoisins \DO
+			\IF P'$ n'a pas été visité$
+			\THEN 
+				\BEGIN
+					$Marquer $P'$ comme visité$\\
+					PtsVoisins'$ = $ \CALL{epsilonVoisinage}{D, P', eps}\\
+					\IF tailleDe(PtsVoisins') >= MinPts
+					\THEN PtsVoisins$ = $PtsVoisins \cup PtsVoisins'\\
+				\END\\
+			\IF P'$ n'est membre d'aucun cluster$
+			\THEN $Ajouter $P'$ au cluster $C
+\ENDPROCEDURE
+
+\COMMENT{Procedure retournant tous les points de $D$ qui sont à une distance inférieure à $eps$ de $P$}\\
+\PROCEDURE{epsilonVoisinage}{D, P, eps}
+	$Retourner tous les points de $D$ qui sont à une distance inférieure à $eps$ de $P
+\ENDPROCEDURE
+\end{pseudocode}
+
+\begin{figure}[h]
+\begin{center}
+\rotatebox{90}{
+	\includegraphics[scale=0.45]{img/DBSCAN-Cluster-Ex.jpg}
+}
+\end{center}
+\caption{\textit{Afficheur} avec la clusterisation DBSCAN}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\rotatebox{90}{
+	\includegraphics[scale=0.45]{img/DBSCAN-Color-Ex.jpg}
+}
+\end{center}
+\caption{\textit{Afficheur} avec la colorisation DBSCAN}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+	\includegraphics[scale=0.6]{img/DBSCAN-Ex.jpg}
+\end{center}
+\caption{\textit{Afficheur} avec la distribution DBSCAN}
+\end{figure}
 
 \end{spacing}
 \end{document}
