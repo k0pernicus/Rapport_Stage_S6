@@ -360,12 +360,13 @@ Les résultats de cette implémentation de l'algorithme DBSCAN en JavaScript von
 	\item{un apport scientifique, axé sur les résultats physiques de l'algorithme en lui-même dans le projet,}
 	\item{ainsi qu'un apport plus axé sur la similitude entre cette nouvelle distribution, et celle créée lors du travail sur la première partie du stage}
 	\end{itemize}
+Aussi, j'ai effectué avec QUnit une série de tests unitaires (voir Figure ? dans l'annexe) permettant de démontrer la fonctionnalité de l'algorithme sur un jeu de tests écrit à la main, et permettant de tester les cas possibles issus d'un jeu de données biologique.
 
 \subsubsection{Apport scientifique et biologique}
 
 L'apport principal de l'implémentation de DBSCAN est de regrouper les clônes similaires par rapport aux distances d'édition précalculées, tout comme la première partie du stage.
 \newline
-Ainsi, cette implémentation permettra au médecin ou au chercheur de pouvoir visualiser directement quels sont les clônes les plus proches les uns des autres, et de pouvoir déceler les clônes ayant subi une mutation au cours du temps (les distances d'édition étant calculées par rapport aux \textit{windows}, marqueur d'évolution temporel) d'un clône déjà étudié.
+Ainsi, cette implémentation permettra au médecin ou au chercheur de pouvoir visualiser directement quels sont les clônes les plus proches les uns des autres - ce qui est visible en \textbf{Figure 5} dans l'annexe, par le rassemblement des clones entre eux, ainsi que la colorisation attribuée à chaque cluster - et de pouvoir déceler les clônes ayant subi une mutation au cours du temps (les distances d'édition étant calculées par rapport aux \textit{windows}, marqueur d'évolution temporel) d'un clône déjà étudié.
 
 \subsubsection{Apport à la première partie du stage}
 
