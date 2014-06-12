@@ -162,65 +162,65 @@ Enfin, je me suis remis à étudier la microbiologie, la recombinaison V(D)J che
 
 La distribution\footnote{Une distribution est une visualisation possible des données, pour une utilisation spécifique.} quant aux distances d'édition entre les différents clônes est très intéressante, car elle permet de visualiser les similarités biologiques entre ceux-ci, par leur rapprochement physique, mais aussi par la couleur de l'arête, représentant cette distance (du rouge pour la proximité, au violet pour le plus éloigné).
 \newline
-Le projet contenait, à mon arrivé, 4 distributions:
+Le projet contenait, à mon arrivée, 4 distributions:
 \begin{itemize}
 \item V/J génique,
 \item V/J allèlique,
 \item abondance des régions V et J,
 \item histogramme d'abondance des régions V.
 \end{itemize}
-Toutes ces distributions peuvent être utiles, voire nécessaires, à un médecin ou un biologiste, afin de visualiser directement la disparité et le réarrangement des clônes, en fonction d'un jeu de données, pour une étude ou un suivi.
+Toutes ces distributions peuvent être utiles, voire nécessaires, à un médecin ou un biologiste, afin de visualiser directement la disparité et le réarrangement des clônes, en fonction d'un jeu de données au format biologique DATA, pour une étude ou un suivi.
 
 \section{Ajout d'une nouvelle distribution}
 L'ajout d'une nouvelle distribution n'était, au départ, pas aisée pour différentes raisons techniques.
 \newline
 En effet, il a déjà fallu me plonger dans le code du \textit{scatterplot} afin de prévisualiser où implanter ma distribution, et quelles modifications seraient à effectuer sur cette partie de l'\textit{afficheur}.
 \newline
-De plus, par rapport aux autres distributions réalisées par notre ingénieur de recherche, il fallait forcer le moteur physique de D3JS afin qu'il puisse positionner les clones \textbf{lui-même} le plus précisémment possible; c'est à dire en respectant au maximum toutes les distances définies entre chaque clône, distances calculées par le programme en C++.
+De plus, par rapport aux autres distributions réalisées par notre ingénieur de recherche, il fallait forcer le moteur physique de D3JS afin qu'il puisse positionner les clones \textbf{lui-même} le plus précisémment possible; c'est à dire en respectant au maximum toutes les distances définies entre chaque clône, distances (qui ont été pour un premier temps des pourcentages d'identité, et non pas des distances à proprement parlé) calculées par le programme en C++.
 \newline
-Cette dernière pourrai donc amener, par la suite, deux problèmes: 
+Cette dernière pourrait donc amener, par la suite, deux problèmes: 
 \begin{itemize}
-\item{la non-possibilité, pour le moteur physique, de calculer pour chaque \textit{frame} absolument tous les déplacements d'arêtes possibles dans le graphe lors d'une animation. En effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par \textit{frame}\footnote{Une \textit{frame} = nombre d'images par seconde} la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié pour ce genre de cas particulier,}
-\item{la grande liberté que pourrai prendre le moteur afin de placer lui-même les points à un endroit donné, et donc le non-respect de la structure globale d'un graphe, possédant déjà certaines propriétés.}
+\item{la non-possibilité, pour le moteur physique, de calculer pour chaque \textit{frame} absolument tous les déplacements d'arêtes possibles dans le graphe, lors d'une animation. En effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par \textit{frame}\footnote{Une \textit{frame} = nombre d'images par seconde} la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié pour ce genre de cas particulier,}
+\item{la grande liberté que pourrait prendre le moteur afin de placer lui-même les points à un endroit donné, et donc le non-respect de la structure globale d'un graphe, possédant déjà certaines propriétés.}
 \end{itemize}
 
 \section{Création du graphe}
 
 La technologie D3JS étant utilisée à fort bon escient dans le projet, il était donc tout à fait naturel d'utiliser celle-ci pour la création et l'exploitation du graphe à mettre en oeuvre.
-De plus, D3JS contient absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus le respect exact des informations données et de la transformation effectuée par D3JS (voir les deux problèmes cités ci-dessus).
+De plus, D3JS contient absolument toutes les fonctions nécessaires afin de construire proprement un graphe - le soucis concernera plus le respect exact des informations données et de la transformation effectuée par son moteur physique (voir les deux problèmes cités ci-dessus).
 \newline
 Voici les transformations effectuées sur le moteur physique:
 \begin{itemize}
 \item{ajout d'une durée d'animation élevée,}
 \item{ajout d'une gravité,}
-\item{ajout d'arêtes via un tableau Javascript ayant comme entrées:	
+\item{ajout d'arêtes via un tableau Javascript (dans le fichier au format DATA) ayant comme entrées:	
 \begin{itemize}
 \item{un point source,}
 \item{un point cible,}
 \item{une longueur entre ces deux points}
 \end{itemize}
-, et de distances spécifiques pour chaque,}
-\item{d'une élasticité - ce point sera détaillé dans la partie consacrée aux Résultats}
+, et de distances spécifiques pour chacune,}
+\item{d'une élasticité - ce paramètre sera détaillé dans la sous-partie consacrée aux Résultats}
 \item{ajout d'une liaison entre un point et un début d'arête, afin de pouvoir bouger les arêtes en même temps que le point.}
 \end{itemize}
 
 \section{Problème et résolution des arêtes}
 
-Sur un graphe à 100 clônes, chacun était lié aux 99 autres par une arête, il faudra donc créer un graphe à 10000 arêtes. 
-Je me suis donc posé la question suivante: "Le moteur du \textit{framework} est-il capable de supporter absolument tout le calcul nécessaire pour la mouvance du graphe, en temps réel?"
+Sur un graphe à 100 clones, chacun était lié aux 99 autres par une arête, il faudra donc créer un graphe complet à 10000 arêtes. 
+Je me suis donc posé la question suivante: "Le moteur du \textit{framework} est-il capable de supporter le nombre élevé d'arêtes, ainsi que le calcul nécessaire pour la mouvance du graphe en temps réel?"
 \newline
-Après plusieurs tests de recherche, la réponse est \textbf{non}: le \textit{framework} n'en est pas capable, car il n'a pas été créé/optimisé pour une tâche aussi lourde.
+Après plusieurs tests de recherche, la réponse est \textbf{non}: le \textit{framework} n'en est pas capable, car il n'a pas été créé et optimisé pour une tâche aussi lourde.
 \newline
-Il a donc fallu trouver un moyen d'optimiser au maximum la composition du graphe (c'est à dire garder un nombre minimal d'arêtes), afin de le représenter le plus rapidement possible, avec un maximum de concordance/de respect par rapport aux données fournies.
+Il a donc fallu trouver un moyen d'optimiser au maximum la composition du graphe (c'est à dire garder un nombre minimal d'arêtes), afin de le représenter le plus rapidement possible, mais avec un maximum de concordance et de respect par rapport aux données fournies.
 \newline
 Les 3 solutions présentées ci-dessous implémentent l'idée de réduire drastiquement le nombre d'arêtes.
 
 \subsection{\textit{"Il était une fois, un premier algorithme..."}}
 Le premier algorithme qui m'est venu à l'esprit est de supprimer toutes les arêtes ayant une longueur supérieure à une distance implantée en dur dans le programme - cela permettra donc d'alléger le tableau d'arêtes Javascript pris en compte par le moteur, et de moins le faire souffrir lors des calculs.
 \newline
-Ce procédé a été un semi-échec: sur plusieurs jeux de données, nous avons supprimé en moyenne un peu plus de 50\% des arêtes disponibles (nous étions passé de 10000 à 4970 sur un jeu de données, pour citer un exemple) - malheureusement, le moteur peinait à calculer toutes les positions des noeuds et arêtes par \textit{frame} une nouvelle fois (sur une machine à processus corei5 à 8Go de RAM, GPU Intel HD 4000).
+Ce procédé a été un semi-échec: sur plusieurs jeux de données, nous avons supprimé en moyenne un peu plus de 50\% des arêtes disponibles (nous étions passé de 10000 à 4970 sur un jeu de données, pour citer un exemple) - malheureusement, le moteur peinait à calculer toutes les positions des noeuds et arêtes par \textit{frame} une nouvelle fois (sur une machine à processeur corei5 à 8Go de RAM, GPU Intel HD 4000 intégré).
 \newline
-Il était donc nécessaire de chercher un nouvel algorithme qui pourrai, au moins, diviser de moitié le nombre d'arêtes qui seront à calculer par le moteur. Cependant, l'idée de modifier la distance maximale d'arêtes à afficher a été validé et gardée dans le projet - elle a été implémenté sous la forme d'un \textit{slider}, présent dans le sous-menu "Display" du \textbf{menu haut} (voir Figure ?? de l'annexe).
+Il était donc nécessaire de chercher un nouvel algorithme qui pourrait, au moins, diviser de moitié le nombre d'arêtes qui seront à prendre en compte par le moteur. Cependant, l'idée de modifier la distance maximale d'arêtes à afficher a été validé et gardé dans le projet - elle a été implémenté sous la forme d'un \textit{slider}, présent dans le sous-menu "Display" du \textbf{menu haut} (voir \textbf{Figure 8} de la partie'\textbf{Annexe}).
 
 \subsection{\textit{"L'algorithme contre-attaque"}}
 Le deuxième algorithme a été trouvé par M. \textbf{Duez Marc}; beaucoup plus brutal, il permet de dispenser une grande partie d'arêtes, qui seront considérées comme inutiles lors de la construction du graphe - toujours en fonction des distances.
@@ -234,13 +234,13 @@ Il s'agit de:
 	\item chaque arête doit être le moins parallèle possible des autres,
 	\end{itemize}
 \item calculer toutes les arêtes possibles entre une extrémité d'arête trouvée,
-\item calculer 4/5 arêtes possibles, dans une distance minimale, des points trouvés lors de l'étape 2.
+\item calculer 4 ou 5 arêtes possibles, dans une distance minimale, des points trouvés lors de l'étape 2.
 \end{enumerate}
 Le résultat a été concluant - en effet, en déroulant l'algorithme, nous pouvons voir que:
 \begin{itemize}
 \item l'étape 1 se fera avec un maximum de 3 arêtes,
 \item l'étape 2 se fera avec un maximum de 600 arêtes (au total: 600 + 3 arêtes),
-\item l'étape 3 se fera avec un maximum de 100 * 5 arêtes (au total: 1103 arêtes).
+\item l'étape 3 se fera avec un maximum de 100 * 5 arêtes (au total: 1103 arêtes maximum).
 \end{itemize}
 Ainsi, nous avons pu enlever un peu moins de 90\% des arêtes totales, en moyenne; ce qui nous est très bénéfique par rapport au temps de calcul du moteur pour chaque \textit{frame}.
 
@@ -253,21 +253,21 @@ Ainsi, nous pourrons nous assurer d'avoir une structure triangulaire, dont la ch
 \newline
 Nous pourrons donc obtenir premièrement un "squelette" du graphe, afin de pouvoir aider le moteur à mieux modéliser la "chair".
 
-\section{Résultats  - voir \textit{Figure 3} du document \textit{Annexe}}
+\section{Résultats}
 
-Le résultat final montre bien les rapports/similarités entre les différents clônes calculés, très rapidement.
+Le résultat final montre bien les similarités entre les différents clônes calculés, très rapidement (voir \textbf{Figure 9} de la partie \textbf{Annexe}).
 \newline
 Malheureusement, nous étions encore confronté à un problème, non pas par rapport au temps de calcul fait par le moteur physique, mais par rapport à la fidélité de la représentation du graphe.
 \newline
 En effet, notre représentation ne préserve pas de façon optimale les distances données en entrée - étant donné qu'il dispose par lui-même chaque clône dans l'élèment \textit{SVG}, il le fera au fur-et-à-mesure et prendra en compte de moins en moins bien les dernières distances quand il ne pourra pas les respecter.
 \newline
-Il a donc fallu intégrer à ce moment là un nouveau paramètre au moteur physique: l'élasticité. Grâce à l'élasticité (attribuée à chaque arête par le moteur D3JS), les distances les plus faibles (inférieures à une certaine distance) auront un poids supérieur aux autres, et seront donc plus respectées que les autres.
+Il a donc fallu intégrer à ce moment là un nouveau paramètre au moteur physique: l'élasticité. Grâce à l'\textbf{élasticité} (attribuée à chaque arête par le moteur D3JS), les distances les plus faibles (inférieures à une certaine distance) auront un poids supérieur aux autres, et seront donc plus respectées que les autres.
 \newline
 Le soucis étant maintenant que les plus grandes distances ne sont pas respectées (bien entendu, sauf les 3 plus grandes distances modélisant le triangle initial). Ainsi, deux points très éloignés peuvent toujours se retrouver à proximité dans le graphe vu que le moteur soit, ne détient pas d'information lui permettant de savoir où le placer correctement, soit détient cette information mais, l'élasticité de cette arête étant trop faible, le place n'importe où.
 \newline
-Afin de palier à ce petit problème, il a fallu donner un moyen à l'utilisateur de savoir si le point est proche d'un autre ou non - ce qui a déjà été fait grâce à la vision des arêtes pour un/plusieurs point(s) sélectionné(s) par clique. Ainsi, chaque arête présente sera représentative d'une certaine proximité entre les deux points visés, selon la distance maximale voulue par l'utilisateur, en faisant bouger à sa guise le \textit{slider}.
+Afin de palier à ce petit problème, il a fallu donner un moyen à l'utilisateur de savoir si le point est proche d'un autre ou non - ce qui a déjà été fait grâce à la vision des arêtes pour un ou plusieurs point(s) sélectionné(s) par clic. Ainsi, chaque arête présente sera représentative d'une certaine proximité entre les deux points visés, selon la distance maximale voulue par l'utilisateur, en faisant bouger à sa guise le \textit{slider}.
 \newline
-Enfin, il était intéressant de visualiser, non pas seulement les pourcentages d'identité/de ressemblance entre les clônes (ce qui a été calculé premièrement par le programme C++), mais d'obtenir de réelles distances en fonction des différences de nucléotides\footnote{Un nucléotide est une molécule organique, élément de base d'un acide nucléique tel que l'ADN ou l'ARN.} entre chaque séquence ADN. C'est le travail qui j'ai réalisé lors des 3 dernières semaines de stage, consultable au \textbf{chapitre 5} du rapport.
+Enfin, il était intéressant de visualiser, non pas seulement les pourcentages d'identité entre les clônes (ce qui a été calculé premièrement par le programme C++), mais d'obtenir de réelles distances en fonction des différences de nucléotides\footnote{Un nucléotide est une molécule organique, élément de base d'un acide nucléique tel que l'ADN ou l'ARN.} entre chaque séquence ADN. C'est le travail qui j'ai réalisé lors des 3 dernières semaines de stage, consultable au \textbf{chapitre 5} du rapport.
 
 \chapter{L'algorithme de clusterisation DBSCAN}
 
@@ -285,11 +285,11 @@ Cet algorithme a été très simple à implémenter.
 Tout d'abord, il faut choisir deux paramètres essentiels:
 \begin{itemize}
 \item{\textbf{une distance} ($\epsilon$), représentant un rayon de cercle, qui nous aidera à considérer que les points situés à une distance inférieure ou égale à celle-ci d'un autre est représentatif d'un seul cluster},
-\item{\textbf{un nombre minimum de points} (\textit{Mp}), que l'on utilisera par la suite pour considérer si le point prit en compte est considéré comme un \textbf{point central} (\textit{\textbf{core point}} - le point détient un nombre de voisins plus élevé que \textit{Mp}, dans le rayon $\epsilon$), un \textbf{point de bordure} (\textit{\textbf{border point}} - le point détient un nombre de voisins moindre que \textit{Mp}, mais est voisin d'un \textbf{point central}), ou encore un \textbf{point de bruit} (\textit{\textbf{noise point}} - tout point n'étant pas l'un des deux précédemment évoqués).}
+\item{\textbf{un nombre minimum de points} (\textit{Mp}), que l'on utilisera par la suite pour considérer si le point pris en compte est considéré comme un \textbf{point central} (\textit{\textbf{core point}} - le point détient un nombre de voisins plus élevé que \textit{Mp}, dans le rayon $\epsilon$), un \textbf{point de bordure} (\textit{\textbf{border point}} - le point détient un nombre de voisins moindre que \textit{Mp}, mais est voisin d'un \textbf{point central}), ou encore un \textbf{point de bruit} (\textit{\textbf{noise point}} - tout point n'étant pas l'un des deux précédemment évoqué).}
 \end{itemize}
-Cet algorithme est ici intéressant car il nous permet donc bien de parcourir chacun des points d'un graphe, son voisinage, et de clusteriser chaque point en fonction de son voisinage, et des deux paramètres énoncés précédemment - la densité revient donc au nombre de points (\textit{Mp}) compris dans un rayon bien spécifié ($\epsilon$). Tout ceci va nous permettre de pouvoir modifier l'\textit{afficheur} afin de pouvoir maximiser le nombre d'outils utiles aux chercheurs - notamment via la colorisation des clusters, ou encore l'apport des regroupements de clones dans le graphe.
+Cet algorithme est ici intéressant car il nous permet de parcourir chacun des points d'un graphe, son voisinage, et de clusteriser chaque point en fonction de celui-ci et des deux paramètres énoncés précédemment - la densité revient donc au nombre de points (\textit{Mp}) compris dans un rayon bien spécifié ($\epsilon$). Tout ceci va nous permettre de pouvoir modifier l'\textit{afficheur} afin de maximiser le nombre d'outils utiles aux chercheurs, notamment via la colorisation des clusters ou encore l'apport des regroupements de clones dans le graphe.
 \newline
-Il est intéressant ici de constater ici que DBSCAN clusterise les données selon une certaine densité, donnée en paramètre via epsilon et \textit{Mp}; cet algorithme ne pourra donc pas gérer les clusters de densités différentes (ce qui ne nous intéresse pas ici, fort-heureusement).
+Il est intéressant ici de constater que DBSCAN partitionne les données selon une certaine densité, donnée en paramètre via $\epsilon$ et \textit{Mp}; cet algorithme ne pourra donc pas gérer les clusters de densités différentes en même temps (ce qui ne nous intéresse pas ici, fort-heureusement).
 
 \subsection{L'algorithme}
 
@@ -303,14 +303,14 @@ Les paramètres pris par défaut sont de 0 pour $\epsilon$ et \textit{Mp}. Ainsi
 \newline
 Le meilleur moyen pour faire varier les paramètres et réaliser, pour soi, la meilleure clusterisation, est de faire varier les paramètres par nos propres moyens.
 \newline
-J'ai donc ajouté, pour cela, deux sliders dans l'\textit{afficheur}:
+J'ai donc ajouté, pour cela, deux sliders dans l'\textit{afficheur} (voir \textbf{Figure 8} dans la partie \textbf{Annexe}):
 	\begin{itemize}
 	\item{un \textit{slider} pour faire varier la distance prise en compte entre chaque clone: $\epsilon$,}
 	\item{un \textit{slider} pour faire varier le nombre de voisins minimum pris en compte dans l'algorithme: \textit{Mp}.}
 	\end{itemize}
-Ces sliders calculent, à chaque modification apportée par clic, un nouvel objet DBSCAN selon les nouveaux paramètres demandés - ce qui permet de visualiser en temps réel les modifications apportées manuellement.
+Ces sliders calculent, à chaque modification apportée par un clic, un nouvel objet DBSCAN selon les paramètres évolués - ce qui permet de visualiser en temps réel les modifications apportées manuellement.
 \newline
-La visualisation des clusters se fait par couleur - en effet, chaque clone appartient à un cluster bien précis, calculé et attribué lors du calcul de l'algorithme, chaque cluster ayant une couleur bien spécifique, attribuée du début à la fin de la visualisation.
+La visualisation des clusters se fait par couleur - en effet, chaque clone appartient à un cluster bien précis ( qui est calculé et attribué lors du calcul par l'algorithme), chaque cluster ayant une couleur bien spécifique, attribuée du début à la fin de la visualisation.
 
 \subsection{Visualisation}
 
@@ -318,69 +318,69 @@ La visualisation des groupes de clones est primordiale - elle en est même la ba
 \newline
 Il a donc fallu travailler sur la visualisation de chaque clone d'un cluster, indépendamment des autres, mais aussi de l'intéraction d'un clone avec un autre, présent ou non dans le même cluster.
 \newline
-D'où l'idée d'implémenter trois choses, accomplissant parfaitement la visualisation et l'intéraction avec les clusters:
+D'où l'idée d'implémenter trois choses, accomplissant parfaitement la visualisation et l'intéraction entre les clusters:
 	\begin{itemize}
-	\item{une colorisation permettnt de visualiser quels sont les clones présents chaque cluster,}
-	\item{une clusterisation permettant de visualiser, via le menu gauche, quels sont les différents groupes de clones existants,}
+	\item{une colorisation permettant de visualiser quels sont les clones présents dans chaque cluster,}
+	\item{une clusterisation permettant de visualiser, via le \textbf{menu gauche}, les différents groupes de clones existants,}
 	\item{une distribution avec laquelle interagir physiquement, via un nouveau paramétrage du moteur physique D3JS, avec un ou plusieurs clone(s) ou cluster(s) - selon la clusterisation choisie pour l'étude.}
 	\end{itemize}
 
-\subsubsection{Ajout d'une nouvelle clusterisation - voir \textbf{Figure 9} du document \textbf{Annexe}}
+\subsubsection{Ajout d'une nouvelle clusterisation - voir \textbf{Figure 10} de la partie \textbf{Annexe}}
 
-L'algorithme DBSCAN est un algorithme de clusterisation, il était normal d'ajouter, dans l'\textit{interface}, la clusterisation DBSCAN afin de pouvoir visualiser directement les clusters, indépendamment de la colorisation et de la distribution étudiée.
+L'algorithme DBSCAN est un algorithme de clusterisation, il était normal d'ajouter, dans l'\textit{afficheur}, la clusterisation DBSCAN afin de pouvoir visualiser directement les clusters, indépendamment de la colorisation et de la distribution étudiée.
 \newline
-La classe "Model" du projet\footnote{Classe Modèle du M.V.C. contenant toutes les données chargées par les fichiers donnés en entrée, et stockant / générant des méta-données utiles pour les vues.} a donc été légèrement modifiée pour ceci, afin de permettre non seulement la visualisation générale de cette clusterisation, mais aussi la visualisation de toutes les mises-à-jour futures de celle-ci, lors des changements des paramètres $\epsilon$ et \textit{Mp} de l'algorithme par l'utilisateur.
+La classe "Model" du projet\footnote{Classe Modèle du M.V.C. contenant toutes les données chargées par les fichiers donnés en entrée, et stockant/générant des méta-données utiles pour les vues.} a donc été légèrement modifiée pour ceci, afin de permettre non seulement la visualisation générale de cette clusterisation, mais aussi la visualisation de toutes les mises à jour futures, lors des changements des paramètres de l'algorithme, par l'utilisateur.
 
-\subsubsection{Ajout d'une nouvelle colorisation - voir \textbf{Figure 10} de la partie \textbf{Annexe}}
+\subsubsection{Ajout d'une nouvelle colorisation - voir \textbf{Figure 11} de la partie \textbf{Annexe}}
 
-La colorisation s'est imposée d'elle-même, étant beaucoup plus bénéfique visuellement et résiduelle dans le temps (il est en effet possible de colorier les clones selon les résultats de DBSCAN, tout en étudiant une distribution précise, autre que celle de DBSCAN).
+La colorisation s'est imposée d'elle-même, étant beaucoup plus bénéfique visuellement et résiduelle dans le temps (il est en effet possible de colorer les clones selon les résultats de DBSCAN, tout en étudiant une distribution précise, autre que celle de DBSCAN par exemple).
 \newline
 Aussi, il a fallu faire attention à plusieurs choses:
 	\begin{itemize}
-		\item{la couleur choisie pour chaque cluster est comprise entre 0 et 270 - afin d'aller d'une teinte rouge (0) vers le violet (270), des couleurs déjà utilisées dans le projet, et permettant aussi de respecter scrupuleusement la légende des couleurs déjà établie par l'ingénieur de recherche du projet,}
-		\item{le dégradé est de mise - il a fallu faire attention à ce que les noeuds se ressemblant n'aient pas une teinte beaucoup trop proche l'une de l'autre.
+		\item{la couleur choisie pour chaque cluster est comprise entre 0 et 270 selon \textit{RGB}\footnote{\textit{RGB}: \textit{Red}, \textit{Green}, \textit{Blue}} - afin d'aller d'une teinte rouge (0) vers le violet (270), des couleurs déjà utilisées dans le projet, et permettant aussi de respecter scrupuleusement la légende des couleurs déjà établie par l'ingénieur de recherche du projet,}
+		\item{le dégradé est de mise - il a fallu faire attention à ce que les noeuds se ressemblant n'aient pas une teinte beaucoup trop proche l'une de l'autre, afin de permettre une visualisation non-faussée.
 			\newline
-			Pour palier à ce problème, j'ai donc créé un objet tableau à N entrées (100 ici, pour utiliser au maximum 100 clusters, soit 1 clone par cluster) que j'ai expressément mélangé afin d'obtenir un tableau de clusters avec une suite de couleurs non-dégradée, via l'\textbf{algorithme de Fisher-Yates} (encore appelé \textbf{mélange de Knuth}), utilisé dans ce genre de situation.}
+			Pour palier à ce problème, j'ai donc créé un objet tableau à N entrées (100 ici, pour utiliser au maximum 100 clusters, soit 1 clone par cluster) que j'ai expressément mélangé afin d'obtenir un tableau de clusters avec une suite de couleurs non-dégradée, via l'\textbf{algorithme de Fisher-Yates} (encore appelé \textbf{mélange de Knuth}), très utilisé dans ce genre de situation.}
 	\end{itemize}
 
-\subsubsection{Ajout d'une nouvelle distribution - voir \textbf{Figure 11} de la partie \textbf{Annexe}}
+\subsubsection{Ajout d'une nouvelle distribution - voir \textbf{Figure 12} de la partie \textbf{Annexe}}
 
-Pourquoi a-t-il fallu créer/ajouter une nouvelle distribution, au lieu d'utiliser celle déjà établie avec le graphe représentant les distances d'édition ?
+Pourquoi a-t-il fallu ajouter une nouvelle distribution, au lieu d'utiliser celle déjà établie avec le graphe représentant les distances d'édition ?
 \newline
-Tout d'abord, il ne s'agira pas d'un seul graphe, mais de tout un ensemble de petits graphes représentant chacun un cluster, présents dans le cadre \textit{SVG} - ainsi, il faut prendre en compte que les distances entre chaque point du graphe ne sera pas représenté, mais que l'on veut obtenir un graphe complet par cluster.
+Tout d'abord, il ne s'agira pas d'un seul graphe, mais de tout un ensemble de petits graphes représentant chacun un cluster, présents dans le cadre \textit{SVG} - ainsi, il faut prendre en compte que les distances entre chaque point du graphe ne sera pas représenté visuellement, mais que l'on veut obtenir un graphe complet par cluster.
 \newline
-Ensuite, les distances calculées et délivrées par le programme en C++ ne seront pas prises en compte! Nous voulons que chaque cluster soit condensé/renfermé - ainsi, il faudra donner une valeur prise par défaut mais minimaliste, à chaque lien entre une source et une cible \textbf{appartenant au même cluster}.
+Ensuite, les distances calculées et délivrées par le programme en C++ ne seront pas prises en compte visuellement! Nous voulons que chaque cluster soit condensé - ainsi, il faudra donner une valeur prise par défaut mais minimaliste (1cm ici), à chaque lien entre une source et une cible \textbf{appartenant au même cluster}.
 \newline
-Vient après une suite de légères modifications:
+Vient après une suite de légères modifications dans le moteur physique de D3JS:
 	\begin{itemize}
-	\item{une augmentation de la gravité,}
+	\item{l'annulation de la gravité,}
 	\item{une élasticité non-utilisée,}
-	\item{l'ajout d'une modification de la distribution en temps réel, en fonction des paramètres utilisés par l'utilisateur, et pouvant être modifié à n'importe quel moment.}
+	\item{l'ajout d'une modification de la distribution en temps réel, en fonction des paramètres demandés par l'utilisateur.}
 	\end{itemize}
-Tout ceci a nécessité la création d'un nouveau paramètre du moteur physique D3JS, spécialement conçu pour la plus précise visualisation intéractive des clusters.
+Tout ceci a nécessité la création d'un nouveau type de moteur physique D3JS, spécialement conçu pour la plus précise visualisation intéractive des clusters.
 \newline
-Heureusement, certaines choses ont été gardés du moteur physique implémenté pour le graphe de distance d'édition, notamment la disposition du \textit{SVG}, son remplissage et l'intéraction établie avec l'ensemble de l'\textit{afficheur}, comme l'effacement des légendes, la modification de celles-ci manuellement, etc...
+Heureusement, certaines choses ont été gardées du moteur physique implémenté pour le graphe de distance d'édition, notamment la disposition du \textit{SVG}, son remplissage et l'intéraction établie avec l'ensemble de l'\textit{afficheur}, comme la suppression des légendes des axes X et Y par exemple.
 
 \section{Résultats}
 
 Les résultats de cette implémentation de l'algorithme DBSCAN en Javascript vont être discutés sous deux formes:
 	\begin{itemize}
-	\item{un apport scientifique, axé sur les résultats physiques de l'algorithme en lui-même dans le projet,}
-	\item{ainsi qu'un apport plus axé sur la similitude entre cette nouvelle distribution, et celle créée lors du travail sur la première partie du stage}
+	\item{un apport scientifique, axé sur les résultats visuels de l'algorithme,}
+	\item{ainsi qu'un apport sur la similitude entre cette nouvelle distribution et celle créée sur la première partie du stage.}
 	\end{itemize}
-Aussi, j'ai effectué avec QUnit\footnote{QUnit est un \textit{framework} permettant de créer des tests unitaires, développé par l'équipe ayant créé le \textit{framework} JQuery.} une série de tests unitaires\footnote{Un test unitaire est une procédure permettant de vérifier le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme.} (voir \textbf{Figure 12} dans la partie \textbf{Annexe}) permettant de démontrer la fonctionnalité de l'algorithme sur un jeu de tests écrit à la main, et permettant de tester les cas possibles issus d'un jeu de données biologique.
+Aussi, j'ai effectué avec QUnit\footnote{QUnit est un \textit{framework} permettant d'implémenter des tests unitaires, développé par l'équipe ayant créé le \textit{framework} JQuery.} une série de tests unitaires\footnote{Un test unitaire est une procédure permettant de vérifier le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme.} (voir \textbf{Figure 13} dans la partie \textbf{Annexe}) permettant de démontrer la fonctionnalité totale de l'algorithme sur un jeu de tests écrit à la main, et permettant de tester tous les cas possibles issus d'un jeu de données biologiques.
 
 \subsubsection{Apport scientifique et biologique}
 
-L'apport principal de l'implémentation de DBSCAN est de regrouper les clônes similaires par rapport aux distances d'édition précalculées, tout comme la première partie du stage.
+L'apport principal de l'implémentation de DBSCAN est de regrouper les clones similaires par rapport aux distances (pourcentages d'identité dans un premier temps) précalculées, tout comme la première partie du stage.
 \newline
-Ainsi, cette implémentation permettra au médecin ou au chercheur de pouvoir visualiser directement quels sont les clônes les plus proches les uns des autres - ce qui est visible en \textbf{Figure 11} dans la partie \textbf{Annexe}, par le rassemblement des clones entre eux, ainsi que la colorisation attribuée à chaque cluster - et de pouvoir déceler les clônes ayant subi une mutation au cours du temps (les distances d'édition étant calculées par rapport aux \textit{windows}, marqueur d'évolution temporel) d'un clône déjà étudié.
+Ainsi, cette implémentation permettra au médecin ou au chercheur de pouvoir visualiser directement quels sont les clones les plus proches les uns des autres - ce qui est visible en \textbf{Figure 11} dans la partie \textbf{Annexe}, par le rassemblement des clones entre eux, ainsi que la colorisation attribuée à chaque cluster - et de pouvoir déceler les clones ayant subi une mutation au cours du temps (les distances d'édition étant calculées par rapport aux \textit{windows}, marqueur d'évolution temporel - voir le \textbf{chapitre 5}).
 
 \subsubsection{Apport à la première partie du stage}
 
-Cette seconde partie fait partie de la visualisation intéractive des clônes, et est aussi une suite au graphe de distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
+Cette seconde partie appartient à la visualisation intéractive des clones, et est aussi une suite au graphe de distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
 \newline
-En effet, celle-ci fait partie aussi de la première car, utilisant une partie du moteur physique et visualisant cette distribution aussi comme un graphe, construit avec les distances entre deux clônes (mais ne les gardant pas pour dessiner ce graphe), cette partie pourrai servir de base sur la première.
+En effet, utilisant une partie du moteur physique et visualisant cette distribution comme un ensemble de graphes, elle se construit avec les distances d'édition.
 
 \chapter{Recherche de la meilleure distance d'édition possible}
 
@@ -388,7 +388,7 @@ Les distances sont essentielles aux deux parties de mon stage. Ce sont elles qui
 \newline
 Auparavant, nous utilisions comme distances les pourcentages d'identité de séquences représentatives - qui sont une approximation de différences entre deux clônes, basés sur des séquences de nucléotides de différentes tailles, et fabriquées à partir des séquences V(D)J et de la \textit{windows}.
 \newline
-Afin de pouvoir obtenir une distance beaucoup plus précise, mais aussi en fonction du temps, j'ai eu l'idée de comparer ces \textit{windows}, directement dans le programme C++.
+Afin de pouvoir obtenir une distance beaucoup plus précise en fonction du temps, j'ai eu l'idée de comparer ces \textit{windows}, directement dans le programme C++.
 
 \section{Utilisation des \textit{windows}}
 
@@ -396,11 +396,11 @@ Afin de pouvoir obtenir une distance beaucoup plus précise, mais aussi en fonct
 
 Les \textit{windows} sont des séquences suivies de 40 nucléotides, trouvées directement entre la fin de la région V, et le début de la région J. Il se peut donc tout à fait que la partie D se retrouve, ou non, dans cette séquence.
 \newline
-Ces séquences ont été alignés en global\footnote{Alignement global: alignement entre deux séquences sur toute leur longueur.}, et non pas en local\footnote{Alignement local: alignement entre une séquence et une partie de l'autre séquence}.
+Ces séquences ont été alignées de façon global\footnote{Alignement global: alignement entre deux séquences sur toute leur longueur.}, et non pas en local\footnote{Alignement local: alignement entre une séquence et une partie de l'autre séquence}.
 
 \subsection{Pourquoi les utiliser ?}
 
-L'avantage de prendre les \textit{windows} comme support de calcul est qu'elle servira, tout au long du suivi/tout au long du temps à marquer spécifiquement un clône - l'on pourra ainsi faire le suivi de la L.A.L. via l'étude des \textit{windows} spécifiant des zones bien spécifiques, qui pourraient être contraints à évoluer en fonction des mutations infligées.
+L'avantage de prendre les \textit{windows} comme support de calcul est qu'elle servira, tout au long du suivi au cours du temps à marquer spécifiquement un clone - l'on pourra ainsi faire le suivi de la L.A.L. via l'étude des \textit{windows} spécifiant des zones bien spécifiques, qui pourraient être contraintes à évoluer en fonction des mutations infligées.
 
 \section{Les différents coûts utilisés}
 
@@ -421,9 +421,9 @@ Chaque calcul effectué se fait sur un coût, constitué de 5 opérations:
 
 \subsubsection{Quels sont ces coûts?}
 
-Pour ces opérations est attribuée un poids (n'importe quel entier positif, négatif ou nul), permettant de régir et de calculer une distance, spécifique en fonction du poids.
+Pour ces opérations est attribué un poids (n'importe quel entier positif, négatif ou nul), permettant de régir et de calculer une distance, spécifique en fonction de ce poids.
 \newline
-Ainsi, deux coûts ayant des poids sur ces opérations différentes ne devraient pouvoir obtenir le même résultat (ou distance) à la fin du calcul.
+Ainsi, deux coûts ayant des poids sur ces opérations différentes ne devraient pouvoir obtenir le même résultat (qui sera une distance) à la fin du calcul.
 \newline
 Il est important de calculer de bons coûts, car ils influeront directement sur les distributions précédemment mises en place. Nous en avons donc sélectionner 4:
 \begin{itemize}
@@ -432,19 +432,19 @@ Il est important de calculer de bons coûts, car ils influeront directement sur 
 \item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -1 pour les délétions de fin de séquence\footnote{Imaginons que, pour un alignement de deux séquences de longueurs différentes, si la partie de l'une est beaucoup plus grande que l'autre, nous pouvons compter une délétion sur la partie grande (et non-alignée) avec un poids différent.}, -2 pour la détection d'homopolymère(s),}
 \item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour la détection d'homopolymère(s).}
 \end{itemize}
-Sur ces 4 coûts, il a dû falloir en choisir un ayant les meilleurs rapports de distance afin de perfectionner l'affichage des graphes.
+Sur ces 4 coûts, il a fallu choisir celui ayant les plus respectueuses distances par rapport aux similarités entre séquences, afin de perfectionner les distributions.
 
 \subsubsection{Comment effectuer les calculs de coût?}
 
-Les coûts étaient déjà implantés à mon arrivée dans l'entreprise, et le programme en C++ contenait déjà un objet (DynProg) prenant en paramètre les deux séquences ADN, l'alignement ainsi que le coût utilisé au calcul, et nous renvoyant, le plus souvent, une matrice de similarité que nous transformions en matrice de distance - ou alors, directement une matrice de distances.
+Les coûts étaient déjà implantés à mon arrivée dans l'entreprise, et le programme en C++ contenait déjà un objet (DynProg) prenant en paramètre les deux séquences ADN, l'alignement ainsi que le coût utilisé lors du calcul, et nous renvoyant, le plus souvent, une matrice de similarité que nous transformions en matrice de distance - ou alors, directement une matrice de distances.
 \newline
-Ainsi, pour étudier les objets \textit{windows} entre eux, il a juste fallu modifier l'alignement local (prit par défaut) par l'alignement global, et le coût par un de notre choix - étant à tester.
+Ainsi, pour étudier les objets \textit{windows} entre eux, il a juste fallu modifier l'alignement local (pris par défaut) par l'alignement global, et le coût par un de notre choix - étant à tester.
 
 \section{Le coût utilisé}
 
-Les coûts \textit{Identity} et \textit{Levenshtein} sont les plus probants pour les graphes implémentés - en effet, ce sont eux qui, lors des tests, permettent d'avoir des distances aussi variées que respectueuses des similarités entre les clones.
+Les coûts \textit{Identity} et \textit{Levenshtein} sont les plus probants pour les graphes implémentés - en effet, ce sont eux qui, lors des tests, permettent d'avoir des distances aussi variées que respectueuses des similarités entre clones.
 \newline
-Dû à sa grande popularité, mon choix s'est porté pour le coût \textit{Levenshtein}, vu que \textit{Identity} se trouve être la même chose que la précédente, avec un poids pour le \textit{match} en plus.
+Dû à sa grande popularité, mon choix s'est porté vers le coût \textit{Levenshtein}, vu que \textit{Identity} se trouve être la même chose que la précédente, avec un poids pour le \textit{match} en plus.
 
 \chapter{Le travail en recherche}
 
@@ -517,7 +517,7 @@ La vigilance est aussi de mise quant à la publication d'autres scientifiques su
 \begin{center}
 	\includegraphics[scale=0.6]{img/C++-Ex.jpg}
 \end{center}
-\caption{Aperçu d'une segmentation (en cours), avec le programme \textit{Vidjil} C++}
+\caption{Aperçu d'une segmentation (en cours sur le \textit{screenshot}), avec le programme \textit{Vidjil} C++}
 \end{figure}
 
 \begin{figure}
@@ -546,6 +546,14 @@ La vigilance est aussi de mise quant à la publication d'autres scientifiques su
 	\includegraphics[scale=0.35]{img/Aff_menu_bas.jpg}
 	\caption{Le \textbf{segmenteur} de l'\textit{afficheur}}
 \end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\vskip10em
+	\includegraphics{img/Aff_menu_display.jpg}
+\end{center}
+\caption{Sous-menu "Display" du menu haut avec, de haut en bas: le \textit{slider} "Display nodes" permettant d'afficher ou non un nombre plus ou moins grand de clones, les deux \textit{sliders} permettant de changer les paramètres de DBSCAN, et enfin le \textit{slider} pour modifier la distance maximale d'affichage des arêtes (pour le graphe concernant les distances d'édition)}
 \end{figure}
 
 \begin{figure}
