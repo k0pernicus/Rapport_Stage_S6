@@ -97,14 +97,19 @@ La grande idée du projet est que toutes les informations quant aux recombinaiso
 L'équipe de ce projet travaille désormais avec \textit{EuroClonality NGS} (un Consentium Européen contenant plusieurs laboratoires, utile au projet quant à l'échantillonage des données), ainsi que différents laboratoires Français - comme l'hôpital Necker à Paris, l'hôpital de Rennes - mais aussi de République Tchèque et d'Angleterre.
 
 \section{Objectifs de stage}
-Mes objectifs sont de mettre en place une visualisation intéractive des distances entre clones V(D)J, et m'ont été donné par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël} lors d'un entretien téléphonique et oral en Décembre 2013/Janvier 2014.
+Mes objectifs m'ont été donné par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël} lors d'un entretien téléphonique et oral en Décembre 2013/Janvier 2014.
 
-\subsection{L'\textit{afficheur}}
+\subsection{Problématique}
+La problèmatique était de permettre à l'utilisateur (médecin et/ou chercheur) de visualiser de façon intéractive des clones V(D)J selon leur distance d'édition, de façon à suivre la progression L.A.L. dans le temps.
+\newline
+Cette problématique devait être résolu \textit{via} deux objectifs, présentés ci-dessous. 
+
+\subsubsection{L'\textit{afficheur}}
 Dans un premier temps, je devais intégrer dans l'\textit{afficheur} un graphe permettant de visualiser les distances d'édition des clônes, ce qui permettrait de voir directement quels clones sont similaires ou, au contraire, très différents.
 \newline
 Ce premier travail devait s'effectuer sur une durée de deux mois, avec une programmation en HTML5, CSS3 et le langage Less, le langage orienté objet Javascript, Ajax, et en utilisant les frameworks\footnote{Un \textit{framework} est un ensemble d'outils et de composants logiciels organisés conformément à un plan d'architecture et des patterns, l'ensemble formant ou promouvant un "squelette" de programme - il est conçu en vue d'aider les programmeurs dans leur travail.} Javascript D3JS et JQuery - tous ces langages et frameworks étaient déjà intégrés à l'\textit{afficheur}, depuis sa conception par M. \textbf{Duez Marc}.
 
-\subsection{DBSCAN}
+\subsubsection{DBSCAN}
 Deuxièmement, le travail devait déborder sur une partie beaucoup plus algorithmique avec l'utilisation de DBSCAN\footnote{DBSCAN est un algorithme de partitionnement de données proposé en 1996 par \textbf{Martin Ester}, \textbf{Hans-Peter Kriegel}, \textbf{Jörg Sander} et \textbf{Xiaowei Xu}.}, toujours dans le même principe que la précédente partie.
 \newline
 DBSCAN sera donc à développer en Javascript, et sera à intégrer au projet sous la forme d'un bouton et de deux \textit{sliders}, permettant de modifier l'environnement et donc de visualiser en temps réel la clusterisation des clones, en fonction de la distance avec ses voisins.
