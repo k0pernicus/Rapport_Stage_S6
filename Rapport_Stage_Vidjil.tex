@@ -278,7 +278,7 @@ Enfin, il était intéressant de visualiser, non pas seulement les pourcentages 
 
 Ce chapitre conduira mon travail et mes réflexions sur la deuxième partie du stage que je devais effectué, sur l'intégration de l'algorithme de clusterisation DBSCAN (\textit{Density-Based Spatial Clustering of Applications with Noise}).
 \newline
-Ce travail a été réalisé en une semaine, de fin Mai à la première semaine de Juin.
+Ce travail a été réalisé en deux semaines, de fin Mai à la deuxième semaine de Juin.
 
 \section{Présentation générale}
 
@@ -301,6 +301,8 @@ Il est intéressant ici de constater que DBSCAN partitionne les données selon u
 L'algorithme est représenté en \textbf{Algorithm 6.2.1.} de la partie \textbf{\textit{Annexe}} (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}).
 
 \section{Implantation de DBSCAN}
+
+DBSCAN aura sa propre classe dans l'\textit{afficheur}, et sera donc un objet qui communiquera essentiellement avec le Modèle du M.V.C.
 
 \subsection{Choix quant aux paramètres}
 
@@ -352,9 +354,9 @@ Aussi, il a fallu faire attention à plusieurs choses:
 
 Pourquoi a-t-il fallu ajouter une nouvelle distribution, au lieu d'utiliser celle déjà établie avec le graphe représentant les distances d'édition ?
 \newline
-Tout d'abord, il ne s'agira pas d'un seul graphe, mais de tout un ensemble de petits graphes représentant chacun un cluster, présents dans le cadre \textit{SVG} - ainsi, il faut prendre en compte que les distances entre chaque point du graphe ne sera pas représenté visuellement, mais que l'on veut obtenir un graphe complet par cluster.
+Tout d'abord, il ne s'agit pas d'un seul graphe mais de tout un ensemble de petits graphes représentant chacun un cluster, présents dans le cadre \textit{SVG} - ainsi, il faut prendre en compte que les distances entre chaque point du graphe ne sera pas représenté visuellement, mais que l'on veut obtenir un graphe complet par cluster.
 \newline
-Ensuite, les distances calculées et délivrées par le programme en C++ ne seront pas prises en compte visuellement! Nous voulons que chaque cluster soit condensé - ainsi, il faudra donner une valeur prise par défaut mais minimaliste (1cm ici), à chaque lien entre une source et une cible \textbf{appartenant au même cluster}.
+Ensuite, les distances calculées et délivrées par le programme en C++ ne seront pas prises en compte visuellement! Nous voulons que chaque cluster soit condensé - ainsi, il faudra donner une valeur prise par défaut mais minimaliste (5 pixels ici), à chaque lien entre une source et une cible \textbf{appartenant au même cluster}.
 \newline
 Vient après une suite de légères modifications dans le moteur physique de D3JS:
 	\begin{itemize}
@@ -383,7 +385,7 @@ Ainsi, cette implémentation permettra au médecin ou au chercheur de pouvoir vi
 
 \subsubsection{Apport à la première partie du stage}
 
-Cette seconde partie appartient à la visualisation intéractive des clones, et est aussi une suite au graphe de distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
+Cette seconde partie appartient à la visualisation intéractive des clones, et est aussi une suite au graphe des distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
 \newline
 En effet, utilisant une partie du moteur physique et visualisant cette distribution comme un ensemble de graphes, elle se construit avec les distances d'édition.
 
