@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[pdftex,12pt,a4paper]{report}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -13,7 +13,7 @@
 \usepackage{calc}
 \usepackage{pseudocode}
 
-\usepackage{graphicx}
+\usepackage[pdftex]{graphicx}
 \usepackage{float}
 \usepackage{fancybox}
 
@@ -25,16 +25,15 @@
 
 \FrenchFootnotes
 
-\setlength{\parskip}{1mm}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
-\title{Rapport de stage}
-\author{Antonin Carette}
-\date{Compilé le \today}
+\setlength{\parskip}{1mm}
 
 \begin{document}
 \begin{spacing}{1.2}
 
-\maketitle
+%Thème utilisé sur http://en.wikibooks.org/wiki/LaTeX/Title_Creation
+\input{./titlePage.tex}
 
 \tableofcontents
 
