@@ -5,6 +5,7 @@
 \usepackage[francais]{babel}
 \usepackage{setspace}
 \usepackage[top=2.5cm,bottom=2.5cm,right=3cm,left=3cm]{geometry}
+\usepackage{parskip}
 
 \usepackage{hyperref}
 \usepackage{color}
@@ -13,6 +14,8 @@
 \usepackage{pseudocode}
 
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{fancybox}
 
 \usepackage{caption}
 \captionsetup{figurewithin=none}  
@@ -21,6 +24,8 @@
 \AddThinSpaceBeforeFootnotes
 
 \FrenchFootnotes
+
+\setlength{\parskip}{1mm}
 
 \title{Rapport de stage}
 \author{Antonin Carette}
@@ -38,77 +43,79 @@
 \addcontentsline{toc}{chapter}{Introduction} 
 
 \section{Remerciements}
-Je remercie tout d'abord mon tuteur d'Université: M. \textbf{Meftali Samy}, ainsi que mon tuteur en entreprise: M. \textbf{Giraud Mathieu}, pour toute l'attention donnée quant au travail sur le projet, ainsi que sur ce rapport.
+Je remercie tout d'abord mon tuteur d'Université: \textbf{Samy Meftali}, ainsi que mon tuteur en entreprise: \textbf{Mathieu Giraud}, pour toute l'attention donnée quant au travail sur le projet, ainsi que sur ce rapport.
 \newline
 Je remercie ensuite l'équipe \textit{Bonsai} ainsi que les membres du projet \textit{Vidjil}, pour leur accueil ainsi que leur soutien, recueillis durant les 3 mois de stage.
 \newline
-Enfin, je tiens à remercier mes collèges du bureau 235: M. \textbf{Dufresne Yoann} et M. \textbf{Vrolland Christophe}.
+Enfin, je tiens à remercier mes collèges du bureau 235: \textbf{Yoann Dufresne} et M. \textbf{Christophe Vrolland}.
 
 \section{Présentation de l'entreprise et de l'équipe}
 
-\subsection{Le \textit{L.I.F.L.}}
-Le \textit{L.I.F.L.} (Laboratoire d'Informatique Fondamentale de Lille) est un laboratoire Français présent sur le campus de l'Université Lille1, rattaché à l'Institut des Sciences de l'Information et de leurs Interactions (\textit{I.N.S.2.I.}) du \textit{C.N.R.S.} (Centre National de la Recherche Scientifique).
+\subsection{Le \textit{LIFL}}
+Le \textit{LIFL} (Laboratoire d'Informatique Fondamentale de Lille) est un laboratoire Français fondé en 1983, présent sur le campus de l'Université Lille1, rattaché à l'Institut des Sciences de l'Information et de leurs Interactions (\textit{INS2I}) du \textit{CNRS} (Centre National de la Recherche Scientifique).
 \newline
-Il comprend 10 équipes-projets et équipes du centre de recherche \textit{I.N.R.I.A.} Lille - Nord Europe (Institut national de recherche en informatique et en automatique), de recherches diverses et variées (axe Mathématique, Réalité Virtuelle, BioInformatique, Sécurité et Réseau, Systèmes Multi-agents, etc...); aujourd'hui, plus de 300 personnes y travaillent (enseignants-chercheurs, ingénieurs, techniciens, administratifs et doctorants).
-\newline
-Le laboratoire a été fondé en 1983, et est maintenant dirigé par Mme \textbf{Tison Sophie}.
+Il est maintenant dirigé par \textbf{Sophie Tison} comprend 10 équipes-projets et équipes du centre de recherche \textit{INRIA} Lille - Nord Europe (Institut national de recherche en informatique et en automatique), de recherches diverses et variées (axe Mathématique, Réalité Virtuelle, BioInformatique, Sécurité et Réseau, Systèmes Multi-agents, etc...); aujourd'hui, plus de 300 personnes y travaillent (enseignants-chercheurs, ingénieurs, techniciens, administratifs et doctorants).
 
 \subsection{L'équipe \textit{Bonsai}}
-\textit{Bonsai} est une équipe du \textit{L.I.F.L.} créée en 2011 par Mme \textbf{Touzet Hélène}, maintenant responsable de l'équipe. Elle était, auparavant, nommée \textit{Sequoia}.
-\newline
-Cette jeune équipe dépend du \textit{L.I.F.L.}, de l'\textit{I.N.R.I.A.} ainsi que du \textit{C.N.R.S.}.
+\textit{Bonsai} est une équipe du \textit{LIFL}, auparavant nommée \textit{Sequoia}.
+Cette jeune équipe dépend du \textit{LIFL}, de l'\textit{INRIA} ainsi que du \textit{CNRS}, et est dirigée par \textbf{Hélène Touzet}.
 \newline
 Les travaux des membres de l'équipe (on en compte actuellement 22) sont tous réunis dans un seul grand domaine: la Biologie.
-\newline
 En effet, l'équipe \textit{Bonsai} est très réputée dans la bio-informatique; on dénombre aujourd'hui plus de 30 applications/logiciels utilisables gratuitement\footnote{Ces logiciels sont consultables sur le site internet de l'équipe: \url{http://bioinfo.lifl.fr}}, créés par les membres de l'équipe.
 \newline
-Mes encadrants ont été, dans l'équipe, M. \textbf{Giraud Mathieu} (mon tuteur en entreprise), M. \textbf{Salson Mikaël} ainsi que M. \textbf{Duez Marc}, ingénieur du projet \textit{Vidjil}.
-\newline
-Cette équipe m'a donc accueillie pour mon stage de fin de licence, s'étant déroulé du 1er Avril au 30 Juin 2014.
+Cette équipe m'a donc accueillie pour mon stage de fin de licence, s'étant déroulé du 1er Avril au 30 Juin 2014, mes encadrants étant \textbf{Mathieu Giraud} (mon tuteur en entreprise), \textbf{Mikaël Salson} ainsi que \textbf{Marc Duez}, ingénieur du projet \textit{Vidjil}.
 
 
 \chapter{Contexte du stage et objectifs}
 
-\section{La Leucémie Aigüe Limphoblastique}
+\section{La Leucémie Aigüe Lymphoblastique}
 
 Chaque Humain et Vertébré détient un système de recombinaison de l'ADN (que l'on appelle \textbf{recombinaison V(D)J}\footnote{Phénomène biologique impliquant des processus par lesquels une molécule d'ADN (ou d'ARN) est coupée, puis jointe à une autre.}), mécanisme permettant de créer une grande diversité de récepteurs d'anti-gènes (nécessaires à la reconnaissance d'antigènes étrangers), et donc de lymphocytes.
-\newline
 Chaque lymphocyte\footnote{Un lymphocyte est un globule blanc (ou Leucocyte), ayant un rôle majeur dans le système immunitaire.} possède un réarrangement V(D)J\footnote{Les régions V, D et J sont des parties d'un anti-corps.} unique, et le dote d'un récepteur lui permettant de reconnaître un anti-gène\footnote{Il pourra s'agir d'un virus ou d'une bactérie par exemple.} bien spécifique. Ce lymphocyte pourra plus tard se multiplier (si contamination il y a des anti-gènes spécifiques reconnus) afin de permettre de mieux contrer l'agresseur, et formera alors un clone\footnote{Un clone V(D)J est donc un ensemble de lymphocytes ayant le même réarrangement V(D)J.}.
 \newline
-La Leucémie Aigüe Limphoblastique (L.A.L.) est un cancer liquide\footnote{Le cancer liquide, encore appelé cancer sanguin, est un ensemble composé des leucémies (cancers du sang et de la moëlle épinière) et des lymphomes (cancers du système lymphatique).} affectant majoritairement les enfants. Il s'attaque à un lymphocyte, le forçant à se multiplier afin de pouvoir créer un clone de lymphocytes cancéreux, inhibant en grande partie les actions du reste du système immunitaire.
+La Leucémie Aigüe Lymphoblastique (L.A.L.) est un cancer liquide\footnote{Le cancer liquide, encore appelé cancer sanguin, est un ensemble composé des leucémies (cancers du sang et de la moëlle épinière) et des lymphomes (cancers du système lymphatique).} affectant majoritairement les enfants. Il s'attaque à un lymphocyte, le forçant à se multiplier afin de pouvoir créer un clone de lymphocytes cancéreux, inhibant en grande partie les actions du reste du système immunitaire.
+
+\begin{figure}[h!]
+\begin{center}
+	\includegraphics[scale=0.35]{img/angfig1.png}
+\end{center}
+\caption{Aperçu d'un lymphocyte, et des régions V(D)J sur le site actif.}
+\end{figure}
 
 \section{Le projet Vidjil}
 
 \textit{Vidjil} est un projet intra (pour le développement des programmes) et extra (pour toute la partie échantillonage) Universitaire créé par un petit groupe de chercheurs et d'ingénieurs de l'équipe \textit{Bonsai}, mais aussi du Laboratoire d'Hématologie de Lille2.
-\subsection{Contexte}
-Ce projet a pris naissance via une problèmatique assez simple: peu d'outils fiables et complets étaient disponibles pour le séquençage à haut-débit\footnote{Méthode de séquençage massif de l'ADN, avec clonage et amplification moléculaire - créé en 2005}, demandé par l'équipe d'Hématologie de Lille2 pour ses analyses concernant principalement la L.A.L., menée par M. \textbf{Preudhomme Claude} - requièrant beaucoup de travail dans les niveaux de l'algorithmique, la programmation informatique, ainsi que l'adaptation à un modèle biologique spécifique\footnote{Voir le premier article écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}, sur l'\textit{algorithme}.}.
 \newline
-Après en avoir parlé avec M. \textbf{Figeac Martin}, il a de suite émis l'idée d'en discuter avec des informaticiens intéressés par la biologie, issus de l'équipe \textit{Bonsai} du \textit{L.I.F.L.} - ce qu'il a fait en parlant du projet avec M. \textbf{Giraud} et M. \textbf{Salson}.
-\newline
+Ce projet a pris naissance en 2011. Peu d'outils fiables et complets étaient disponibles pour le séquençage à haut-débit\footnote{Méthode de séquençage massif de l'ADN, avec clonage et amplification moléculaire - créé en 2005} demandé par l'équipe d'Hématologie de Lille2, pour ses analyses concernant principalement la L.A.L., menée par \textbf{Claude Preudhomme} - requièrant beaucoup de travail dans les niveaux de l'algorithmique, la programmation informatique, ainsi que l'adaptation à un modèle biologique spécifique\footnote{Voir le premier article écrit par \textbf{Mathieu Giraud} et \textbf{Mikaël Salson}, sur l'\textit{algorithme}.}.
+Après en avoir parlé avec \textbf{Martin Figeac}, il a de suite émis l'idée d'en discuter avec des informaticiens intéressés par la biologie, issus de l'équipe \textit{Bonsai} du \textit{LIFL} - ce qu'il a fait en parlant du projet avec M. \textbf{Giraud} et M. \textbf{Salson}.
 Les deux équipes se sont donc rencontrées début de l'année 2011 pour en parler calmement, et essayer de mieux cerner l'utilisation principale. Ce n'est qu'en 2012 que le premier programme a été écrit, et que le projet \textit{Vidjil} a réellement débuté.
-
-\subsection{Principe}
-Le projet \textit{Vidjil} consiste à la mise en place d'un programme en langage C++, permettant de séquencer les clones V(D)J issus de données d'un format FASTA ou FASTQ\footnote{Les formats FASTA et FASTQ sont des formats de fichier texte utilisés pour stocker des séquences biologiques de nature nucléique ou protéique.} d'un patient atteint de L.A.L. (voir \textbf{Figure 1} de la partie \textbf{Annexe}), ainsi que d'une interface Web (composée majoritairement de Javascript), appelée \textit{afficheur}, dont le but est d'afficher les informations nécessaires pour les médecins et chercheurs, quant aux résultats de séquençage retournés par le précédent programme (dans un fichier généré au format JSON\footnote{JSON est un format de données textuelles et générique, permettant de représenter de l'information structurée. Ce format a été créé par M. \textbf{Douglas Crockford} en 2005.}).
 \newline
-La grande idée du projet est que toutes les informations quant aux réarrangements V(D)J issus d'un prélévement de sang d'un patient souffrant de L.A.L., pourront être étudiés, comptés et analysés plus facilement par les médecins, afin de pouvoir suivre celui-ci et mesurer l'étendue du cancer, adapter les traitements médicaux au mieux et de prédire les rechutes.
+Le projet \textit{Vidjil} consiste à la mise en place d'un programme en langage C++, permettant de séquencer les clones V(D)J issus de données d'un format FASTA ou FASTQ\footnote{Les formats FASTA et FASTQ sont des formats de fichier texte utilisés pour stocker des séquences biologiques de nature nucléique ou protéique.} d'un patient atteint de L.A.L. (voir \textbf{Figure 1} de la partie \textbf{Annexe}), ainsi que d'une interface Web (composée majoritairement de Javascript), appelée \textit{afficheur}, dont le but est d'afficher les informations nécessaires pour les médecins et chercheurs, quant aux résultats de séquençage recueuillis dans un fichier généré au format JSON\footnote{JSON est un format de données textuelles et générique, permettant de représenter de l'information structurée. Ce format a été créé par M. \textbf{Douglas Crockford} en 2005.}).
+La grande idée du projet est que toutes les informations quant aux réarrangements V(D)J issus d'un prélévement de sang d'un patient souffrant de L.A.L., pourront ainsi être étudiés, comptés et analysés plus facilement par les médecins, afin de pouvoir suivre celui-ci et mesurer l'étendue du cancer, adapter les traitements médicaux au mieux et de prédire les rechutes.
 
-\subsection{L'équipe}
-\textit{Vidjil} est donc un projet créé en partenariat avec le \textit{Laboratoire d'Hématologie de Lille2}, par M. \textbf{Giraud Mathieu}, M. \textbf{Salson Mikaël} et M. \textbf{Preudhomme Claude}.
-\newline
-L'équipe de ce projet travaille désormais avec \textit{EuroClonality NGS} (un Consentium Européen contenant plusieurs laboratoires, utile au projet quant à l'échantillonage des données), ainsi que différents laboratoires Français - comme l'hôpital Necker à Paris, l'hôpital de Rennes - mais aussi de République Tchèque et d'Angleterre.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.6]{img/C++-Ex.jpg}
+\end{center}
+\caption{Aperçu d'une segmentation (en cours sur le \textit{screenshot}), avec le programme \textit{Vidjil} C++}
+\end{figure}
+
+\textit{Vidjil} est donc un projet créé en partenariat avec le \textit{Laboratoire d'Hématologie de Lille2}, par \textbf{Mathieu Giraud}, \textbf{Mikaël Salson} et \textbf{Claude Preudhomme}.
+L'équipe de ce projet travaille aujourd'hui avec \textit{EuroClonality NGS} (un Consentium Européen contenant plusieurs laboratoires, utile au projet quant à l'échantillonage des données), ainsi que différents laboratoires Français - comme l'hôpital Necker à Paris, l'hôpital de Rennes - mais aussi de République Tchèque et d'Angleterre.
 
 \section{Objectifs de stage}
-Mes objectifs m'ont été donné par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël} lors d'un entretien téléphonique et oral en Décembre 2013/Janvier 2014.
-
-\subsection{Problématique}
+Mes objectifs m'ont été donné par \textbf{Mathieu Giraud} et \textbf{Mikaël Salson} lors d'un entretien téléphonique et oral en Décembre 2013/Janvier 2014.
+\newline
 La problèmatique était de permettre à l'utilisateur (médecin et/ou chercheur) de visualiser de façon intéractive des clones V(D)J selon leur distance d'édition, de façon à suivre la progression L.A.L. dans le temps.
 \newline
 Cette problématique devait être résolu \textit{via} deux objectifs, présentés ci-dessous. 
 
+\subsection{Les objectifs}
+
 \subsubsection{L'\textit{afficheur}}
 Dans un premier temps, je devais intégrer dans l'\textit{afficheur} un graphe permettant de visualiser les distances d'édition des clônes, ce qui permettrait de voir directement quels clones sont similaires ou, au contraire, très différents.
 \newline
-Ce premier travail devait s'effectuer sur une durée de deux mois, avec une programmation en HTML5, CSS3 et le langage Less, le langage orienté objet Javascript, Ajax, et en utilisant les frameworks\footnote{Un \textit{framework} est un ensemble d'outils et de composants logiciels organisés conformément à un plan d'architecture et des patterns, l'ensemble formant ou promouvant un "squelette" de programme - il est conçu en vue d'aider les programmeurs dans leur travail.} Javascript D3JS et JQuery - tous ces langages et frameworks étaient déjà intégrés à l'\textit{afficheur}, depuis sa conception par M. \textbf{Duez Marc}.
+Ce premier travail devait s'effectuer sur une durée de deux mois, avec une programmation en HTML5, CSS3 et le langage Less, le langage orienté objet Javascript, Ajax, et en utilisant les frameworks\footnote{Un \textit{framework} est un ensemble d'outils et de composants logiciels organisés conformément à un plan d'architecture et des patterns, l'ensemble formant ou promouvant un "squelette" de programme - il est conçu en vue d'aider les programmeurs dans leur travail.} Javascript D3JS et JQuery - tous ces langages et frameworks étaient déjà intégrés à l'\textit{afficheur}, depuis sa conception par \textbf{Marc Duez}.
 
 \subsubsection{DBSCAN}
 Deuxièmement, le travail devait déborder sur une partie beaucoup plus algorithmique avec l'utilisation de DBSCAN\footnote{DBSCAN est un algorithme de partitionnement de données proposé en 1996 par \textbf{Martin Ester}, \textbf{Hans-Peter Kriegel}, \textbf{Jörg Sander} et \textbf{Xiaowei Xu}.}, toujours dans le même principe que la précédente partie.
@@ -119,10 +126,10 @@ DBSCAN sera donc à développer en Javascript, et sera à intégrer au projet so
 
 Avant de me lancer dans le travail tout de suite, il m'a fallu étudier l'\textit{afficheur}, ses différentes parties afin de savoir le rôle de chacune, mais aussi les langages qui composaient le site internet afin de pouvoir au mieux les exploiter.
 
-\section{L'\textit{afficheur}  - voir \textit{Figure 1} du document \textit{Annexe}}
+\section{L'\textit{afficheur}}
 
 \subsection{Un travail d'un an...}
-Toute la conception et l'écriture du code de l'\textit{afficheur} ont été effectués par l'ingénieur de recherche du projet \textit{Vidjil}: M. \textbf{Duez Marc}.
+Toute la conception et l'écriture du code de l'\textit{afficheur} ont été effectués par l'ingénieur de recherche du projet \textit{Vidjil}: \textbf{Marc Duez}.
 \newline
 M. \textbf{Duez} a commencé à participer au projet dès Mars/Avril 2013, qui était son projet de fin d'année pour son Master 2.
 \newline
@@ -137,16 +144,35 @@ Tout le côté "Administration serveur" a été réalisé grâce au langage Pyth
 \newline
 Côté conception, il y avait déjà plus de 20 classes Javascript écrites (à environ 1000 lignes de code par classe), utilisant 2 \textit{frameworks} JavaScript reconnus (D3JS et JQuery), ainsi que le langage Less\footnote{Less est un langage dynamique de génération de feuilles de style, conçu par \textbf{M. Sellier Alexis}.} - très utile quant au changement dynamique de feuille de style afin de mieux visualiser les données calculées pour un échantillonage préparé, et permettant beaucoup plus de souplesse que le langage CSS, permettant de définir la présentation du document HTML.
 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.35]{img/Montage_Sans_Annotations.jpg}
+\end{center}
+\caption{Aperçu général de l'\textit{afficheur} - montage avec palette ``Dark'' et ``Light''}
+\end{figure}
+
 \subsection{Composition de l'\textit{afficheur}}
 
 L'\textit{afficheur} se présente sur différentes parties, toutes dépendantes les unes des autres\footnote{Se rapporter à l'annexe, pour une visualisation de l'\textit{afficheur} et ses différentes parties}.
 \newline Je ne me suis intéressé, pour mon stage, qu'à trois grandes parties composant celui-ci:
 \begin{itemize}
-\item{le \textbf{menu haut} - pour l'implémentation des distributions, de la clusterisation et de la colorisation DBSCAN,}
-\item{l'affichage des informations (\textbf{partie gauche}) - pour l'implémentation de la clusterisation par DBSCAN,}
-\item{et enfin le \textbf{\textit{scatterplot}} - partie au format \textit{SVG}\footnote{SVG est un format de données conçu pour décrire des ensembles de graphiques vectoriels.} permettant la visualisation des clones selon la distribution, colorisation et/ou clusterisation demandée(s).}
+\item{le \textbf{menu haut} - pour l'implémentation des distributions, de la clusterisation et de la colorisation DBSCAN (voir \textbf{Figure 2}),}
+\item{l'affichage des informations (\textbf{partie gauche}) - pour l'implémentation de la clusterisation par DBSCAN (voir \textbf{Figure 3}),}
+\item{et enfin le \textbf{\textit{scatterplot}} - partie au format \textit{SVG}\footnote{SVG est un format de données conçu pour décrire des ensembles de graphiques vectoriels.} permettant la visualisation des clones selon la distribution, colorisation et/ou clusterisation demandée(s) (voir \textbf{Figure 4}).}
 \end{itemize}
-Toutes les parties de l'\textit{afficheur} sont visibles dans les \textbf{Figures 2 à 7} de la partie \textbf{Annexe}.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.4]{img/Aff_menu_haut.jpg}
+	\caption{\textbf{Menu haut} de l'\textit{afficheur}}
+	\vskip2em
+	\includegraphics[scale=0.35]{img/Aff_menu_gauche.jpg}
+	\caption{Développement des informations (\textbf{gauche}) de l'\textit{afficheur}}
+	\vskip2em
+	\includegraphics[scale=0.35]{img/Aff_menu_droite.jpg}
+	\caption{Le \textbf{\textit{scatterplot}} de l'\textit{afficheur}}
+\end{center}
+\end{figure}
 
 \section{Étude et intégration}
 
@@ -156,37 +182,34 @@ Cette phase a duré 2 semaines.
 Ne connaissant pas les \textit{frameworks} D3JS et JQuery, les langages Ajax ou encore Less, il a donc fallu que je me documente à leur sujet, exploiter toutes les fonctionnalités mais aussi comprendre comment les intégrer au projet et quel est le but recherché quant à l'utilisation de chaquel \textit{framework} et langage.
 
 \subsection{L'intégration au projet}
-Je ne pouvais me permettre d'ajouter directement ma nouvelle fonctionnalité dans la classe correspondant à l'endroit où elle devait apparaître dans l'\textit{afficheur}. Il m'a donc fallu tout d'abord étudier le code, ainsi que recourir à la création de la documentation pour le développeur (qui était soit non-écrite, soit obsolète). Aussi, j'ai dû corriger quelques bugs mineurs dans l'\textit{afficheur}, demandée par l'équipe \textit{Vidjil}, afin de me permettre de mieux discerner les grandes parties de l'\textit{afficheur}.
+Je ne pouvais me permettre d'ajouter directement ma nouvelle fonctionnalité dans la classe correspondant à l'endroit où elle devait apparaître dans l'\textit{afficheur}. Il m'a donc fallu tout d'abord étudier le code, ainsi que recourir à la création de la documentation pour le développeur (qui était soit non-écrite, soit obsolète). Aussi, j'ai dû corriger quelques bugs mineurs dans l'\textit{afficheur}, demandée par l'équipe, afin de me permettre de mieux discerner les grandes parties de l'\textit{afficheur}.
 \newline
 De plus, il était très important pour moi de respecter les règles de l'équipe en matière d'ingénièrie logicielle, ne serait-ce par l'écriture du code, de la documentation, mais aussi par rapport au respect des \textit{commits}\footnote{Un \textit{commit} est une action permettant d'envoyer ses modifications locales vers le référentiel central}/\textit{push}\footnote{Un \textit{push} est une action permettant de transférer des commits d'un dépôt local à un dépôt distant} sur le serveur, via le logiciel de gestion de versions décentralisé \textit{Git}\footnote{\textit{Git} est un logiciel libre créé par \textbf{Linus Torvalds}, permettant de gérer très facilement les codes sources de projets.}.
 
 \subsection{Le domaine biologique}
-Enfin, je me suis remis à étudier la microbiologie, la recombinaison V(D)J chez les Vertébrés, ainsi que les techniques de séquençage et de clusterisation afin de me permettre de comprendre, et de poursuivre, les discussions autour du sujet, lors des réunions dans l'équipe, et avec le Laboratoire d'Hématologie de Lille2.
+Enfin, je me suis remis à étudier la microbiologie, la recombinaison V(D)J, ainsi que les techniques de séquençage et de clusterisation afin de me permettre de comprendre et de poursuivre les discussions lors des réunions dans l'équipe, et avec le Laboratoire d'Hématologie de Lille2.
 
 \chapter{Le graphe de distances d'édition}
 
-
-La distribution\footnote{Une distribution est une visualisation possible des données, pour une utilisation spécifique.} quant aux distances d'édition entre les différents clônes est très intéressante, car elle permet de visualiser les similarités biologiques entre ceux-ci, par leur rapprochement physique, mais aussi par la couleur de l'arête, représentant cette distance (du rouge pour la proximité, au violet pour le plus éloigné).
-\newline
-Le projet contenait, à mon arrivée, 4 distributions:
+Le projet contenait, à mon arrivée, 4 distributions\footnote{Une distribution est une visualisation possible des données, pour une utilisation spécifique.}:
 \begin{itemize}
 \item V/J génique,
 \item V/J allèlique,
 \item abondance des régions V et J,
 \item histogramme d'abondance des régions V.
 \end{itemize}
-Toutes ces distributions peuvent être utiles, voire nécessaires, à un médecin ou un biologiste, afin de visualiser directement la disparité et le réarrangement des clônes, en fonction d'un jeu de données au format biologique DATA, pour une étude ou un suivi.
+Toutes ces distributions sont nécessaires, à un médecin ou un biologiste, afin de visualiser directement la disparité et le réarrangement des clônes, en fonction d'un jeu de données au format biologique DATA, pour une étude ou un suivi. Or, il n'y avait pas encore de travaux effectués sur une distribution des clones en fonction de leurs distances d'édition, afin de pouvoir visualiser leur rapprochement en fonction de leurs disparités et ressemblances nucléotidiques.
 
 \section{Ajout d'une nouvelle distribution}
-L'ajout d'une nouvelle distribution n'était, au départ, pas aisée pour différentes raisons techniques.
+L'ajout d'une nouvelle distribution n'était pas aisée, pour différentes raisons techniques.
 \newline
-En effet, il a déjà fallu me plonger dans le code du \textit{scatterplot} afin de prévisualiser où implanter ma distribution, et quelles modifications seraient à effectuer sur cette partie de l'\textit{afficheur}.
+Premièrement, il a fallu me plonger dans le code du \textit{scatterplot} afin de prévisualiser où implanter ma distribution, et quelles modifications seraient à effectuer sur cette partie de l'\textit{afficheur}.
 \newline
-De plus, par rapport aux autres distributions réalisées par notre ingénieur de recherche, il fallait forcer le moteur physique de D3JS afin qu'il puisse positionner les clones \textbf{lui-même} le plus précisémment possible; c'est à dire en respectant au maximum toutes les distances définies entre chaque clône, distances (qui ont été pour un premier temps des pourcentages d'identité, et non pas des distances à proprement parlé) calculées par le programme en C++.
+De plus, par rapport aux autres distributions réalisées par notre ingénieur de recherche, il fallait forcer le moteur physique de D3JS afin qu'il puisse positionner les clones \textbf{lui-même} le plus précisémment possible; c'est à dire en respectant au maximum toutes les distances définies entre chaque clône, distances (qui ont été pour un premier temps des pourcentages d'identité, et non pas des distances à proprement parlé, ce que nous verrons dans le \textbf{chapitre 5}) calculées par le programme en C++.
 \newline
 Cette dernière pourrait donc amener, par la suite, deux problèmes: 
 \begin{itemize}
-\item{la non-possibilité, pour le moteur physique, de calculer pour chaque \textit{frame} absolument tous les déplacements d'arêtes possibles dans le graphe, lors d'une animation. En effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par \textit{frame}\footnote{Une \textit{frame} = nombre d'images par seconde} la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié pour ce genre de cas particulier,}
+\item{l'impossibilité, pour le moteur physique, de calculer pour chaque \textit{frame} absolument tous les déplacements d'arêtes possibles dans le graphe, lors d'une animation. En effet, ayant un jeu de données calculé pour 100 clônes, celà nous fera donc 10000 arêtes possibles pour l'ensemble du graphe - la possibilité de calculer par \textit{frame}\footnote{Une \textit{frame} = nombre d'images par seconde} la position de chacune d'elle est compliquée, l'optimisation du moteur n'ayant pas été étudié pour ce genre de cas particulier,}
 \item{la grande liberté que pourrait prendre le moteur afin de placer lui-même les points à un endroit donné, et donc le non-respect de la structure globale d'un graphe, possédant déjà certaines propriétés.}
 \end{itemize}
 
@@ -226,7 +249,14 @@ Le premier algorithme qui m'est venu à l'esprit est de supprimer toutes les ar�
 \newline
 Ce procédé a été un semi-échec: sur plusieurs jeux de données, nous avons supprimé en moyenne un peu plus de 50\% des arêtes disponibles (nous étions passé de 10000 à 4970 sur un jeu de données, pour citer un exemple) - malheureusement, le moteur peinait à calculer toutes les positions des noeuds et arêtes par \textit{frame} une nouvelle fois (sur une machine à processeur corei5 à 8Go de RAM, GPU Intel HD 4000 intégré).
 \newline
-Il était donc nécessaire de chercher un nouvel algorithme qui pourrait, au moins, diviser de moitié le nombre d'arêtes qui seront à prendre en compte par le moteur. Cependant, l'idée de modifier la distance maximale d'arêtes à afficher a été validé et gardé dans le projet - elle a été implémenté sous la forme d'un \textit{slider}, présent dans le sous-menu "Display" du \textbf{menu haut} (voir \textbf{Figure 8} de la partie'\textbf{Annexe}).
+Il était donc nécessaire de chercher un nouvel algorithme qui pourrait, au moins, diviser de moitié le nombre d'arêtes qui seront à prendre en compte par le moteur. Cependant, l'idée de modifier la distance maximale d'arêtes à afficher a été validé et gardé dans le projet - elle a été implémenté sous la forme d'un \textit{slider}, présent dans le sous-menu "Display" du \textbf{menu haut}.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics{img/Aff_menu_display.jpg}
+\end{center}
+\caption{Sous-menu "Display" du menu haut avec, de haut en bas: le \textit{slider} "Display nodes" permettant d'afficher ou non un nombre plus ou moins grand de clones, les deux \textit{sliders} permettant de changer les paramètres de DBSCAN, et enfin le \textit{slider} pour modifier la distance maximale d'affichage des arêtes (pour le graphe concernant les distances d'édition)}
+\end{figure}
 
 \subsection{\textit{"L'algorithme contre-attaque"}}
 Le deuxième algorithme a été trouvé par M. \textbf{Duez Marc}; beaucoup plus brutal, il permet de dispenser une grande partie d'arêtes, qui seront considérées comme inutiles lors de la construction du graphe - toujours en fonction des distances.
@@ -261,19 +291,26 @@ Nous pourrons donc obtenir premièrement un "squelette" du graphe, afin de pouvo
 
 \section{Résultats}
 
-Le résultat final montre bien les similarités entre les différents clônes calculés, très rapidement (voir \textbf{Figure 9} de la partie \textbf{Annexe}).
+Le résultat final montre bien les similarités entre les différents clônes calculés, très rapidement).
 \newline
 Malheureusement, nous étions encore confronté à un problème, non pas par rapport au temps de calcul fait par le moteur physique, mais par rapport à la fidélité de la représentation du graphe.
-\newline
 En effet, notre représentation ne préserve pas de façon optimale les distances données en entrée - étant donné qu'il dispose par lui-même chaque clône dans l'élèment \textit{SVG}, il le fera au fur-et-à-mesure et prendra en compte de moins en moins bien les dernières distances quand il ne pourra pas les respecter.
-\newline
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.5]{img/Edit-Distance-Ex.jpg}
+\end{center}
+\caption{\textit{Afficheur} avec la distribution de distances d'édition}
+\end{figure}
+
 Il a donc fallu intégrer à ce moment là un nouveau paramètre au moteur physique: l'élasticité. Grâce à l'\textbf{élasticité} (attribuée à chaque arête par le moteur D3JS), les distances les plus faibles (inférieures à une certaine distance) auront un poids supérieur aux autres, et seront donc plus respectées que les autres.
-\newline
-Le soucis étant maintenant que les plus grandes distances ne sont pas respectées (bien entendu, sauf les 3 plus grandes distances modélisant le triangle initial). Ainsi, deux points très éloignés peuvent toujours se retrouver à proximité dans le graphe vu que le moteur soit, ne détient pas d'information lui permettant de savoir où le placer correctement, soit détient cette information mais, l'élasticité de cette arête étant trop faible, le place n'importe où.
-\newline
-Afin de palier à ce petit problème, il a fallu donner un moyen à l'utilisateur de savoir si le point est proche d'un autre ou non - ce qui a déjà été fait grâce à la vision des arêtes pour un ou plusieurs point(s) sélectionné(s) par clic. Ainsi, chaque arête présente sera représentative d'une certaine proximité entre les deux points visés, selon la distance maximale voulue par l'utilisateur, en faisant bouger à sa guise le \textit{slider}.
-\newline
-Enfin, il était intéressant de visualiser, non pas seulement les pourcentages d'identité entre les clônes (ce qui a été calculé premièrement par le programme C++), mais d'obtenir de réelles distances en fonction des différences de nucléotides\footnote{Un nucléotide est une molécule organique, élément de base d'un acide nucléique tel que l'ADN ou l'ARN.} entre chaque séquence ADN. C'est le travail qui j'ai réalisé lors des 3 dernières semaines de stage, consultable au \textbf{chapitre 5} du rapport.
+Le soucis étant maintenant que les plus grandes distances ne sont pas respectées (bien entendu, sauf les 3 plus grandes distances modélisant le triangle initial). Ainsi, deux points très éloignés peuvent toujours se retrouver à proximité dans le graphe vu que le moteur soit, ne détient pas d'information lui permettant de savoir où le placer correctement, soit détient cette information mais, l'élasticité de cette arête étant trop faible, le place n'importe où, ce qui ne correspond pas du tout avec ce que nous voulions au départ.
+
+Il existe cependant 2 solutions à apporter au sujet:
+\begin{itemize}
+\item{aborder le soucis comme non pas un seul graphe, mais un ensemble de sous-graphes dont le seul paramètre de variation sera la distance d'édition à prendre en compte via le \textit{slider} implanté pour cette utilisation,}
+\item{ne pas développer ce sujet comme un graphe mais plutôt comme un arbre, et donc recourir à un arbre phylogénétique.}
+\end{itemize}
 
 \chapter{L'algorithme de clusterisation DBSCAN}
 
@@ -281,297 +318,31 @@ Ce chapitre conduira mon travail et mes réflexions sur la deuxième partie du s
 \newline
 Ce travail a été réalisé en deux semaines, de fin Mai à la deuxième semaine de Juin.
 
-\section{Présentation générale}
+\section{Présentation}
 
-\subsection{Présentation}
 DBSCAN est un algorithme permettant la clusterisation de données, proposé en 1996 par Messieurs \textbf{Ester Martin}, \textbf{Kriegel Hans-Peter}, \textbf{Sander Jörg} et \textbf{Xu Xiaowei}, s'appuyant sur la densité estimée des clusters à partitionner.
-\newline
-Cet algorithme a été très simple à implémenter.
-\newline
+Cet algorithme est très simple à implémenter.
 Tout d'abord, il faut choisir deux paramètres essentiels:
 \begin{itemize}
 \item{\textbf{une distance} ($\epsilon$), représentant un rayon de cercle, qui nous aidera à considérer que les points situés à une distance inférieure ou égale à celle-ci d'un autre est représentatif d'un seul cluster},
 \item{\textbf{un nombre minimum de points} (\textit{Mp}), que l'on utilisera par la suite pour considérer si le point pris en compte est considéré comme un \textbf{point central} (\textit{\textbf{core point}} - le point détient un nombre de voisins plus élevé que \textit{Mp}, dans le rayon $\epsilon$), un \textbf{point de bordure} (\textit{\textbf{border point}} - le point détient un nombre de voisins moindre que \textit{Mp}, mais est voisin d'un \textbf{point central}), ou encore un \textbf{point de bruit} (\textit{\textbf{noise point}} - tout point n'étant pas l'un des deux précédemment évoqué).}
 \end{itemize}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.45]{img/400px-DBSCAN-Illustration.png}
+\end{center}
+\caption{Exemple de clusterisation, avec DBSCAN}
+\end{figure}
+
 Cet algorithme est ici intéressant car il nous permet de parcourir chacun des points d'un graphe, son voisinage, et de clusteriser chaque point en fonction de celui-ci et des deux paramètres énoncés précédemment - la densité revient donc au nombre de points (\textit{Mp}) compris dans un rayon bien spécifié ($\epsilon$). Tout ceci va nous permettre de pouvoir modifier l'\textit{afficheur} afin de maximiser le nombre d'outils utiles aux chercheurs, notamment via la colorisation des clusters ou encore l'apport des regroupements de clones dans le graphe.
 \newline
-Il est intéressant ici de constater que DBSCAN partitionne les données selon une certaine densité, donnée en paramètre via $\epsilon$ et \textit{Mp}; cet algorithme ne pourra donc pas gérer les clusters de densités différentes en même temps (ce qui ne nous intéresse pas ici, fort-heureusement).
-
-\subsection{L'algorithme}
-
-L'algorithme est représenté en \textbf{Algorithm 6.2.1.} de la partie \textbf{\textit{Annexe}} (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}).
-
-\section{Implantation de DBSCAN}
-
-DBSCAN aura sa propre classe dans l'\textit{afficheur}, et sera donc un objet qui communiquera essentiellement avec le Modèle du M.V.C.
-
-\subsection{Choix quant aux paramètres}
-
-Les paramètres pris par défaut sont de 0 pour $\epsilon$ et \textit{Mp}. Ainsi, au départ, chaque clone a son propre cluster.
+Il est intéressant de constater que DBSCAN partitionne les données selon une certaine densité, donnée en paramètre via $\epsilon$ et \textit{Mp}; cet algorithme ne pourra donc pas gérer les clusters de densités différentes en même temps (ce qui ne nous intéresse pas ici, fort-heureusement).
 \newline
-Le meilleur moyen pour faire varier les paramètres et réaliser, pour soi, la meilleure clusterisation, est de faire varier les paramètres par nos propres moyens.
-\newline
-J'ai donc ajouté, pour cela, deux sliders dans l'\textit{afficheur} (voir \textbf{Figure 8} dans la partie \textbf{Annexe}):
-	\begin{itemize}
-	\item{un \textit{slider} pour faire varier la distance prise en compte entre chaque clone: $\epsilon$,}
-	\item{un \textit{slider} pour faire varier le nombre de voisins minimum pris en compte dans l'algorithme: \textit{Mp}.}
-	\end{itemize}
-Ces sliders calculent, à chaque modification apportée par un clic, un nouvel objet DBSCAN selon les paramètres évolués - ce qui permet de visualiser en temps réel les modifications apportées manuellement.
-\newline
-La visualisation des clusters se fait par couleur - en effet, chaque clone appartient à un cluster bien précis ( qui est calculé et attribué lors du calcul par l'algorithme), chaque cluster ayant une couleur bien spécifique, attribuée du début à la fin de la visualisation.
-
-\subsection{Visualisation}
-
-La visualisation des groupes de clones est primordiale - elle en est même la base du sujet de stage.
-\newline
-Il a donc fallu travailler sur la visualisation de chaque clone d'un cluster, indépendamment des autres, mais aussi de l'intéraction d'un clone avec un autre, présent ou non dans le même cluster.
-\newline
-D'où l'idée d'implémenter trois choses, accomplissant parfaitement la visualisation et l'intéraction entre les clusters:
-	\begin{itemize}
-	\item{une colorisation permettant de visualiser quels sont les clones présents dans chaque cluster,}
-	\item{une clusterisation permettant de visualiser, via le \textbf{menu gauche}, les différents groupes de clones existants,}
-	\item{une distribution avec laquelle interagir physiquement, via un nouveau paramétrage du moteur physique D3JS, avec un ou plusieurs clone(s) ou cluster(s) - selon la clusterisation choisie pour l'étude.}
-	\end{itemize}
-
-\subsubsection{Ajout d'une nouvelle clusterisation - voir \textbf{Figure 10} de la partie \textbf{Annexe}}
-
-L'algorithme DBSCAN est un algorithme de clusterisation, il était normal d'ajouter, dans l'\textit{afficheur}, la clusterisation DBSCAN afin de pouvoir visualiser directement les clusters, indépendamment de la colorisation et de la distribution étudiée.
-\newline
-La classe "Model" du projet\footnote{Classe Modèle du M.V.C. contenant toutes les données chargées par les fichiers donnés en entrée, et stockant/générant des méta-données utiles pour les vues.} a donc été légèrement modifiée pour ceci, afin de permettre non seulement la visualisation générale de cette clusterisation, mais aussi la visualisation de toutes les mises à jour futures, lors des changements des paramètres de l'algorithme, par l'utilisateur.
-
-\subsubsection{Ajout d'une nouvelle colorisation - voir \textbf{Figure 11} de la partie \textbf{Annexe}}
-
-La colorisation s'est imposée d'elle-même, étant beaucoup plus bénéfique visuellement et résiduelle dans le temps (il est en effet possible de colorer les clones selon les résultats de DBSCAN, tout en étudiant une distribution précise, autre que celle de DBSCAN par exemple).
-\newline
-Aussi, il a fallu faire attention à plusieurs choses:
-	\begin{itemize}
-		\item{la couleur choisie pour chaque cluster est comprise entre 0 et 270 selon \textit{RGB}\footnote{\textit{RGB}: \textit{Red}, \textit{Green}, \textit{Blue}} - afin d'aller d'une teinte rouge (0) vers le violet (270), des couleurs déjà utilisées dans le projet, et permettant aussi de respecter scrupuleusement la légende des couleurs déjà établie par l'ingénieur de recherche du projet,}
-		\item{le dégradé est de mise - il a fallu faire attention à ce que les noeuds se ressemblant n'aient pas une teinte beaucoup trop proche l'une de l'autre, afin de permettre une visualisation non-faussée.
-			\newline
-			Pour palier à ce problème, j'ai donc créé un objet tableau à N entrées (100 ici, pour utiliser au maximum 100 clusters, soit 1 clone par cluster) que j'ai expressément mélangé afin d'obtenir un tableau de clusters avec une suite de couleurs non-dégradée, via l'\textbf{algorithme de Fisher-Yates} (encore appelé \textbf{mélange de Knuth}), très utilisé dans ce genre de situation.}
-	\end{itemize}
-
-\subsubsection{Ajout d'une nouvelle distribution - voir \textbf{Figure 12} de la partie \textbf{Annexe}}
-
-Pourquoi a-t-il fallu ajouter une nouvelle distribution, au lieu d'utiliser celle déjà établie avec le graphe représentant les distances d'édition ?
-\newline
-Tout d'abord, il ne s'agit pas d'un seul graphe mais de tout un ensemble de petits graphes représentant chacun un cluster, présents dans le cadre \textit{SVG} - ainsi, il faut prendre en compte que les distances entre chaque point du graphe ne sera pas représenté visuellement, mais que l'on veut obtenir un graphe complet par cluster.
-\newline
-Ensuite, les distances calculées et délivrées par le programme en C++ ne seront pas prises en compte visuellement! Nous voulons que chaque cluster soit condensé - ainsi, il faudra donner une valeur prise par défaut mais minimaliste (5 pixels ici), à chaque lien entre une source et une cible \textbf{appartenant au même cluster}.
-\newline
-Vient après une suite de légères modifications dans le moteur physique de D3JS:
-	\begin{itemize}
-	\item{l'annulation de la gravité,}
-	\item{une élasticité non-utilisée,}
-	\item{l'ajout d'une modification de la distribution en temps réel, en fonction des paramètres demandés par l'utilisateur.}
-	\end{itemize}
-Tout ceci a nécessité la création d'un nouveau type de moteur physique D3JS, spécialement conçu pour la plus précise visualisation intéractive des clusters.
-\newline
-Heureusement, certaines choses ont été gardées du moteur physique implémenté pour le graphe de distance d'édition, notamment la disposition du \textit{SVG}, son remplissage et l'intéraction établie avec l'ensemble de l'\textit{afficheur}, comme la suppression des légendes des axes X et Y par exemple.
-
-\section{Résultats}
-
-Les résultats de cette implémentation de l'algorithme DBSCAN en Javascript vont être discutés sous deux formes:
-	\begin{itemize}
-	\item{un apport scientifique, axé sur les résultats visuels de l'algorithme,}
-	\item{ainsi qu'un apport sur la similitude entre cette nouvelle distribution et celle créée sur la première partie du stage.}
-	\end{itemize}
-Aussi, j'ai effectué avec QUnit\footnote{QUnit est un \textit{framework} permettant d'implémenter des tests unitaires, développé par l'équipe ayant créé le \textit{framework} JQuery.} une série de tests unitaires\footnote{Un test unitaire est une procédure permettant de vérifier le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme.} (voir \textbf{Figure 13} dans la partie \textbf{Annexe}) permettant de démontrer la fonctionnalité totale de l'algorithme sur un jeu de tests écrit à la main, et permettant de tester tous les cas possibles issus d'un jeu de données biologiques.
-
-\subsubsection{Apport scientifique et biologique}
-
 L'apport principal de l'implémentation de DBSCAN est de regrouper les clones similaires par rapport aux distances (pourcentages d'identité dans un premier temps) précalculées, tout comme la première partie du stage.
-\newline
 Ainsi, cette implémentation permettra au médecin ou au chercheur de pouvoir visualiser directement quels sont les clones les plus proches les uns des autres - ce qui est visible en \textbf{Figure 11} dans la partie \textbf{Annexe}, par le rassemblement des clones entre eux, ainsi que la colorisation attribuée à chaque cluster - et de pouvoir déceler les clones ayant subi une mutation au cours du temps (les distances d'édition étant calculées par rapport aux \textit{windows}, marqueur d'évolution temporel - voir le \textbf{chapitre 5}).
-
-\subsubsection{Apport à la première partie du stage}
-
-Cette seconde partie appartient à la visualisation intéractive des clones, et est aussi une suite au graphe des distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
 \newline
-En effet, utilisant une partie du moteur physique et visualisant cette distribution comme un ensemble de graphes, elle se construit avec les distances d'édition.
-
-\chapter{Recherche de la meilleure distance d'édition possible}
-
-Les distances sont essentielles aux deux parties de mon stage. Ce sont elles qui régissent la structure globale du graphe, et ce sont aussi les principales données des deux distributions que j'ai pu intégrer au projet.
-\newline
-Auparavant, nous utilisions comme distances les pourcentages d'identité de séquences représentatives - qui sont une approximation de différences entre deux clônes, basés sur des séquences de nucléotides de différentes tailles, et fabriquées à partir des séquences V(D)J et de la \textit{windows}.
-\newline
-Afin de pouvoir obtenir une distance beaucoup plus précise en fonction du temps, j'ai eu l'idée de comparer ces \textit{windows}, directement dans le programme C++.
-
-\section{Utilisation des \textit{windows}}
-
-\subsection{Qu'est-ce qu'une \textit{window}}
-
-Les \textit{windows} sont des séquences suivies de 40 nucléotides, trouvées directement entre la fin de la région V, et le début de la région J. Il se peut donc tout à fait que la partie D se retrouve, ou non, dans cette séquence.
-\newline
-Ces séquences ont été alignées de façon global\footnote{Alignement global: alignement entre deux séquences sur toute leur longueur.}, et non pas en local\footnote{Alignement local: alignement entre une séquence et une partie de l'autre séquence}.
-
-\subsection{Pourquoi les utiliser ?}
-
-L'avantage de prendre les \textit{windows} comme support de calcul est qu'elle servira, tout au long du suivi au cours du temps à marquer spécifiquement un clone - l'on pourra ainsi faire le suivi de la L.A.L. via l'étude des \textit{windows} spécifiant des zones bien spécifiques, qui pourraient être contraintes à évoluer en fonction des mutations infligées.
-
-\section{Les différents coûts utilisés}
-
-Les distances d'édition calculées le sont grâce à la Programmation Dynamique\footnote{La Programmation Dynamique est une technique algorithmique pour optimiser des sommes de fonctions monotones croissantes sous contrainte.}, ce qui nous permettra d'obtenir, pour deux mots \textit{x} et \textit{y}, le nombre minimal d’opérations d’édition\footnote{Il y a 3 opérations possibles: la \textbf{substitution} (le remplacement d'une lettre par une autre - nous utiliseront aussi le mot \textit{mismatch} pour cette opération), l'\textbf{insertion} (l'ajout d'une nouvelle lettre), et la \textbf{délétion} (la suppression d'une lettre)} pour transformer \textit{x} en \textit{y} - ce nombre minimal étant la distance d'édition recherchée.
-
-\subsection{Les coûts étudiés}
-
-\subsubsection{Sur quoi est basé un coût?}
-
-Chaque calcul effectué se fait sur un coût, constitué de 5 opérations:
-\begin{itemize}
-\item{le \textit{match}: la lettre de la séquence 1 sur la position actuelle correspond bien à celle de la séquence 2,}
-\item{le \textit{mismatch} (ou substitution): la lettre de la séquence 1 sur la position actuelle ne correspond pas à celle de la séquence 2,}
-\item{l'insertion,}
-\item{la délétion,}
-\item{la détection d'un homopolymère: motif de répétition, le plus souvent attribué par une erreur dans le séquenceur.}
-\end{itemize}
-
-\subsubsection{Quels sont ces coûts?}
-
-Pour ces opérations est attribué un poids (n'importe quel entier positif, négatif ou nul), permettant de régir et de calculer une distance, spécifique en fonction de ce poids.
-\newline
-Ainsi, deux coûts ayant des poids sur ces opérations différentes ne devraient pouvoir obtenir le même résultat (qui sera une distance) à la fin du calcul.
-\newline
-Il est important de calculer de bons coûts, car ils influeront directement sur les distributions précédemment mises en place. Nous en avons donc sélectionner 4:
-\begin{itemize}
-\item{le coût de \textbf{\textit{Levenshtein}}: (0, -1, -1): 0 en \textit{match}, -1 en \textit{mismatch}, et -1 en insertion et délétion - la détection d'homopolymère(s) est considéré comme "gratuit" ici, donc ne pèse rien,}
-\item{le coût \textbf{\textit{DNA}}: (+5, -4, -10): 5 en \textit{match}, -4 en \textit{mismatch}, et -10 en insertion et délétion - la détection d'homopolymère(s) est aussi considéré comme "gratuit",}
-\item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -1 pour les délétions de fin de séquence\footnote{Imaginons que, pour un alignement de deux séquences de longueurs différentes, si la partie de l'une est beaucoup plus grande que l'autre, nous pouvons compter une délétion sur la partie grande (et non-alignée) avec un poids différent.}, -2 pour la détection d'homopolymère(s),}
-\item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour la détection d'homopolymère(s).}
-\end{itemize}
-Sur ces 4 coûts, il a fallu choisir celui ayant les plus respectueuses distances par rapport aux similarités entre séquences, afin de perfectionner les distributions.
-
-\subsubsection{Comment effectuer les calculs de coût?}
-
-Les coûts étaient déjà implantés à mon arrivée dans l'entreprise, et le programme en C++ contenait déjà un objet (DynProg) prenant en paramètre les deux séquences ADN, l'alignement ainsi que le coût utilisé lors du calcul, et nous renvoyant, le plus souvent, une matrice de similarité que nous transformions en matrice de distance - ou alors, directement une matrice de distances.
-\newline
-Ainsi, pour étudier les objets \textit{windows} entre eux, il a juste fallu modifier l'alignement local (pris par défaut) par l'alignement global, et le coût par un de notre choix - étant à tester.
-
-\section{Le coût utilisé}
-
-Les coûts \textit{Identity} et \textit{Levenshtein} sont les plus probants pour les graphes implémentés - en effet, ce sont eux qui, lors des tests, permettent d'avoir des distances aussi variées que respectueuses des similarités entre clones.
-\newline
-Dû à sa grande popularité, mon choix s'est porté vers le coût \textit{Levenshtein}, vu que \textit{Identity} se trouve être la même chose que la précédente, avec un poids pour le \textit{match} en plus.
-
-\chapter{Le travail en recherche}
-
-La recherche m'intéressait au plus au point dès ma sortie du lycée.
-\newline
-Il était donc naturel que je puisse effectuer mon premier stage Universitaire dans une structure de recherche. Ayant effectué un DEUST de Biologie avant de postuler pour une licence d'Informatique à l'Université de Lille1, et étant toujours intéressé par ce domaine si particulier de la Science, j'étais très curieux de pouvoir effectuer mes premiers pas dans le monde de la recherche, dans une équipe de bio-informaticiens. D'où ma candidature pour un stage Universitaire dans l'équipe \textit{Bonsai}.
-
-\section{La vie est un long fleuve tranquille...}
-
-La vie en laboratoire de recherche a été un véritable plaisir.
-\newline
-L'intérêt de chaque membre de l'équipe envers le travail des autres et la facilité de communication envers tous ont tout bonnement été exceptionnels. En effet, éternel curieux, je suis à la recherche perpétuelle d'informations de tous genres pouvant me permettre de progresser dans la vie, mais aussi de m'instruire et me cultiver. L'intérêt de chaque membre de l'équipe envers la Science (à proprement parlé) est imparable, chacun ayant une certaine spécifité qui en fait quelqu'un d'unique dans son sous-domaine, lui permettant d'échanger avec ses collègues sur ses intérêts dans sa recherche de résultats ou ceux des autres.
-\newline
-Celà s'est ressenti de différentes manières:
-\begin{itemize}
-\item \textbf{les conférences/séminaires du Mardi matin}
-	\newline
-	Chaque mardi matin, généralement entre 11H et 12H, était programmé un séminaire sur un sujet déterminé par le conférencier: un membre de l'équipe \textit{Bonsai} ou un intervenant extérieur.
-	\newline
-	Nous avons donc pu avoir le plaisir de recevoir des chercheurs de Pennsylvanie et d'un autre État de l'Amérique Centrale, venus nous parler de nouvelles méthodes de recherche, d'attrait à celle-ci, ou des dernières innovations et recherches effectuées sur le sujet donné (\textit{the International Mouse Phenotyping Consortium}\footnote{Entreprise Internationale scientifique créant et caractérisant le phénotype de 20 000 \textit{knock-out} (ou "invalidation génétique" en Français) chez la souris}, les graphes de Bruijn\footnote{Graphe orienté qui permet de représenter les chevauchements de longueur (\textit{n}-1) entre tous les mots de longueur \textit{n} sur un alphabet donné - nom donné par le mathématicien les ayant décrit en 1946: Nicolaas Govert de Bruijn} ou encore la détection des variants complexes \footnote{Variants cytogénétiques constituant une majeure partie des cas de Leucémie myéloïde chronique}) -  mais pas seulement!
-	\newline
-	Cela a aussi permis à certains membres de l'équipe de pouvoir exposer ses travaux finis ou en cours, afin de pouvoir expliquer son cheminement, sa méthode de travail et ses résultats, comme par exemple le travail d'\textbf{Amandine Perrin} sur l' "Illustration dynamique des effets des vaccins et de la vaccination"\footnote{Travail réalisé entre Mars et Août 2013}.
-\item \textbf{les entraides perpétuelles}
-	\newline
-	Chaque membre de l'équipe peut compter sur les autres s'il a un problème - en effet, l'entraide est omniprésente dans l'équipe, que ce soit pour une aide informatique, algorithmique ou encore de compréhension biologique. Un bref exemple à donner serai celui m'ayant permis de rassembler plus de 5 algorithmes différents, de 5 personnes différentes, pour mon problème de représentation respectueuse d'un graphe à 1000 arêtes.
-\item \textbf{les débats sur les nouvelles données scientifiques}
-	\newline
-	Lors de la pause déjeuner, l'heure est à la discussion scientifique la plupart du temps, et les débats font rage, chacun exposant sa thèse, annonçant et dénonçant un ou plusieurs argument(s) contraire(s) à sa propre vision, etc...
-\end{itemize}
-Tout ceci m'a permis de me créer une belle idée de ce qu'est le monde de la recherche sur le plan relationnel et scientifique, et de me sentir beaucoup plus à l'aise dès la première semaine de stage.
-
-\section{...ou pas!}
-
-Ce stage m'a permis aussi de me rendre compte de tous les problèmes liés à la recherche, que ce soit pour l'accréditation des sujets de recherche, les problèmes liés aux actions en dehors de sa thèse, ou encore plus directement aux problèmes touchant à son sujet de thèse (la publication du sujet en est un exemple valable).
-\newline
-En effet, je me suis rendu compte qu'un travail de recherche représentait des heures incalculables à rechercher, programmer, analyser et rédiger - il faut en général entre 6 mois et 1 an pour arriver à des résultats satisfaisants, valant la peine de les publier.
-\newline
-La thèse, surtout la problèmatique sur laquelle elle repose, mérite un temps considérablement long à être développée, approfondie et traitée, afin de pouvoir enfin réellement commencer à travailler dessus - un peu plus longtemps qu'un nouveau sujet de recherche en général, avec l'expérience, les compétences et la culture en plus.
-\newline
-Tout ceci est lié à un rythme de publication assez rapide et drastique, qui ne permet pas réellement aux chercheurs de pouvoir travailler dans de bonnes conditions.
-\newline
-La vigilance est aussi de mise quant à la publication d'autres scientifiques sur un sujet similaire de celui sur lequel un/plusieurs chercheur(s) travaille(nt). En effet, un article paraissant à une période très proche d'un autre traitant du même sujet, mais déjà publié, pourrait être refusé en publication pour ce motif - ce qui pourrait faire perdre au(x) chercheur(s) plusieurs mois (voire années) de travail, à cause de celà.
-
-\chapter*{Conclusion}
-
-\addcontentsline{toc}{chapter}{Conclusion}
-
-\section*{Conclusion par rapport aux objectifs du stage}
-
-\section*{Conclusion par rapport à la Recherche}
-
-\chapter*{Bibliographie - Webographie}
-
-\addcontentsline{toc}{chapter}{Bibliographie - Webographie} 
-
-\begin{itemize}
-\item{Le premier article sur le projet \textit{Vidjil}, écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}: \url{http://www.biomedcentral.com/1471-2164/15/409/abstract} \textit{(Consultation le 04 Avril 2014)}}
-\item{\url{http://www.worldcat.org/title/recombinaison-vdj-illegitime-et-developpement-de-leucemies-aigues-lymphoblastiques-t/oclc/495056914} \textit{(Consultation le 10 Mai 2014)}}
-\item{\url{http://fr.wikipedia.org/wiki/Recombinaison_V%28D%29J} \textit{(Consultation le 10 Mai 2014)}}
-\item{\url{http://fr.wikipedia.org/wiki/DBSCAN} \textit{(Consultation le 19 Mai 2014)}}
-\item{\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.4045&rep=rep1&type=pdf} \textit{(Consultation le 19 Mai 2014)}}
-\item{\url{http://www.cise.ufl.edu/class/cis4930sp09dm/notes/dm5part4.pdf} \textit{(Consultation le 19 Mai 2014)}}
-\end{itemize}
-
-\chapter*{Annexe}
-
-\addcontentsline{toc}{chapter}{Annexe}
-
-\begin{figure}[h!]
-\begin{center}
-	\includegraphics[scale=0.6]{img/C++-Ex.jpg}
-\end{center}
-\caption{Aperçu d'une segmentation (en cours sur le \textit{screenshot}), avec le programme \textit{Vidjil} C++}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\rotatebox{90}{
-	\includegraphics[scale=0.35]{img/Montage_Sans_Annotations.jpg}
-}
-\end{center}
-\caption{Aperçu général de l'\textit{afficheur} - montage avec palette ``Dark'' et ``Light''}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-	\includegraphics[scale=0.45]{img/Aff_menu_haut.jpg}
-	\caption{\textbf{Menu haut} de l'\textit{afficheur}}
-	\vskip2em
-	\includegraphics[scale=0.4]{img/Aff_menu_gauche.jpg}
-	\caption{Développement des informations (\textbf{gauche}) de l'\textit{afficheur}}
-	\vskip2em
-	\includegraphics[scale=0.35]{img/Aff_menu_haut_droite.jpg}
-	\caption{Partie graphique (\textbf{haut-droit}) de l'\textit{afficheur}}
-	\vskip2em
-	\includegraphics[scale=0.35]{img/Aff_menu_droite.jpg}
-	\caption{Le \textbf{\textit{scatterplot}} de l'\textit{afficheur}}
-	\vskip2em
-	\includegraphics[scale=0.35]{img/Aff_menu_bas.jpg}
-	\caption{Le \textbf{segmenteur} de l'\textit{afficheur}}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-	\vskip8em
-	\includegraphics{img/Aff_menu_display.jpg}
-\end{center}
-\caption{Sous-menu "Display" du menu haut avec, de haut en bas: le \textit{slider} "Display nodes" permettant d'afficher ou non un nombre plus ou moins grand de clones, les deux \textit{sliders} permettant de changer les paramètres de DBSCAN, et enfin le \textit{slider} pour modifier la distance maximale d'affichage des arêtes (pour le graphe concernant les distances d'édition)}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-	\includegraphics[scale=0.5]{img/Edit-Distance-Ex.jpg}
-	\vskip4em
-	\includegraphics[scale=0.5]{img/Edit-Distance-Ex-2.jpg}
-\end{center}
-\caption{\textit{Afficheur} avec la distribution de distances d'édition}
-\end{figure}
+L'algorithme est représenté ci-dessous (issu de Wikipedia\footnote{\url{http://fr.wikipedia.org/wiki/DBSCAN}}).
 
 \begin{pseudocode}{DBSCAN}{D, eps, MinPts}
 \COMMENT{Base de l'algorithme}\\
@@ -610,37 +381,272 @@ PtsVoisins$ = $\CALL{epsilonVoisinage}{P, eps}\\
 \ENDPROCEDURE
 \end{pseudocode}
 
-\begin{figure}[h]
+\section{Implantation de DBSCAN}
+
+DBSCAN aura sa propre classe dans l'\textit{afficheur}, et sera donc un objet qui communiquera essentiellement avec le Modèle du M.V.C.
+
+\subsection{Choix quant aux paramètres}
+
+Les paramètres pris par défaut sont de 0 pour $\epsilon$ et \textit{Mp}. Ainsi, au départ, chaque clone a son propre cluster.
+\newline
+Le meilleur moyen pour faire varier les paramètres et réaliser, pour soi, la meilleure clusterisation, est de faire varier les paramètres par nos propres moyens.
+\newline
+J'ai donc ajouté, pour cela, deux sliders dans l'\textit{afficheur} (voir \textbf{Figure 8} dans la partie \textbf{Annexe}):
+	\begin{itemize}
+	\item{un \textit{slider} pour faire varier la distance prise en compte entre chaque clone: $\epsilon$,}
+	\item{un \textit{slider} pour faire varier le nombre de voisins minimum pris en compte dans l'algorithme: \textit{Mp}.}
+	\end{itemize}
+Ces sliders calculent, à chaque modification apportée par un clic, un nouvel objet DBSCAN selon les paramètres évolués - ce qui permet de visualiser en temps réel les modifications apportées manuellement.
+\newline
+La visualisation des clusters se fait par couleur - en effet, chaque clone appartient à un cluster bien précis ( qui est calculé et attribué lors du calcul par l'algorithme), chaque cluster ayant une couleur bien spécifique, attribuée du début à la fin de la visualisation.
+
+\subsection{Visualisation}
+
+La visualisation des groupes de clones est primordiale - elle en est même la base du sujet de stage.
+\newline
+Il a donc fallu travailler sur la visualisation de chaque clone d'un cluster, indépendamment des autres, mais aussi de l'intéraction d'un clone avec un autre, présent ou non dans le même cluster.
+\newline
+D'où l'idée d'implémenter trois choses, accomplissant parfaitement la visualisation et l'intéraction entre les clusters:
+	\begin{itemize}
+	\item{une colorisation permettant de visualiser quels sont les clones présents dans chaque cluster,}
+	\item{une clusterisation permettant de visualiser, via le \textbf{menu gauche}, les différents groupes de clones existants,}
+	\item{une distribution avec laquelle interagir physiquement, via un nouveau paramétrage du moteur physique D3JS, avec un ou plusieurs clone(s) ou cluster(s) - selon la clusterisation choisie pour l'étude.}
+	\end{itemize}
+
+\subsubsection{Ajout d'une nouvelle clusterisation - voir \textbf{Figure 10} de la partie \textbf{Annexe}}
+
+La classe "Model" du projet\footnote{Classe Modèle du M.V.C. contenant toutes les données chargées par les fichiers donnés en entrée, et stockant/générant des méta-données utiles pour les vues.} a donc été légèrement modifiée pour ceci, afin de permettre non seulement la visualisation générale de cette clusterisation, mais aussi la visualisation de toutes les mises à jour futures, lors des changements des paramètres de l'algorithme, par l'utilisateur.
+
+\begin{figure}[H]
 \begin{center}
-\rotatebox{90}{
-	\includegraphics[scale=0.45]{img/DBSCAN-Cluster-Ex.jpg}
-}
+	\includegraphics[scale=0.35]{img/DBSCAN-Cluster-Ex.jpg}
 \end{center}
 \caption{\textit{Afficheur} avec la clusterisation DBSCAN}
 \end{figure}
 
-\begin{figure}[h]
+\subsubsection{Ajout d'une nouvelle colorisation - voir \textbf{Figure 11} de la partie \textbf{Annexe}}
+
+La colorisation est beaucoup plus bénéfique visuellement et résiduelle dans le temps (il est en effet possible de colorer les clones selon les résultats de DBSCAN, tout en étudiant une distribution quelconque).
+\newline
+Aussi, il a fallu faire attention à plusieurs choses:
+	\begin{itemize}
+		\item{la couleur choisie pour chaque cluster est comprise entre 0 et 270 selon \textit{RGB}\footnote{\textit{RGB}: \textit{Red}, \textit{Green}, \textit{Blue}} - afin d'aller d'une teinte rouge (0) vers le violet (270), des couleurs déjà utilisées dans le projet, et permettant aussi de respecter scrupuleusement la légende des couleurs déjà établie par l'ingénieur de recherche du projet,}
+		\item{il a fallu faire attention à ce que les noeuds se ressemblant n'aient pas une teinte beaucoup trop proche l'une de l'autre, afin de permettre une visualisation non-faussée.
+			\newline
+			Pour palier à ce problème, j'ai donc créé un objet tableau à N entrées (100 ici, pour utiliser au maximum 100 clusters, soit 1 clone par cluster) que j'ai mélangé via l'\textbf{algorithme de Fisher-Yates} (encore appelé \textbf{mélange de Knuth}), très utilisé dans ce genre de situation.}
+	\end{itemize}
+
+\begin{figure}[H]
 \begin{center}
-\rotatebox{90}{
-	\includegraphics[scale=0.45]{img/DBSCAN-Color-Ex.jpg}
-}
+	\includegraphics[scale=0.35]{img/DBSCAN-Color-Ex.jpg}
 \end{center}
 \caption{\textit{Afficheur} avec la colorisation DBSCAN}
 \end{figure}
 
-\begin{figure}[h]
+\subsubsection{Ajout d'une nouvelle distribution - voir \textbf{Figure 12} de la partie \textbf{Annexe}}
+
+Pourquoi a-t-il fallu ajouter une nouvelle distribution, au lieu d'utiliser celle déjà établie avec le graphe représentant les distances d'édition ?
+\newline
+Tout d'abord, il ne s'agit pas d'un seul graphe mais de tout un ensemble de petits graphes représentant chacun un cluster, présents dans le cadre \textit{SVG} - ainsi, il faut prendre en compte que les distances entre chaque point du graphe ne sera pas représenté visuellement, mais que l'on veut obtenir un graphe complet par cluster.
+\newline
+Ensuite, les distances calculées et délivrées par le programme en C++ ne seront pas prises en compte visuellement! Nous voulons que chaque cluster soit condensé - ainsi, il faudra donner une valeur prise par défaut mais minimaliste (5 pixels ici), à chaque lien entre une source et une cible \textbf{appartenant au même cluster}.
+\newline
+Vient après une suite de légères modifications dans le moteur physique de D3JS:
+	\begin{itemize}
+	\item{l'annulation de la gravité,}
+	\item{une élasticité non-utilisée,}
+	\item{l'ajout d'une modification de la distribution en temps réel, en fonction des paramètres demandés par l'utilisateur.}
+	\end{itemize}
+Tout ceci a nécessité la création d'un nouveau type de moteur physique D3JS, spécialement conçu pour la plus précise visualisation intéractive des clusters.
+\newline
+Heureusement, certaines choses ont été gardées du moteur physique implémenté pour le graphe de distance d'édition, notamment la disposition du \textit{SVG}, son remplissage et l'intéraction établie avec l'ensemble de l'\textit{afficheur}, comme la suppression des légendes des axes X et Y par exemple.
+
+\begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.57]{img/DBSCAN-Ex.jpg}
 \end{center}
 \caption{\textit{Afficheur} avec la distribution DBSCAN}
 \end{figure}
 
-\begin{figure}[h]
+\section{Résultats}
+
+Les résultats de cette implémentation de l'algorithme DBSCAN en Javascript vont être discutés sous deux formes:
+	\begin{itemize}
+	\item{un apport scientifique, axé sur les résultats visuels de l'algorithme,}
+	\item{ainsi qu'un apport sur la similitude entre cette nouvelle distribution et celle créée sur la première partie du stage.}
+	\end{itemize}
+Aussi, j'ai effectué avec QUnit\footnote{QUnit est un \textit{framework} permettant d'implémenter des tests unitaires, développé par l'équipe ayant créé le \textit{framework} JQuery.} une série de tests unitaires\footnote{Un test unitaire est une procédure permettant de vérifier le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme.} (voir \textbf{Figure 13} dans la partie \textbf{Annexe}) permettant de démontrer la fonctionnalité totale de l'algorithme sur un jeu de tests écrit à la main, et permettant de tester tous les cas possibles issus d'un jeu de données biologiques.
+
+\subsubsection{Apport à la première partie du stage}
+
+Cette seconde partie appartient à la visualisation intéractive des clones, et est aussi une suite au graphe des distances d'édition, car elle utilise elle aussi ces distances pour fournir un résultat.
+\newline
+En effet, utilisant une partie du moteur physique et visualisant cette distribution comme un ensemble de graphes, elle se construit avec les distances d'édition.
+
+\begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.35]{img/QUnit.jpg}
 \end{center}
 \caption{Interface de QUnit, les tests étant passés avec succès}
 \end{figure}
+
+\chapter{Recherche et calcul des distances d'édition}
+
+Les distances sont essentielles aux deux parties de mon stage. Ce sont elles qui régissent la structure globale du graphe, et ce sont aussi les principales données des deux distributions que j'ai pu intégrer au projet.
+\newline
+Auparavant, nous utilisions comme distances les pourcentages d'identité de séquences représentatives - qui sont une approximation de différences entre deux clônes, basés sur des séquences de nucléotides de différentes tailles, et fabriquées à partir des séquences V(D)J et de la \textit{windows}.
+\newline
+Afin de pouvoir obtenir une distance beaucoup plus précise en fonction du temps, j'ai eu l'idée de comparer ces \textit{windows}, directement dans le programme C++.
+
+\section{Utilisation des \textit{windows}}
+
+\subsection{Qu'est-ce qu'une \textit{window}}
+
+Les \textit{windows} sont des séquences suivies de 40 nucléotides, trouvées directement entre la fin de la région V, et le début de la région J après le séquençage. Il se peut donc tout à fait que la partie D se retrouve, ou non, dans cette séquence.
+\newline
+Ces séquences ont été alignées de façon global\footnote{Alignement global: alignement entre deux séquences sur toute leur longueur.}, et non pas en local\footnote{Alignement local: alignement entre une séquence et une partie de l'autre séquence}.
+
+\subsection{Pourquoi les utiliser ?}
+
+L'avantage de prendre les \textit{windows} comme support de calcul est qu'elle servira, tout au long du suivi au cours du temps à marquer spécifiquement un clone - l'on pourra ainsi faire le suivi de la L.A.L. via l'étude des \textit{windows} spécifiant des zones bien spécifiques, qui pourraient être contraintes à évoluer en fonction des mutations infligées.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.6]{img/C++-window.jpg}
+\end{center}
+\caption{La \textit{window} du 40ème clone, dans le programme C++, est ici représentée par 'clone-040-window}
+\end{figure}
+
+\section{Les différents coûts utilisés}
+
+Les distances d'édition calculées le sont grâce à la programmation dynamique\footnote{La Programmation Dynamique est une technique algorithmique pour optimiser des sommes de fonctions monotones croissantes sous contrainte.}, ce qui nous permettra d'obtenir, pour deux mots \textit{x} et \textit{y}, le nombre minimal d’opérations d’édition\footnote{Il y a 3 opérations possibles: la \textbf{substitution} (le remplacement d'une lettre par une autre - nous utiliseront aussi le mot \textit{mismatch} pour cette opération), l'\textbf{insertion} (l'ajout d'une nouvelle lettre), et la \textbf{délétion} (la suppression d'une lettre)} pour transformer \textit{x} en \textit{y} - ce nombre minimal étant la distance d'édition recherchée.
+
+\subsection{Les coûts étudiés}
+
+\subsubsection{Sur quoi est basé un coût?}
+
+Chaque calcul effectué se fait sur un coût, constitué de 5 opérations:
+\begin{itemize}
+\item{le \textit{match}: la lettre de la séquence 1 sur la position actuelle correspond bien à celle de la séquence 2,}
+\item{le \textit{mismatch} (ou substitution): la lettre de la séquence 1 sur la position actuelle ne correspond pas à celle de la séquence 2,}
+\item{l'insertion,}
+\item{la délétion,}
+\item{la détection d'un homopolymère: motif de répétition, le plus souvent attribué par une erreur dans le séquenceur.}
+\end{itemize}
+
+\subsubsection{Quels sont ces coûts?}
+
+Pour ces opérations est attribué un poids (n'importe quel entier positif, négatif ou nul), permettant de régir et de calculer une distance, spécifique en fonction de ce poids.
+\newline
+Ainsi, deux coûts ayant des poids sur ces opérations différentes ne devraient pouvoir obtenir le même résultat (qui sera une distance) à la fin du calcul.
+\newline
+Il est important de calculer de bons coûts, car ils influeront directement sur les distributions précédemment mises en place. Nous en avons donc sélectionner 4:
+\begin{itemize}
+\item{le coût de \textbf{\textit{Levenshtein}}: (0, -1, -1): 0 en \textit{match}, -1 en \textit{mismatch}, et -1 en insertion et délétion - la détection d'homopolymère(s) est considéré comme "gratuit" ici, donc ne pèse rien,}
+\item{le coût \textbf{\textit{DNA}}: (+5, -4, -10): 5 en \textit{match}, -4 en \textit{mismatch}, et -10 en insertion et délétion - la détection d'homopolymère(s) est aussi considéré comme "gratuit",}
+\item{le coût \textbf{\textit{VDJ}}: (+4, -6, -10, -1, -2): 4 en \textit{match}, -6 en \textit{mismatch}, -10 en insertion et délétion, -1 pour les délétions de fin de séquence\footnote{Imaginons que, pour un alignement de deux séquences de longueurs différentes, si la partie de l'une est beaucoup plus grande que l'autre, nous pouvons compter une délétion sur la partie grande (et non-alignée) avec un poids différent.}, -2 pour la détection d'homopolymère(s),}
+\item{le coût \textbf{\textit{Identity}}: (+1, -1, -1, 0, 0): 1 en \textit{match}, -1 en \textit{mismatch}, -1 en insertion et délétion, rien pour la détection d'homopolymère(s).}
+\end{itemize}
+Sur ces 4 coûts, il a fallu choisir celui ayant les plus respectueuses distances par rapport aux similarités entre séquences, afin de perfectionner les distributions.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ccccccccc}
+   & \textbf{G} & \textbf{A} & \textbf{C} & \textbf{G} & \textbf{A} & \textbf{T} & \textbf{T} & \textbf{A} \\
+\textbf{G} & \textbf{0} & -1 & -1 & 0 & -1 & -1 & -1 & -1 \\
+\textbf{A} & -1 & \textbf{0} & -1 & -2 & 0 & -1 & -2 & -1 \\
+\textbf{T} & -1 & \textbf{-1} & -1 & -2 & -1 & 0 & 0 & -1 \\
+\textbf{C} & -1 & -2 & \textbf{-1} & -2 & -2 & -1 & -1 & -1 \\
+\textbf{G} & 0 & -2 & -2 & \textbf{-1} & -2 & -2 & -2 & -2 \\
+\textbf{A} & -1 & 0 & -1 & -2 & \textbf{-1} & -2 & -3 & -2 \\
+\textbf{T} & -1 & -1 & -1 & -2 & -2 & \textbf{-1} & -1 & -2 \\
+\textbf{T} & -1 & -2 & -2 & -2 & -3 & -1 & \textbf{-1} & \textbf{\ovalbox{-2}} \\
+\end{tabular}
+\caption{Calcul de distance d'édition entre 2 séquences ADN (avec \textbf{\textit{Levenshtein}}). 
+\newline La distance est entourée - alignement GA\_CGATTA et GATCGATT\_}
+\end{table}
+
+\subsubsection{Comment effectuer les calculs de coût?}
+
+Les coûts étaient déjà implantés à mon arrivée dans l'entreprise, et le programme en C++ contenait déjà un objet (DynProg) prenant en paramètre les deux séquences ADN, l'alignement ainsi que le coût utilisé lors du calcul, et nous renvoyant une matrice de similarité que j'ai transformé en matrice de distances.
+\newline
+Ainsi, pour étudier les objets \textit{windows} entre eux, il a juste fallu modifier l'alignement local (pris par défaut) par l'alignement global, et le coût par un de notre choix - étant à tester. La matrice est à calculer ou non, en fonction du poids choisi lors du calcul dans la programmation dynamique.
+
+\section{Le coût utilisé}
+
+Les coûts \textit{VDJ}, \textit{Identity} et \textit{Levenshtein} sont les plus probants pour les graphes implémentés - en effet, ce sont eux qui, lors des tests, permettent d'avoir des distances aussi variées que respectueuses des similarités entre clones.
+\newline
+Dû à sa grande popularité, mon choix s'est porté vers le coût \textit{Levenshtein}, nous permettant aussi d'obtenir directement des distances d'édition, après les avoir transformé en valeur absolue.
+
+\chapter{Le travail en recherche}
+
+Je voulais effectuer mon premier stage Universitaire dans une structure de recherche, étant motivé par l'idée de participer aux solutions et innovations de demain. Ayant effectué un DEUST de Biologie avant de postuler pour une licence d'Informatique à l'Université de Lille1, et étant toujours intéressé par ce domaine de la Science, j'étais très curieux et intéressé de pouvoir effectuer mes premiers pas dans une équipe de bio-informaticiens
+
+\section{La vie est un long fleuve tranquille...}
+
+Mon stage dans l'équipe de recherche \textit{Bonsai} a été un véritable plaisir.
+\newline
+Eternel curieux, je suis à la recherche perpétuelle d'informations de tous genres pouvant me permettre de progresser dans la vie, mais aussi de m'instruire et me cultiver. L'intérêt et la curiosité de chaque membre de l'équipe envers la Science (à proprement parlé) est imparable, chacun ayant une certaine spécificité en fonction de son parcours et ses intérêts, et qui en fait quelqu'un d'unique dans l'équipe, lui permettant d'échanger avec ses collègues sur ses intérêts dans sa recherche de résultats ou ceux des autres.
+\newline
+J'ai pu ressentir celà par:
+\begin{itemize}
+\item \textbf{les conférences/séminaires du Mardi matin}
+	\newline
+	Chaque mardi matin, généralement entre 11H et 12H, était programmé un séminaire sur un sujet déterminé par le conférencier: un membre de l'équipe \textit{Bonsai} ou un intervenant extérieur.
+	\newline
+	Nous avons donc pu avoir le plaisir de recevoir des chercheurs de Pennsylvanie et d'un autre État de l'Amérique Centrale, venus nous parler de nouvelles méthodes de recherche, d'attrait à celle-ci, ou des dernières innovations et recherches effectuées sur le sujet donné (\textit{the International Mouse Phenotyping Consortium}\footnote{Entreprise Internationale scientifique créant et caractérisant le phénotype de 20 000 \textit{knock-out} (ou "invalidation génétique" en Français) chez la souris}, les graphes de Bruijn\footnote{Graphe orienté qui permet de représenter les chevauchements de longueur (\textit{n}-1) entre tous les mots de longueur \textit{n} sur un alphabet donné - nom donné par le mathématicien les ayant décrit en 1946: Nicolaas Govert de Bruijn} ou encore la détection des variants complexes \footnote{Variants cytogénétiques constituant une majeure partie des cas de Leucémie myéloïde chronique}) -  mais pas seulement!
+	\newline
+	Cela a aussi permis à certains membres de l'équipe de pouvoir exposer ses travaux finis ou en cours, afin de pouvoir expliquer son cheminement, sa méthode de travail et ses résultats, comme par exemple le travail d'\textbf{Amandine Perrin} sur l' "Illustration dynamique des effets des vaccins et de la vaccination"\footnote{Travail réalisé entre Mars et Août 2013}.
+\item \textbf{les entraides perpétuelles}
+	\newline
+	Chaque membre de l'équipe peut compter sur les autres s'il a un problème - en effet, l'entraide est omniprésente dans l'équipe, que ce soit pour une aide informatique, algorithmique ou encore de compréhension biologique. Un bref exemple à donner serai celui m'ayant permis de rassembler plus de 5 algorithmes différents, de 5 personnes différentes, pour mon problème de représentation respectueuse d'un graphe à 1000 arêtes.
+\item \textbf{la pause déjeuner}
+	\newline
+	Lors de la pause déjeuner, l'heure est à la discussion scientifique la plupart du temps, et les débats font rage, chacun exposant sa thèse, annonçant et dénonçant un ou plusieurs argument(s) contraire(s) à sa propre vision, etc...
+\end{itemize}
+Tout ceci m'a permis de me créer une belle idée de ce qu'est le monde de la recherche sur le plan relationnel et scientifique, et de me sentir beaucoup plus à l'aise dès la première semaine de stage.
+
+\section{...ou pas!}
+
+Ce stage m'a permis aussi de me rendre compte de tous les problèmes liés à la recherche, que ce soit pour l'accréditation des sujets de recherche, les problèmes liés aux actions en dehors de sa thèse (le temps attribué à l'éducation, ou encore aux services rendus à l'Université par exemple), ou encore plus directement aux problèmes touchant à son sujet de thèse (la publication du sujet en est un exemple valable).
+\newline
+Je me suis rendu compte qu'un travail de recherche représentait des heures incalculables à rechercher, programmer, analyser et rédiger - il faut en moyenne entre 6 mois et 1 an (si tout se passe correctement) pour arriver à des résultats valant la peine de les publier.
+
+La problèmatique de la thèse mérite un temps considérablement long à être développée, approfondie et traitée, afin de pouvoir enfin réellement commencer à effectuer ses propres recherches - un peu plus longtemps qu'un nouveau sujet de recherche en général, avec l'expérience, les compétences et la culture en plus.
+\newline
+Tout ceci est lié à un rythme de publication assez rapide et drastique, qui ne permet pas réellement aux chercheurs de pouvoir travailler dans de bonnes conditions.
+
+La vigilance est aussi de mise quant à la publication des recherches de scientifiques, sur un sujet similaire de celui sur lequel la personne travaille. En effet, un article paraissant à une période très proche d'un autre traitant du même sujet, mais déjà publié, pourrait être refusé en publication pour ce motif.
+
+\chapter*{Conclusion}
+
+\addcontentsline{toc}{chapter}{Conclusion}
+
+\section*{Conclusion par rapport aux objectifs du stage}
+
+J'ai beaucoup appris durant ce stage, notamment pour la conception logicielle - ayant fait de l'ingénierie logicielle durant plusieurs semaines. C'est ce qui m'a appris à travailler en groupe (le respect du travail de mes collègues, les réunions à prévoir, les dead-lines à respecter, le travail logiciel en groupe via l'utilitaire \textit{Git}), à me confronter à un projet déjà existant et rentrer au coeur du sujet alors que je ne suis pas l'initiateur de celui-ci, la programmation informatique ainsi que l'apprentissage de langages (C++, Python) et de frameworks (D3JS, JQuery) informatiques, ainsi que confronter mes idées avec celles des autres et optimiser au possible mon travail, s'il y a nécessité. De plus, ce stage m'a beaucoup apporté en organisation, et j'ai ainsi pu confronter le milieu scolaire et le milieu professionnel.
+
+
+Pour les objectifs qui m'ont été donnés en début de stage, le travail sur le graphe de distances d'édition est toujours en cours - nous ne pouvions pas savoir si le moteur allait réagir correctement par rapport à des distances précises, et la programmation du graphe a été un semi-échec.
+Quant à DBSCAN, l'implantation a été réalisé avec succès, et montre bien les ressemblances et disparités entre le clones.
+
+\section*{Conclusion par rapport à la Recherche}
+
+Ce stage a été pour moi un avant-goût de ce que va donner mon travail dans le milieu de la recherche plus tard, et celà m'a bien conforté dans l'idée de poursuivre mon chemin dans ce monde fabuleux, composé par le travail, la réflexion mais aussi l'échange.
+
+\chapter*{Bibliographie - Webographie}
+
+\addcontentsline{toc}{chapter}{Bibliographie - Webographie} 
+
+\begin{itemize}
+\item{Le premier article sur le projet \textit{Vidjil}, écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}: \url{http://www.biomedcentral.com/1471-2164/15/409/abstract} \textit{(Consultation le 04 Avril 2014)}}
+\item{\url{http://www.worldcat.org/title/recombinaison-vdj-illegitime-et-developpement-de-leucemies-aigues-lymphoblastiques-t/oclc/495056914} \textit{(Consultation le 10 Mai 2014)}}
+\item{\url{http://fr.wikipedia.org/wiki/Recombinaison_V%28D%29J} \textit{(Consultation le 10 Mai 2014)}}
+\item{\url{http://fr.wikipedia.org/wiki/DBSCAN} \textit{(Consultation le 19 Mai 2014)}}
+\item{\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.4045&rep=rep1&type=pdf} \textit{(Consultation le 19 Mai 2014)}}
+\item{\url{http://www.cise.ufl.edu/class/cis4930sp09dm/notes/dm5part4.pdf} \textit{(Consultation le 19 Mai 2014)}}
+\end{itemize}
+
 
 \end{spacing}
 \end{document}
