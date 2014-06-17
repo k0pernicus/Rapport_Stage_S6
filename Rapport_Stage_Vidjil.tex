@@ -15,6 +15,7 @@
 
 \usepackage[pdftex]{graphicx}
 \usepackage{float}
+\usepackage{caption}
 \usepackage{fancybox}
 
 \usepackage{caption}
@@ -44,9 +45,7 @@
 \section{Remerciements}
 Je remercie tout d'abord mon tuteur d'Université: \textbf{Samy Meftali}, ainsi que mon tuteur en entreprise: \textbf{Mathieu Giraud}, pour toute l'attention donnée quant au travail sur le projet, ainsi que sur ce rapport.
 \newline
-Je remercie ensuite l'équipe \textit{Bonsai} ainsi que les membres du projet \textit{Vidjil}, pour leur accueil ainsi que leur soutien, recueillis durant les 3 mois de stage.
-\newline
-Enfin, je tiens à remercier mes collèges du bureau 235: \textbf{Yoann Dufresne} et M. \textbf{Christophe Vrolland}.
+Je remercie ensuite l'équipe \textit{Bonsai} ainsi que les membres du projet \textit{Vidjil} pour leur accueil ainsi que leur soutien, recueillis durant ces 3 mois de stage.
 
 \section{Présentation de l'entreprise et de l'équipe}
 
@@ -70,15 +69,15 @@ Cette équipe m'a donc accueillie pour mon stage de fin de licence, s'étant dé
 \section{La Leucémie Aigüe Lymphoblastique}
 
 Chaque Humain et Vertébré détient un système de recombinaison de l'ADN (que l'on appelle \textbf{recombinaison V(D)J}\footnote{Phénomène biologique impliquant des processus par lesquels une molécule d'ADN (ou d'ARN) est coupée, puis jointe à une autre.}), mécanisme permettant de créer une grande diversité de récepteurs d'antigènes (nécessaires à la reconnaissance de corps étrangers), et donc de lymphocytes.
-Chaque \textbf{lymphocyte} (faisant partie des "globules blancs", ou Leucocyte) possède un réarrangement V(D)J\footnote{Les régions V, D et J sont des parties d'un anticorps.} unique, et le dote d'un récepteur lui permettant de reconnaître un antigène bien spécifique. Ce lymphocyte pourra plus tard se multiplier (si il y a contamination par des antigènes spécifiques reconnus), afin de mieux permettre de contrer l'agresseur, et formera alors dans ce cas un \textbf{clone}\footnote{Un clone V(D)J est donc un ensemble de lymphocytes ayant le même réarrangement V(D)J.}.
+Chaque \textbf{lymphocyte} (faisant partie des "globules blancs", ou Leucocyte) possède un réarrangement V(D)J\footnote{Les régions V, D et J sont des parties d'un anticorps - voir \textbf{Figure 1}.} unique, et le dote d'un récepteur lui permettant de reconnaître un antigène bien spécifique. Ce lymphocyte pourra plus tard se multiplier (si il y a contamination par des antigènes spécifiques reconnus), afin de mieux permettre de contrer l'agresseur, et formera alors dans ce cas un \textbf{clone}\footnote{Un clone V(D)J est donc un ensemble de lymphocytes ayant le même réarrangement V(D)J.}.
 \newline
-La \textbf{Leucémie Aigüe Lymphoblastique} (L.A.L.) est un cancer liquide\footnote{Le cancer liquide, encore appelé cancer sanguin, est un ensemble composé des leucémies (cancers du sang et de la moëlle épinière) et des lymphomes (cancers du système lymphatique).} affectant majoritairement les enfants. Il s'attaque à un lymphocyte, le forçant à se multiplier afin de pouvoir créer un clone de lymphocytes cancéreux, inhibant en grande partie les actions du reste du système immunitaire.
+La \textbf{Leucémie Aigüe Lymphoblastique} (L.A.L.) est un cancer liquide\footnote{Le cancer liquide, encore appelé cancer sanguin, est un ensemble composé des leucémies (cancers du sang et de la moëlle épinière) et des lymphomes (cancers du système lymphatique).} affectant majoritairement les enfants. Il s'attaque à un lymphocyte en le forçant à se multiplier afin de pouvoir créer un clone de lymphocytes cancéreux, ce qui inhibe les actions du reste du système immunitaire.
 
 \begin{figure}[H]
 \begin{center}
-	\includegraphics[scale=0.37]{img/angfig1.png}
+	\includegraphics[scale=0.4]{img/angfig1.png}
 \end{center}
-\caption{Aperçu d'un lymphocyte, et des régions V(D)J sur le site actif.}
+\caption{Aperçu d'un lymphocyte, et des régions V(D)J sur le site actif. Figure reprise via \url{imgt.org}.}
 \end{figure}
 
 \section{Le projet Vidjil}
@@ -91,9 +90,9 @@ Les deux équipes Universitaire se sont donc rencontrées début de l'année 201
 
 Le projet \textit{Vidjil} est principalement conçu pour les médecins et les chercheurs.
 \newline 
-Il consiste à la mise en place d'un programme permettant de séquencer à haut-débit les clones V(D)J, issus de données d'un format FASTA ou FASTQ\footnote{Les formats FASTA et FASTQ sont des formats de fichier texte utilisés pour stocker des séquences biologiques de nature nucléique ou protéique.}, à partir d'un échantillon de sang d'un patient atteint de L.A.L. (voir \textbf{Figure 2} de la partie \textbf{Annexe}). Le résultat retourné par le programme est donc une analyse de l'échantillon, stockée dans un fichier au format biologique DATA, en utilisant JSON\footnote{JSON est un format de données textuelles et générique, permettant de représenter de l'information structurée. Ce format a été créé par M. \textbf{Douglas Crockford} en 2005.}).Ce programme est écrit en C++, dû à la gestion de la mémoire héritée du langage C, et est dénommé \textit{Vidjil}. Aussi, il consiste en une interface Web (composée majoritairement de Javascript), appelée \textit{interface}, dont le but est d'afficher toutes les informations nécessaires quant aux résultats de séquençage recueillis dans le fichier DATA, et d'en faire une sortie papier au format PDF. L'interface Web a été décidé afin de permettre aux utilisateurs d'avoir le même résultat, et ne pas avoir à installer des packages ou plugins pour l'utiliser à bon escient, sur différents systèmes d'exploitation.
+Il consiste à la mise en place d'un programme permettant de séquencer à haut-débit les clones V(D)J, issus de données d'un format FASTA ou FASTQ\footnote{Les formats FASTA et FASTQ sont des formats de fichier texte utilisés pour stocker des séquences biologiques de nature nucléique ou protéique.}, à partir d'un échantillon de sang d'un patient atteint de L.A.L. (voir \textbf{Figure 2} de la partie \textbf{Annexe}). Le résultat retourné par le programme est donc une analyse de l'échantillon, stockée dans un fichier au format DATA, en utilisant JSON\footnote{JSON est un format de données textuelles et générique, permettant de représenter de l'information structurée. Ce format a été créé par M. \textbf{Douglas Crockford} en 2005.}).Ce programme est écrit en C++, dû à la gestion de la mémoire héritée du langage C, et est dénommé \textit{Vidjil}. Aussi, il consiste en une interface Web (composée majoritairement de Javascript), appelée \textit{interface}, dont le but est d'afficher toutes les informations nécessaires quant aux résultats de séquençage recueillis dans le fichier DATA, et d'en faire une sortie papier au format PDF. L'interface a été décidé comme site internet afin de permettre aux utilisateurs d'avoir le même résultat sur leur ordinateur, et ne pas avoir à installer des packages ou plugins pour l'utiliser à bon escient, qu'importe le système d'exploitation utilisé, mais aussi de pouvoir créer et exploiter plus facilement un accès serveur pour sauvegarder et/ou retrouver ses données analysées.
 \newline
-L'idée sur laquelle repose le projet \textit{Vidjil} est que toutes les informations, quant aux réarrangements V(D)J issus du prélévement de sang, pourront être étudiées, comptées et analysées plus facilement par les utilisateurs du logiciel, afin de pouvoir suivre la maladie, mesurer son étendue, mais aussi adapter les traitements médicaux au mieux et prédire les rechutes.
+L'idée sur laquelle repose le projet \textit{Vidjil} est que toutes les informations, quant aux réarrangements V(D)J concernés par la maladie et issus du prélévement de sang, pourront être étudiées, comptées et analysées plus facilement par les utilisateurs du logiciel, afin de pouvoir suivre la LAL, mesurer son étendue, mais aussi adapter les traitements médicaux au mieux et prédire les rechutes.
 
 \begin{figure}[H]
 \begin{center}
@@ -203,11 +202,11 @@ Le projet contenait, à mon arrivée, 5 distributions\footnote{Une distribution 
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 	\includegraphics[width=\textwidth]{img/5distributions.jpg}
-	\\
+	\captionof{figure}{Sous-menu Analysis de l'\textit{interface}}
+	\vfill
 \end{minipage}
 
-
-Toutes ces distributions sont nécessaires à l'utilisateur, afin de visualiser directement la disparité et le réarrangement des clônes, en fonction d'un jeu de données au format biologique DATA. Or, il n'y avait pas encore de travaux effectués sur une distribution des clones en fonction de leurs distances d'édition, afin de pouvoir visualiser leur rapprochement en fonction de leurs disparités et ressemblances nucléotidiques, essentielle pour un suivi des lymphocytes cancéreux dans le temps.
+Toutes ces distributions sont nécessaires à l'utilisateur, afin de visualiser directement la disparité et le réarrangement des clônes, en fonction d'un jeu de données au format DATA. Or, il n'y avait pas encore de travaux effectués sur une distribution des clones en fonction de leurs distances d'édition, afin de pouvoir visualiser leur rapprochement en fonction de leurs disparités et ressemblances nucléotidiques, essentielle pour un suivi des lymphocytes cancéreux dans le temps.
 
 \section{Ajout d'une nouvelle distribution}
 L'ajout d'une nouvelle distribution n'était pas aisée, pour différentes raisons techniques.
@@ -291,7 +290,7 @@ En effet, celle-ci ne préserve pas de façon optimale les distances données en
 \begin{center}
 	\includegraphics[scale=0.5]{img/Edit-Distance-Ex.jpg}
 \end{center}
-\caption{\textit{Afficheur} avec la distribution de distances d'édition}
+\caption{\textit{Interface} avec la distribution de distances d'édition - vous pouvez bien voir la disposition du triangle initial, ainsi que l'exploitation partielle visuellement du graphe.}
 \end{figure}
 
 Nous nous intéressons plus particulièrement à la similarité des clones qu'à leur disparité. Il était donc extrêmement important de garder les arêtes les plus petites (signe que la similarité est élevée) - ainsi, les plus petites arêtes doivent être plus respectées que les plus grandes, sauf pour les arêtes constituant le triangle initial bien entendu. La dernière solution à apporter était de donner une élasticité aux arêtes. Après les tests, il se trouve que les similarités sont bien respectées dans le graphe, mais accompagne un nouveau problème. Celui-ci, découlant de la précédente solution, est que les plus grandes distances ne sont plus respectées. Ainsi, deux points ayant une distance d'édition très grande peuvent se retrouver à proximité dans le graphe vu que le moteur attribue par lui-même les positions des clones, dans le \textit{scatterplot}. Ce problème étant, à cause de ce problème par le moteur physique, insoluble, le déploiement du graphe de distances d'édition est un semi-échec.
@@ -306,7 +305,7 @@ Il existe cependant 2 solutions à apporter, pour un prochain sujet:
 \begin{center}
 	\includegraphics[scale=0.6]{img/phylogenetic_tree_d3js.png}
 \end{center}
-\caption{Exemple d'implantation d'un arbre phylogénétique circulaire, avec D3JS.}
+\caption{Exemple d'implantation d'un arbre phylogénétique circulaire, avec D3JS. Figure reprise via \url{http://bl.ocks.org/mbostock/4063550}.}
 \end{figure}
 
 \chapter{L'algorithme de clusterisation DBSCAN}
@@ -330,7 +329,7 @@ Tout d'abord, il faut choisir deux paramètres, essentiels à la clusterisation:
 \begin{center}
 	\includegraphics[scale=0.45]{img/400px-DBSCAN-Illustration.png}
 \end{center}
-\caption{Exemple de clusterisation, avec DBSCAN}
+\caption{Exemple de clusterisation, avec DBSCAN. Figure reprise via \url{http://fr.wikipedia.org/wiki/DBSCAN}}
 \end{figure}
 
 Cet algorithme est intéressant car il nous permet de parcourir chacun des points d'un graphe, son voisinage, et de clusteriser chaque point en fonction des deux paramètres énoncés précédemment - la densité revient donc au nombre de points (\textit{Mp}) compris dans un rayon bien spécifié ($\epsilon$).
@@ -419,7 +418,7 @@ Aussi, il a fallu faire attention à plusieurs choses:
 \begin{center}
 	\includegraphics[scale=0.35]{img/DBSCAN-Color-Ex.jpg}
 \end{center}
-\caption{\textit{Afficheur} avec la colorisation DBSCAN}
+\caption{\textit{Interface} avec la colorisation DBSCAN}
 \end{figure}
 
 Après cela, j'ai tenté une nouvelle approche en voulant permettre de visualiser dans le \textbf{menu gauche} non pas les clones, mais les clusters issus de DBSCAN.
@@ -428,7 +427,7 @@ Après cela, j'ai tenté une nouvelle approche en voulant permettre de visualise
 \begin{center}
 	\includegraphics[scale=0.35]{img/DBSCAN-Cluster-Ex.jpg}
 \end{center}
-\caption{\textit{Afficheur} avec la clusterisation DBSCAN}
+\caption{\textit{Interface} avec la clusterisation DBSCAN}
 \end{figure}
 
 Enfin, en testant plusieurs fois l'algorithme sur des données, je me suis rendu compte qu'il pourrai être bénéfique que les clusters se repoussent mutuellement afin de laisser un maximum de liberté à l'utilisateur, et non pas l'inciter à bouger par lui-même les clusters si les clones issus de ceux-ci sont mélangés, mais aussi que les points \textbf{points centraux} soient au centre de ceux-ci.
@@ -443,7 +442,7 @@ Aussi, cette distribution permet d'affirmer que la représentation d'un système
 \begin{center}
 	\includegraphics[scale=0.57]{img/DBSCAN-Ex.jpg}
 \end{center}
-\caption{\textit{Afficheur} avec la distribution DBSCAN}
+\caption{\textit{Interface} avec la distribution DBSCAN}
 \end{figure}
 
 \chapter{Recherche et calcul des distances d'édition}
@@ -583,31 +582,28 @@ La vigilance est aussi de mise quant à la publication des recherches de scienti
 
 \addcontentsline{toc}{chapter}{Conclusion}
 
-\section*{Conclusion par rapport aux objectifs du stage}
+\section*{Résolution de la problèmatique}
 
-Pour les objectifs qui m'ont été donnés en début de stage, le travail sur le graphe de distances d'édition est toujours en cours. Concernant celui-ci, nous ne pouvions pas savoir si le moteur allait réagir correctement par rapport à des distances précises, mon stage étant un test par rapport à son implémentation. Ainsi, il serai préférable de penser au graphe de distances d'édition comme un arbre phylogénétique, ou comme un ensemble de plusieurs graphes comme la distribution DBSCAN. Quant à cette dernière, son implantation a été réalisé avec succès, et démontre bien les ressemblances et disparités entre les clones V(D)J séquencés.
+Concernant le graphe de distances d'édition, nous ne pouvions pas savoir si le moteur allait réagir correctement par rapport à des distances précises, mon stage étant un test par rapport à son implémentation. N'ayant pas reussi à obtenir le résultat voulu pour cette distribution, il serai préférable de penser au graphe de distances d'édition comme un arbre phylogénétique, ou comme un ensemble de plusieurs graphes comme la distribution DBSCAN. Quant à cette dernière, son implantation a été réalisé avec succès, et démontre bien les ressemblances et disparités entre les clones V(D)J séquencés. Par rapport au projet \textit{Vidjil}, l'équipe M. Giraud et M. Salson sont en pleine rédaction du nouvel article, M. Duez perfectionnant quant à lui le serveur sur l'\textit{interface}.
 
-\section*{Conclusion technique}
+\section*{Bilan personnel}
 
-J'ai beaucoup appris durant ce stage, notamment quant à la conception logicielle - ayant fait de l'ingénierie logicielle durant plusieurs semaines. C'est ce qui m'a appris à travailler en groupe (le respect du travail de mes collègues, les réunions à prévoir, les dead-lines à respecter, le travail logiciel en groupe via l'utilitaire \textit{Git}), à me confronter à un projet déjà existant et pouvoir rentrer au coeur du sujet rapidement, la programmation informatique, l'apprentissage de langages (C++, Python) et de \textit{frameworks} (D3JS, JQuery) informatiques, ainsi que confronter mes idées avec celles des autres et optimiser au possible mon travail, s'il y a nécessité. De plus, ce stage m'a beaucoup apporté en organisation, et j'ai pu confronter le milieu scolaire et le milieu professionnel.
-
-\section*{Conclusion par rapport à la Recherche}
-
-Ce stage a été un avant-goût de ce que va m'apporter le travail dans le milieu de la recherche, ce qui m'a bien conforté dans l'idée de poursuivre mon chemin dans ce monde fabuleux, composé par le travail, la réflexion et l'échange.
+J'ai énormément appris durant ce stage, notamment quant à la conception logicielle - ayant fait de l'ingénierie logicielle durant plusieurs semaines. C'est ce qui m'a appris à me confronter à un projet déjà existant et pouvoir rentrer au coeur du sujet rapidement (la plus grosse difficulté du stage pour moi), à apprendre de nouveaux langages (comme C++) et \textit{frameworks} (D3JS, JQuery) informatiques, ainsi que confronter mes idées avec celles des autres et optimiser au possible mon travail, s'il y a nécessité. De plus, ce stage m'a beaucoup apporté quant au travail en groupe (le respect du travail de mes collègues, les réunions à prévoir, le respect des dead-lines, l'utilisation d'outils spécifiques comme \textit{Git}, etc...), dans mon organisation personnelle, et m'a permis de confronter le milieu scolaire et le milieu professionnel.
+Mais ce qui est le plus important à mes yeux, c'est que celui-ci m'a bien confirmé mon idée de poursuivre dans le monde de la recherche, un milieu extrêmement riche composé par le travail, la réflexion, l'envie d'apprendre et d'échanger.
 
 \chapter*{Bibliographie - Webographie}
 
 \addcontentsline{toc}{chapter}{Bibliographie - Webographie} 
 
 \begin{itemize}
-\item{Le premier article sur le projet \textit{Vidjil}, écrit par M. \textbf{Giraud Mathieu} et M. \textbf{Salson Mikaël}: \url{http://www.biomedcentral.com/1471-2164/15/409/abstract} \textit{(Consultation le 04 Avril 2014)}}
-\item{\url{http://www.worldcat.org/title/recombinaison-vdj-illegitime-et-developpement-de-leucemies-aigues-lymphoblastiques-t/oclc/495056914} \textit{(Consultation le 10 Mai 2014)}}
-\item{\url{http://fr.wikipedia.org/wiki/Recombinaison_V%28D%29J} \textit{(Consultation le 10 Mai 2014)}}
-\item{\url{http://fr.wikipedia.org/wiki/DBSCAN} \textit{(Consultation le 19 Mai 2014)}}
-\item{\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.4045&rep=rep1&type=pdf} \textit{(Consultation le 19 Mai 2014)}}
-\item{\url{http://www.cise.ufl.edu/class/cis4930sp09dm/notes/dm5part4.pdf} \textit{(Consultation le 19 Mai 2014)}}
+\item{Le premier article sur le projet \textit{Vidjil}, écrit par \textbf{Mathieu Giraud} et M. \textbf{Mikaël Salson}: \url{http://www.biomedcentral.com/1471-2164/15/409/abstract} \textit{(Consultation le 04 Avril 2014)}}
+\item{\url{http://www.worldcat.org/title/recombinaison-vdj-illegitime-et-developpement-de-leucemies-aigues-lymphoblastiques-t/oclc/495056914}, thèse sur "La recombinaison V(D)J illégitime, et le développement de Leucémies Aigües Lymphoblastiques" \textit{(Consultation le 10 Mai 2014)}}
+\item{\url{http://fr.wikipedia.org/wiki/Recombinaison_V%28D%29J}, article de Wikipédia sur la recombinaison V(D)J \textit{(Consultation le 10 Mai 2014)}}
+\item{\url{http://fr.wikipedia.org/wiki/DBSCAN}, article de Wikipédia sur l'algorithme DBSCAN \textit{(Consultation le 19 Mai 2014)}}
+\item{\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.4045&rep=rep1&type=pdf}, article original de \textit{DBSCAN} \textit{(Consultation le 19 Mai 2014)}}
+\item{\url{http://www.cise.ufl.edu/class/cis4930sp09dm/notes/dm5part4.pdf}, diaporama sur la clusterisation \textit{(Consultation le 19 Mai 2014)}}
+\item{\url{http://fr.wikipedia.org/wiki/Distance_de_Levenshtein}, article sur la distance de \textit{Levenshtein} \textit{(Consultation le 4 Juin 2014)}}
 \end{itemize}
-
 
 \end{spacing}
 \end{document}
