@@ -91,9 +91,9 @@ Les deux équipes Universitaire se sont donc rencontrées début de l'année 201
 
 Le projet \textit{Vidjil} est principalement conçu pour les médecins et les chercheurs.
 \newline 
-Il consiste à la mise en place d'un programme permettant de séquencer à haut-débit les clones V(D)J, issus de données d'un format FASTA ou FASTQ\footnote{Les formats FASTA et FASTQ sont des formats de fichier texte utilisés pour stocker des séquences biologiques de nature nucléique ou protéique.}, à partir d'un échantillon de sang d'un patient atteint de L.A.L. (voir \textbf{Figure 2} de la partie \textbf{Annexe}). Ce programme est écrit en C++, dû à la gestion de la mémoire héritée du langage C. Aussi, il consiste en une interface Web (composée majoritairement de Javascript), appelée \textit{interface}, dont le but est d'afficher les informations nécessaires quant aux résultats de séquençage recueuillis par le précédent programme, dans un fichier généré au format JSON\footnote{JSON est un format de données textuelles et générique, permettant de représenter de l'information structurée. Ce format a été créé par M. \textbf{Douglas Crockford} en 2005.}) - l'interface Web a été décidé afin de permettre aux utilisateurs de ne pas avoir à installer des packages ou plugins pour l'utiliser à bon escient sur différents systèmes d'exploitation.
+Il consiste à la mise en place d'un programme permettant de séquencer à haut-débit les clones V(D)J, issus de données d'un format FASTA ou FASTQ\footnote{Les formats FASTA et FASTQ sont des formats de fichier texte utilisés pour stocker des séquences biologiques de nature nucléique ou protéique.}, à partir d'un échantillon de sang d'un patient atteint de L.A.L. (voir \textbf{Figure 2} de la partie \textbf{Annexe}). Le résultat retourné par le programme est donc une analyse de l'échantillon, stockée dans un fichier au format biologique DATA, en utilisant JSON\footnote{JSON est un format de données textuelles et générique, permettant de représenter de l'information structurée. Ce format a été créé par M. \textbf{Douglas Crockford} en 2005.}).Ce programme est écrit en C++, dû à la gestion de la mémoire héritée du langage C, et est dénommé \textit{Vidjil}. Aussi, il consiste en une interface Web (composée majoritairement de Javascript), appelée \textit{interface}, dont le but est d'afficher toutes les informations nécessaires quant aux résultats de séquençage recueillis dans le fichier DATA, et d'en faire une sortie papier au format PDF. L'interface Web a été décidé afin de permettre aux utilisateurs d'avoir le même résultat, et ne pas avoir à installer des packages ou plugins pour l'utiliser à bon escient, sur différents systèmes d'exploitation.
 \newline
-La grande idée du projet est que toutes les informations quant aux réarrangements V(D)J issus du prélévement de sang pourront être étudiés, comptés et analysés plus facilement par les utilisateurs logiciel, afin de pouvoir suivre la maladie, mesurer son étendue, mais aussi adapter les traitements médicaux au mieux et prédire les rechutes.
+L'idée sur laquelle repose le projet \textit{Vidjil} est que toutes les informations, quant aux réarrangements V(D)J issus du prélévement de sang, pourront être étudiées, comptées et analysées plus facilement par les utilisateurs du logiciel, afin de pouvoir suivre la maladie, mesurer son étendue, mais aussi adapter les traitements médicaux au mieux et prédire les rechutes.
 
 \begin{figure}[H]
 \begin{center}
@@ -112,14 +112,12 @@ La problèmatique était de permettre à l'utilisateur de l'\textit{interface} d
 \newline
 Cette problématique devait être résolu \textit{via} deux objectifs, présentés ci-dessous. 
 
-\subsection{Les objectifs}
-
-\subsubsection{L'\textit{interface}}
+\subsection*{L'\textit{interface}}
 Dans un premier temps, je devais intégrer dans l'\textit{interface} un graphe permettant de visualiser physiquement les distances d'édition des clones, ce qui permettrait de percevoir directement la similarité et la disparité des clones.
 \newline
 Ce premier travail devait s'effectuer sur une durée de deux mois, avec une programmation en HTML5, CSS3 et le langage Less, le langage orienté objet Javascript, Ajax, et en utilisant les frameworks\footnote{Un \textit{framework} est un ensemble d'outils et de composants logiciels organisés conformément à un plan d'architecture et des patterns, l'ensemble formant ou promouvant un "squelette" de programme - il est conçu en vue d'aider les programmeurs dans leur travail.} Javascript D3JS et JQuery - tous ces langages et frameworks étant déjà intégrés à l'\textit{interface}, depuis sa conception par \textbf{Marc Duez}.
 
-\subsubsection{DBSCAN}
+\subsection*{DBSCAN}
 Deuxièmement, le travail devait déborder sur une partie beaucoup plus algorithmique, avec l'utilisation de DBSCAN\footnote{DBSCAN est un algorithme de partitionnement de données proposé en 1996 par \textbf{Martin Ester}, \textbf{Hans-Peter Kriegel}, \textbf{Jörg Sander} et \textbf{Xiaowei Xu}.} afin de partitionner les clones V(D)J en fonction de deux paramètres: leur distance d'édition, ainsi que leur nombre de voisins.
 \newline
 L'algorithme était à implanter en Javascript, sur une durée de 1 mois.
@@ -165,13 +163,13 @@ L'\textit{interface} se présente sur différentes parties, toutes dépendantes 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.4]{img/Aff_menu_haut.jpg}
-	\caption{\textbf{Menu haut} de l'\textit{afficheur}}
+	\caption{\textbf{Menu haut} de l'\textit{interface}}
 	\vskip2em
 	\includegraphics[scale=0.35]{img/Aff_menu_gauche.jpg}
-	\caption{Développement des informations (\textbf{gauche}) de l'\textit{afficheur}}
+	\caption{Développement des informations (ou \textbf{menu gauche}) de l'\textit{interface}}
 	\vskip2em
 	\includegraphics[scale=0.35]{img/Aff_menu_droite.jpg}
-	\caption{Le \textbf{\textit{scatterplot}} de l'\textit{afficheur}}
+	\caption{Le \textbf{\textit{scatterplot}} de l'\textit{interface}}
 \end{center}
 \end{figure}
 
@@ -183,12 +181,12 @@ Cette phase a duré 2 semaines.
 Ne connaissant pas les \textit{frameworks} D3JS et JQuery, les langages Ajax ou encore Less, il a donc fallu que je me documente à leur sujet afin de pouvoir exploiter toutes les fonctionnalités implémentées, mais aussi comprendre quand et comment les intégrer au projet.
 
 \subsection{L'intégration au projet}
-Durant les deux premières semaines, il m'a fallu étudier tout le code du projet utile à mes objectifs, ainsi que recourir à la création de la documentation pour le développeur (obsolète ou inexistante). L'étude du projet a été pour moi la plus grosse difficulté dans ce stage, n'ayant jamais effectué ceci auparavant, ni obtenu une ou plusieurs méthode(s) pour me permettre d'être le plus efficace possible pour ceci. Aussi, j'ai profité de ce temps afin de corriger plusieurs erreurs mineurs dans l'\textit{interface}, afin de me permettre de mieux discerner les grandes parties de l'\textit{afficheur}, et leurs buts respectifs.
+Durant les deux premières semaines, il m'a fallu étudier tout le code du projet utile à mes objectifs, ainsi que recourir à la création de la documentation pour le développeur (obsolète ou inexistante). L'étude du projet a été pour moi la plus grosse difficulté dans ce stage, n'ayant jamais effectué ceci auparavant, ni obtenu une ou plusieurs méthode(s) pour me permettre d'être le plus efficace possible pour ceci. Aussi, j'ai profité de ce temps afin de corriger plusieurs erreurs mineurs dans l'\textit{interface}, afin de me permettre de mieux discerner les grandes parties de celle-ci et leurs buts respectifs.
 \newline
 De plus, il était très important pour moi de respecter les règles de l'équipe en matière d'ingénierie logicielle, ne serait-ce par l'écriture du code, de la documentation, mais aussi par rapport au respect des \textit{commits}\footnote{Un \textit{commit} est une action permettant d'envoyer ses modifications locales vers le référentiel central}/\textit{push}\footnote{Un \textit{push} est une action permettant de transférer des commits d'un dépôt local à un dépôt distant} sur le serveur, via le logiciel de gestion de versions décentralisé \textit{Git}\footnote{\textit{Git} est un logiciel libre créé par \textbf{Linus Torvalds}, permettant de gérer très facilement les codes sources de projets.}.
 
 \subsection{Le domaine biologique}
-Enfin, je me suis remis à étudier par moi-même la microbiologie, le principe de recombinaison V(D)J, ainsi que les techniques de séquençage et de clusterisation. Tout celà afin de me permettre de comprendre et de poursuivre les discussions lors des réunions dans l'équipe, et avec le Laboratoire d'Hématologie de Lille2.
+Enfin, je me suis remis à étudier par moi-même la microbiologie, le principe de recombinaison V(D)J, ainsi que les techniques de séquençage et de clusterisation. Tout celà afin de me permettre de comprendre et de poursuivre les discussions lors des réunions dans l'équipe, et avec le \textit{Laboratoire d'Hématologie de Lille2}.
 
 \chapter{Le graphe de distances d'édition}
 
@@ -519,7 +517,7 @@ Sur ces 4 coûts, il a fallu choisir celui ayant les plus respectueuses distance
 \textbf{T} & -1 & -2 & -2 & -2 & -3 & -1 & \textbf{-1} & \textbf{\ovalbox{-2}} \\
 \end{tabular}
 \caption{Calcul de distance d'édition entre 2 séquences ADN (avec \textbf{\textit{Levenshtein}}). 
-\newline La distance est entourée - alignement GA\_CGATTA et GATCGATT\_}
+\newline La distance est entourée - alignement GA\_CGATTA et GATCGATT\_ (le chemin permettant de trouver ces résultats est marqué en \textbf{gras})}
 \end{table}
 
 \subsubsection{Comment effectuer les calculs de coût?}
@@ -528,11 +526,18 @@ Les coûts étaient déjà implantés à mon arrivée dans l'entreprise, et le p
 \newline
 Ainsi, pour étudier les objets \textit{windows} entre eux, il a juste fallu modifier l'alignement local (pris par défaut) par l'alignement global, et le coût par un de notre choix - étant à tester. La matrice est à calculer ou non, en fonction du poids choisi lors du calcul dans la programmation dynamique.
 
-\section{Le coût utilisé}
+\section{Conclusion}
 
-Les coûts \textit{VDJ}, \textit{Identity} et \textit{Levenshtein} sont les plus probants pour les graphes implémentés. En effet, ce sont eux qui, lors des tests, permettent d'avoir des distances aussi variées que respectueuses des similarités entre clones - ce qui a été vérifié avec un objet Javascript "Statistique", implanté directement dans le \textit{scatterplot}, permettant d'obtenir des statistiques sur les arêtes enregistrées par cette vue (comme la moyenne, la distribution ou la médiane par exemple).
+Les coûts \textit{VDJ}, \textit{Identity} et \textit{Levenshtein} sont les plus probants pour les graphes implémentés. En effet, ce sont eux qui, lors des tests, permettent d'avoir des distances aussi variées que respectueuses des similarités entre clones - ce qui a été vérifié avec un objet Javascript "Stats" (voir \textbf{Figure 16}), implanté directement dans le \textit{scatterplot} en mode \textit{console}, permettant d'obtenir des statistiques sur les arêtes enregistrées par cette vue (comme la moyenne, la distribution ou la médiane par exemple).
 \newline
-Dû à sa grande popularité, mon choix s'est porté vers le coût \textit{Levenshtein}, nous permettant aussi d'obtenir directement des distances d'édition lors du calcul, après les avoir transformé en valeur absolue.
+Dû à sa grande popularité, mon choix du coût pour le calcul des distances d'édition entre les \textit{windows} s'est porté vers le coût \textit{Levenshtein}, nous permettant aussi d'obtenir directement des distances d'édition lors du calcul, après les avoir transformé en valeur absolue.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.6]{img/Stats.jpg}
+\end{center}
+\caption{Aperçu de l'objet "Stats", sur un jeu de données avec les distances d'édition de \textit{Levenshtein}}
+\end{figure}
 
 \chapter{Le travail en recherche}
 
